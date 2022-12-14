@@ -23,22 +23,22 @@ class SignUpProvider extends ChangeNotifier {
       fullname: fullName.text,
     );
 
-    signupServices.signupUser(signupUser, context).then(
-      (value) {
-        if (value != null) {
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-              builder: (context) {
-                return const OtpScreen();
-              },
-            ),
-          );
-          disposeTextfield();
-        } else {
-          return;
-        }
-      },
-    );
+    signupServices.signupUser(signupUser, context);
+    // (value) {
+    //   if (value != null) {
+    //     Navigator.of(context).pushReplacement(
+    //       MaterialPageRoute(
+    //         builder: (context) {
+    //           return const OtpScreen();
+    //         },
+    //       ),
+    //     );
+    //     disposeTextfield();
+    //   } else {
+    //     return;
+    //   }
+    // },
+    // );
     isLoading = false;
     notifyListeners();
   }

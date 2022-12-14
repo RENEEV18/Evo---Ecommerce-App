@@ -1,5 +1,6 @@
 import 'package:evo_mart/common/const/const.dart';
 import 'package:evo_mart/controller/providers/sign_up_provider.dart';
+import 'package:evo_mart/controller/providers/verify_otp_provider.dart';
 import 'package:evo_mart/view/bottom_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
@@ -36,17 +37,17 @@ class OtpScreen extends StatelessWidget {
                       color: kHintBlack),
                 ),
                 kGapSize,
-                Consumer<SignUpProvider>(
+                Consumer<VerifyOtpProvider>(
                   builder: (context, value, child) {
                     return OtpTextField(
                       textStyle: const TextStyle(color: Colors.black),
-                      numberOfFields: 6,
+                      numberOfFields: 4,
                       borderColor: kBlack,
                       enabledBorderColor: kBlack,
                       borderRadius: BorderRadius.circular(12),
                       showFieldAsBox: true,
                       onSubmit: (String verificationCode) {
-                        // data.onSubmitCode(verificationCode);
+                        value.onSubmitCode(verificationCode);
                         // data.sumbitOtp(value.phoneNo.text, context);
                         showDialog(
                           context: context,
@@ -69,21 +70,26 @@ class OtpScreen extends StatelessWidget {
                   },
                 ),
                 kGapSize,
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.55,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      //  value.sumbitOtp(value2.phoneNo.text, context);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: kBlack,
-                    ),
-                    child: const Text(
-                      'Verify',
-                      style: TextStyle(color: kWhite),
-                    ),
-                  ),
-                ),
+                Consumer2<VerifyOtpProvider, SignUpProvider>(
+                  builder: (context, value, value2, child) {
+                    return SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.55,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          value.sumbitOtp(
+                              value2.emailId.text, value.code, context);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: kBlack,
+                        ),
+                        child: const Text(
+                          'Verify',
+                          style: TextStyle(color: kWhite),
+                        ),
+                      ),
+                    );
+                  },
+                )
               ],
             ),
           ),

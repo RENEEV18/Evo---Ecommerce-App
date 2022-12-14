@@ -89,7 +89,11 @@ flutter:
   #         style: italic
     - family: Manrope
       fonts:
-        - asset: assets\fonts\Manrope-ExtraBold.ttf
+        - asset: assets/fonts/Manrope-VariableFont_wght.ttf
+
+    - family: Comfortaa
+      fonts:
+        - asset: assets/fonts/Comfortaa-VariableFont_wght.ttf    
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #

@@ -35,8 +35,8 @@ class WelcomeScreen extends StatelessWidget {
                     TextSpan(
                       text: 'Please your eyes on the ',
                       style: TextStyle(
-                        fontFamily: 'Manrope',
-                        color: kBlack,
+                        fontFamily: 'Comfortaa',
+                        color: kWhite,
                         fontSize: 30,
                       ),
                     ),
@@ -44,14 +44,14 @@ class WelcomeScreen extends StatelessWidget {
                       text: 'trending\n items',
                       style: TextStyle(
                           color: kWhite,
-                          fontFamily: 'Manrope',
+                          fontFamily: 'Comfortaa',
                           fontSize: 30,
                           fontWeight: FontWeight.bold),
                     ),
                     TextSpan(
                       text: '\non',
                       style: TextStyle(
-                          fontFamily: 'Manrope',
+                          fontFamily: 'Comfortaa',
                           fontSize: 30,
                           color: kWhite,
                           fontWeight: FontWeight.w300),
@@ -59,8 +59,9 @@ class WelcomeScreen extends StatelessWidget {
                     TextSpan(
                       text: ' Evo',
                       style: TextStyle(
-                        fontFamily: 'Manrope',
+                        fontFamily: 'Comfortaa',
                         fontSize: 30,
+                        fontWeight: FontWeight.bold,
                         color: kWhite,
                       ),
                     ),

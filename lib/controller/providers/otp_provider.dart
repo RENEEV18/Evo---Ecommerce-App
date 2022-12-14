@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:evo_mart/model/otp_model/otp_model.dart';
 import 'package:evo_mart/services/otp_api_service/send_otp.dart';
+import 'package:evo_mart/view/otp_screen/otp_screen.dart';
 import 'package:flutter/material.dart';
 
 class OtpProvider extends ChangeNotifier {
@@ -12,7 +13,17 @@ class OtpProvider extends ChangeNotifier {
 
     SendOtpModel sendOtpModel = SendOtpModel(email: email);
     log('otp send');
-    otpServices.sendOtp(sendOtpModel, context);
+    otpServices.sendOtp(sendOtpModel, context).then(
+      (value) {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) {
+              return const OtpScreen();
+            },
+          ),
+        );
+      },
+    );
     isLoading = false;
     notifyListeners();
   }

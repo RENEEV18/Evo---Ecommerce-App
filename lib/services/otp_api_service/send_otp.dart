@@ -19,7 +19,7 @@ class OtpServices {
           queryParameters: {"email": model.email}
           // data: model.toJson(),
           );
-      log('reached');
+
       if (response.statusCode == 200 || response.statusCode == 201) {
         final sendUserOtp = SendOtpModel.fromJson(response.data);
         log(sendUserOtp.toString());
