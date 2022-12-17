@@ -13,12 +13,8 @@ class BottomNav extends StatelessWidget {
       return Scaffold(
         bottomNavigationBar: AnimatedBottomNavigationBar(
           backgroundColor: kWhite,
-          // splashColor: kYellow,
-          // activeColor: kYellow,
-          //inactiveColor: kWhite,
           elevation: 0,
           icons: data.icons,
-
           gapLocation: GapLocation.none,
           activeIndex: data.currentIndex,
           onTap: (value) {

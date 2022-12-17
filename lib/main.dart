@@ -3,6 +3,8 @@ import 'package:evo_mart/controller/providers/otp_provider.dart';
 import 'package:evo_mart/controller/providers/sign_in_provider.dart';
 import 'package:evo_mart/controller/providers/sign_up_provider.dart';
 import 'package:evo_mart/controller/providers/verify_otp_provider.dart';
+import 'package:evo_mart/view/bottom_nav.dart';
+import 'package:evo_mart/view/home/home.dart';
 import 'package:evo_mart/view/sign_in_screen/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -41,7 +43,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(useMaterial3: true, primarySwatch: Colors.amber),
-        home: SigninScreen(),
+        home: BottomNav(),
       ),
     );
   }

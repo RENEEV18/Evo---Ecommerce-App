@@ -1,6 +1,5 @@
 import 'package:evo_mart/model/sign_up_model/sign_up_model.dart';
 import 'package:evo_mart/services/sign_up_services/signup_services.dart';
-import 'package:evo_mart/view/otp_screen/otp_screen.dart';
 import 'package:flutter/material.dart';
 
 class SignUpProvider extends ChangeNotifier {
