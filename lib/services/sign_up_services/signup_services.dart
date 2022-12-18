@@ -4,13 +4,14 @@ import 'package:dio/dio.dart';
 import 'package:evo_mart/common/api/api_baseurl.dart';
 import 'package:evo_mart/common/api/api_endpoint.dart';
 import 'package:evo_mart/model/sign_up_model/sign_up_model.dart';
+import 'package:evo_mart/model/sign_up_model/sign_up_token.dart';
 import 'package:evo_mart/utils/exceptions/dio_exceptions.dart';
 import 'package:flutter/cupertino.dart';
 
 class SignupServices {
   Dio dio = Dio();
 
-  Future<SignupModel?> signupUser(
+  Future<SignUpTokenModel?> signupUser(
       SignupModel model, BuildContext context) async {
     try {
       Response response = await dio.post(
@@ -21,7 +22,7 @@ class SignupServices {
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
         log(response.data.toString());
-        final signupResponse = SignupModel.fromJson(response.data);
+        final signupResponse = SignUpTokenModel.fromJson(response.data);
         log(response.data.toString());
         return signupResponse;
       }

@@ -1,5 +1,6 @@
 import 'package:evo_mart/common/const/const.dart';
 import 'package:evo_mart/controller/providers/sign_in_provider.dart';
+import 'package:evo_mart/view/forgot_password_screen/forgot_password.dart';
 import 'package:evo_mart/view/sign_in_screen/widgets/custom_clippath.dart';
 import 'package:evo_mart/view/sign_up_screen/sign_up_screen.dart';
 import 'package:evo_mart/view/widgets/custom_textfield.dart';
@@ -40,18 +41,15 @@ class SigninScreen extends StatelessWidget {
                       children: [
                         const MainTextWidget(),
                         kHeight,
-                        CustomTextField(
-                          text: 'Email',
-                          controller: data.email,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter your email';
-                            }
-
-                            return null;
-                          },
-                          keyboard: TextInputType.emailAddress,
-                        ),
+                        Consumer<SignInProvider>(
+                            builder: (context, data, child) {
+                          return CustomTextField(
+                            text: 'Email',
+                            controller: data.email,
+                            validator: (value) => data.emailValdation(value),
+                            keyboard: TextInputType.emailAddress,
+                          );
+                        }),
                         kGapSize,
                         Consumer<SignInProvider>(
                           builder: (context, value, child) {
@@ -78,11 +76,12 @@ class SigninScreen extends StatelessWidget {
                         const SizedBox(),
                         TextButton(
                           onPressed: () {
-                            // Navigator.of(context).push(
-                            //   MaterialPageRoute(
-                            //     builder: (context) => ForgotPasswordScreen(),
-                            //   ),
-                            // );
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const ForgotPasswordScreen(),
+                              ),
+                            );
                           },
                           child: const Text(
                             'Forgot password?',

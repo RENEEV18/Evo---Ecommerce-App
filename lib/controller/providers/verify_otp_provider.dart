@@ -1,9 +1,12 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:evo_mart/model/otp_model/verify_otp.dart';
+import 'package:evo_mart/controller/providers/sign_up_provider.dart';
+import 'package:evo_mart/model/sign_up_model/sign_up_model.dart';
 import 'package:evo_mart/services/otp_api_service/verify_otp.dart';
-import 'package:evo_mart/view/home/home.dart';
+import 'package:evo_mart/services/sign_up_services/signup_services.dart';
+import 'package:evo_mart/utils/error_popup/snackbar.dart';
+import 'package:evo_mart/view/bottom_nav.dart';
 import 'package:flutter/material.dart';
 
 class VerifyOtpProvider extends ChangeNotifier {
@@ -12,31 +15,42 @@ class VerifyOtpProvider extends ChangeNotifier {
   bool isLoading = false;
   String code = '';
 
+// final model = SignupModel(
+//     email: SignUpProvider().emailId.text,
+//     password: SignUpProvider().password.text,
+//     phone: SignUpProvider().phoneNo.text,
+//     fullname: SignUpProvider().fullName.text,
+//   );
+
   void onSubmitCode(String submitCode) {
     log(submitCode);
     code = submitCode;
     notifyListeners();
   }
 
-  void sumbitOtp(String email, String code, BuildContext context) {
-    isLoading = true;
-    notifyListeners();
-
-    VerifyOtpModel verifyOtpModel = VerifyOtpModel(email: email, code: code);
-
-    verifyOtpService.verifyOtp(verifyOtpModel, code, context).then((value) {
-      if (value != null) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) {
-              return const HomeScreen();
-            },
-          ),
-        );
-      }
-    });
-
-    isLoading = false;
-    notifyListeners();
+  void sumbitOtp(SignupModel model, code, context) {
+    if (code.length != 4) {
+      SnackBarPop.popUp(context, 'Please enter the OTP', Colors.red);
+    } else {
+      isLoading = true;
+      notifyListeners();
+      verifyOtpService.verifyOtp(model.email, code, context).then(
+        (value) {
+          if (value != null) {
+            SignupServices().signupUser(model, context).then((value) {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) {
+                    return const BottomNav();
+                  },
+                ),
+              );
+              isLoading = false;
+              notifyListeners();
+            });
+          } else {}
+        },
+      );
+    }
   }
 }
