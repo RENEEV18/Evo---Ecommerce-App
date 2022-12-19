@@ -20,13 +20,11 @@ class SignInProvider extends ChangeNotifier {
     signinServices.signinUser(signinModel, context).then(
       (value) {
         if (value != null) {
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-              builder: (context) {
-                return const BottomNav();
-              },
-            ),
-          );
+          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
+            builder: (context) {
+              return const BottomNav();
+            },
+          ), (route) => false);
           disposeTextfield();
         } else {
           return;

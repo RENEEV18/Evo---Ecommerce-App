@@ -108,7 +108,7 @@ class SigninScreen extends StatelessWidget {
                               backgroundColor: kBlack,
                             ),
                             child: const Text(
-                              'Signin',
+                              'Sign in',
                               style: TextStyle(color: kWhite),
                             ),
                           ),

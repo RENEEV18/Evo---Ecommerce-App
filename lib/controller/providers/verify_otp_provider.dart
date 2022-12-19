@@ -38,17 +38,15 @@ class VerifyOtpProvider extends ChangeNotifier {
         (value) {
           if (value != null) {
             SignupServices().signupUser(model, context).then((value) {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (context) {
-                    return const BottomNav();
-                  },
-                ),
-              );
+              Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
+                builder: (context) {
+                  return const BottomNav();
+                },
+              ), (route) => false);
               isLoading = false;
               notifyListeners();
             });
-          } else {}
+          }
         },
       );
     }
