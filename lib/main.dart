@@ -1,4 +1,5 @@
 import 'package:evo_mart/controller/providers/bottom_nav_provider.dart';
+import 'package:evo_mart/controller/providers/category_provider.dart';
 import 'package:evo_mart/controller/providers/sign_in_provider.dart';
 import 'package:evo_mart/controller/providers/sign_up_provider.dart';
 import 'package:evo_mart/controller/providers/verify_otp_provider.dart';
@@ -33,6 +34,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => VerifyOtpProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => CategoryProvider(context),
         ),
       ],
       child: MaterialApp(

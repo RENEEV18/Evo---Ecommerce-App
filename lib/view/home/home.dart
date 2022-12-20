@@ -17,68 +17,108 @@ class HomeScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.only(left: 10, right: 10),
-            child: Column(
-              children: [
-                kHeight,
-                Row(
-                  children: const [
-                    kWidth,
-                    Text(
-                      'Categories',
-                      style: TextStyle(
-                        fontFamily: 'Comfortaa',
-                        fontSize: 18,
+          child: Column(
+            children: [
+              kHeight,
+              Row(
+                children: const [
+                  kHeadLineWidth,
+                  Text(
+                    'Categories',
+                    style: TextStyle(
+                      fontFamily: 'Comfortaa',
+                      fontSize: 18,
+                    ),
+                  ),
+                ],
+              ),
+              kSize,
+              const SlidingWidget(),
+              const CarouselSliderWidget(),
+              Row(
+                children: const [
+                  Text(
+                    'Newly Launched Phones !',
+                    style: TextStyle(
+                      fontFamily: 'Comfortaa',
+                      fontSize: 18,
+                    ),
+                  ),
+                ],
+              ),
+              kSize,
+              Container(
+                height: 200,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  image: const DecorationImage(
+                      image: AssetImage(
+                          'assets/images/ezgif.com-gif-maker (4).png'),
+                      fit: BoxFit.cover),
+                ),
+              ),
+              kSize,
+              Row(
+                children: [
+                  Flexible(
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.35,
+                      width: MediaQuery.of(context).size.width * 0.45,
+                      child: const Image(
+                        image: AssetImage('assets/images/EU-IN_Green.png'),
+                        fit: BoxFit.cover,
                       ),
                     ),
-                  ],
-                ),
-                const SlidingWidget(),
-                const CarouselSliderWidget(),
-                Row(
-                  children: const [
-                    kWidth,
-                    Text(
-                      'Newly Launched Phones !',
-                      style: TextStyle(
-                        fontFamily: 'Comfortaa',
-                        fontSize: 18,
-                      ),
-                    ),
-                  ],
-                ),
-                kSize,
-                Container(
-                  height: 200,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    image: const DecorationImage(
-                        image: AssetImage(
-                            'assets/images/ezgif.com-gif-maker (4).png'),
-                        fit: BoxFit.cover),
                   ),
-                ),
-                SizedBox(
-                  //width: double.infinity,
-                  height: 100,
-                  child: GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 3 / 4,
+                  kWidth,
+                  Flexible(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text(
+                          'Offer Zone !',
+                          style:
+                              TextStyle(fontSize: 28, fontFamily: 'Comfortaa'),
+                        ),
+                        Text(
+                            'One Plus 10 Pro 5G series - GOES OFFICIAL \n From ₹49,999'),
+                      ],
                     ),
-                    itemBuilder: (context, index) {
-                      return Container(
-                        height: 20,
-                        width: 20,
-                        color: kBlack,
-                      );
-                    },
                   ),
-                ),
-              ],
-            ),
+                ],
+              ),
+              kSize,
+              Row(
+                children: const [
+                  kWidth,
+                  Text(
+                    'Best Seller Phones',
+                    style: TextStyle(
+                      fontFamily: 'Comfortaa',
+                      fontSize: 18,
+                    ),
+                  ),
+                ],
+              ),
+              kSize,
+              GridView.builder(
+                shrinkWrap: true,
+                physics: const ScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    childAspectRatio: 3 / 4,
+                    mainAxisSpacing: 4,
+                    crossAxisSpacing: 4),
+                itemBuilder: (context, index) {
+                  return Container(
+                    // height: 90,
+                    color: Colors.black.withOpacity(0.1),
+                  );
+                },
+                itemCount: 10,
+              ),
+            ],
           ),
         ),
       ),

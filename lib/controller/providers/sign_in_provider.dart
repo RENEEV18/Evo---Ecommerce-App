@@ -3,10 +3,12 @@ import 'package:evo_mart/model/sign_in_model/sign_in.dart';
 import 'package:evo_mart/services/sign_in_services/sign_in_service.dart';
 import 'package:evo_mart/view/bottom_nav.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SignInProvider extends ChangeNotifier {
   final TextEditingController email = TextEditingController();
   final TextEditingController passwordlog = TextEditingController();
+  FlutterSecureStorage storage = const FlutterSecureStorage();
 
   SigninServices signinServices = SigninServices();
   bool isLoading = false;
@@ -20,6 +22,8 @@ class SignInProvider extends ChangeNotifier {
     signinServices.signinUser(signinModel, context).then(
       (value) {
         if (value != null) {
+          storage.write(key: 'token', value: value.accessToken);
+          storage.write(key: 'refreshToken', value: value.refreshToken);
           Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
             builder: (context) {
               return const BottomNav();
