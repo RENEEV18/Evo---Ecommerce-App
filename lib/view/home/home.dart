@@ -35,8 +35,10 @@ class HomeScreen extends StatelessWidget {
               kSize,
               const SlidingWidget(),
               const CarouselSliderWidget(),
+              kHeight,
               Row(
                 children: const [
+                  kWidth,
                   Text(
                     'Newly Launched Phones !',
                     style: TextStyle(
@@ -47,20 +49,24 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
               kSize,
-              Container(
-                height: 200,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  image: const DecorationImage(
-                      image: AssetImage(
-                          'assets/images/ezgif.com-gif-maker (4).png'),
-                      fit: BoxFit.cover),
+              Padding(
+                padding: const EdgeInsets.only(left: 10, right: 10),
+                child: Container(
+                  height: 250,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    image: const DecorationImage(
+                        image: AssetImage(
+                            'assets/images/ezgif.com-gif-maker (4).png'),
+                        fit: BoxFit.cover),
+                  ),
                 ),
               ),
               kSize,
               Row(
                 children: [
+                  kHeadLineWidth,
                   Flexible(
                     child: SizedBox(
                       height: MediaQuery.of(context).size.height * 0.35,
@@ -102,21 +108,24 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
               kSize,
-              GridView.builder(
-                shrinkWrap: true,
-                physics: const ScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    childAspectRatio: 3 / 4,
-                    mainAxisSpacing: 4,
-                    crossAxisSpacing: 4),
-                itemBuilder: (context, index) {
-                  return Container(
-                    // height: 90,
-                    color: Colors.black.withOpacity(0.1),
-                  );
-                },
-                itemCount: 10,
+              Padding(
+                padding: const EdgeInsets.only(left: 10, right: 10),
+                child: GridView.builder(
+                  shrinkWrap: true,
+                  physics: const ScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      childAspectRatio: 3 / 4,
+                      mainAxisSpacing: 4,
+                      crossAxisSpacing: 4),
+                  itemBuilder: (context, index) {
+                    return Container(
+                      // height: 90,
+                      color: Colors.black.withOpacity(0.1),
+                    );
+                  },
+                  itemCount: 10,
+                ),
               ),
             ],
           ),

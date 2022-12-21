@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:evo_mart/utils/error_popup/snackbar.dart';
 import 'package:flutter/material.dart';
@@ -8,19 +10,25 @@ class DioException {
       if (e.response?.statusCode == 401) {
         SnackBarPop.popUp(
           context,
-          'Unauthorized Error',
+          'Invalid username or password',
           Colors.red,
         );
       } else if (e.response?.statusCode == 400) {
         SnackBarPop.popUp(
           context,
-          'Unknown field',
+          'All fields required',
           Colors.red,
         );
       } else if (e.response?.statusCode == 403) {
         SnackBarPop.popUp(
           context,
-          'User credential is not working',
+          'Forbidden',
+          Colors.red,
+        );
+      } else if (e.response?.statusCode == 500) {
+        SnackBarPop.popUp(
+          context,
+          'Something went wrong',
           Colors.red,
         );
       } else if (e.toString() ==
@@ -31,6 +39,11 @@ class DioException {
           Colors.red,
         );
       }
+    }
+    if (e is SocketException) {
+      SnackBarPop.popUp(context, 'No Internet Connection', Colors.red);
+    } else if (e is TimeoutException) {
+      SnackBarPop.popUp(context, 'Connection Timedout', Colors.red);
     }
   }
 }

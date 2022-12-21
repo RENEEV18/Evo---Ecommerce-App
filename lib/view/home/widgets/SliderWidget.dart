@@ -1,4 +1,3 @@
-import 'package:evo_mart/common/api/api_baseurl.dart';
 import 'package:evo_mart/common/const/const.dart';
 import 'package:evo_mart/controller/providers/category_provider.dart';
 import 'package:flutter/material.dart';

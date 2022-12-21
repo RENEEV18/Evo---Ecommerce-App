@@ -7,5 +7,6 @@ class ApiEndpoints {
   static String refreshToken = '/api/v1/auth/refresh';
 
   /*Home page End-points*/
-  static String category ='/api/v1/category'; 
+  static String category = '/api/v1/category';
+  static String carousal = '/api/v1/carousal';
 }

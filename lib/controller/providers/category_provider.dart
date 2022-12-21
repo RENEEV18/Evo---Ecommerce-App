@@ -14,7 +14,7 @@ class CategoryProvider extends ChangeNotifier {
   void getCategory(context) async {
     isLoading = true;
     notifyListeners();
-    services.categoryUsers(context).then((value) {
+    await services.categoryUsers(context).then((value) {
       if (value != null) {
         categoryList = value;
         notifyListeners();

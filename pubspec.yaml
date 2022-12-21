@@ -43,6 +43,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   carousel_slider: ^4.2.0
   flutter_secure_storage: ^7.0.1
+  smooth_page_indicator: ^1.0.0+2
 
 dev_dependencies:
   flutter_test:

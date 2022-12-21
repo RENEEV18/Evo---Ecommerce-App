@@ -1,10 +1,12 @@
 import 'package:evo_mart/controller/providers/bottom_nav_provider.dart';
+import 'package:evo_mart/controller/providers/carousel_provider.dart';
 import 'package:evo_mart/controller/providers/category_provider.dart';
+import 'package:evo_mart/controller/providers/intro_provider.dart';
 import 'package:evo_mart/controller/providers/sign_in_provider.dart';
 import 'package:evo_mart/controller/providers/sign_up_provider.dart';
 import 'package:evo_mart/controller/providers/verify_otp_provider.dart';
-import 'package:evo_mart/view/bottom_nav.dart';
-import 'package:evo_mart/view/sign_in_screen/sign_in_screen.dart';
+import 'package:evo_mart/controller/providers/splash_provider.dart';
+import 'package:evo_mart/view/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -38,11 +40,20 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => CategoryProvider(context),
         ),
+        ChangeNotifierProvider(
+          create: (context) => IntroProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => SplashProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => CarouselProvider(context),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(useMaterial3: true, primarySwatch: Colors.amber),
-        home: SigninScreen(),
+        home: const SplashScreen(),
       ),
     );
   }

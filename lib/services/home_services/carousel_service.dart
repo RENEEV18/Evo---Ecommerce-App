@@ -3,22 +3,25 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:evo_mart/common/api/api_baseurl.dart';
 import 'package:evo_mart/common/api/api_endpoint.dart';
-import 'package:evo_mart/model/home/category_model.dart';
+import 'package:evo_mart/model/carousel_model/carousel_model.dart';
 import 'package:evo_mart/utils/dio_interceptor/interceptor.dart';
 import 'package:evo_mart/utils/exceptions/dio_exceptions.dart';
 
-class CategoryServices {
-  Future<List<CategoryModel>?> categoryUsers(context) async {
+class CarousalService {
+  // Dio dio = Dio();
+  Future<List<CarousalModel>?> homeCarousel(context) async {
     final dios = await ApiInterceptor().getApiUser(context);
     try {
-      final Response response =
-          await dios.get(ApiBaseUrl().baseUrl + ApiEndpoints.category);
-      if (response.statusCode == 200 || response.statusCode == 201) {
+      log('hai');
+      final Response response = await dios.get(
+        ApiBaseUrl().baseUrl + ApiEndpoints.carousal,
+      );
+      if (response.data == 200 || response.data == 201) {
         log(response.data.toString());
-        final List<CategoryModel> listCategory = (response.data as List)
-            .map((e) => CategoryModel.fromJson(e))
+        final List<CarousalModel> carousel = (response.data as List)
+            .map((e) => CarousalModel.fromJson(e))
             .toList();
-        return listCategory;
+        return carousel;
       } else {
         return null;
       }

@@ -1,7 +1,5 @@
 import 'dart:developer';
-
 import 'package:dio/dio.dart';
-import 'package:evo_mart/controller/providers/sign_up_provider.dart';
 import 'package:evo_mart/model/sign_up_model/sign_up_model.dart';
 import 'package:evo_mart/services/otp_api_service/verify_otp.dart';
 import 'package:evo_mart/services/sign_up_services/signup_services.dart';
