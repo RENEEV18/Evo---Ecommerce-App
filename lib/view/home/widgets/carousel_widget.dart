@@ -14,7 +14,7 @@ class CarouselSliderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<HomeProvider>(builder: (context, value, child) {
-      return Column(
+      return Stack(
         children: [
           SizedBox(
             width: double.infinity,
@@ -58,10 +58,14 @@ class CarouselSliderWidget extends StatelessWidget {
                   ),
           ),
           kHeight,
-          AnimatedSmoothIndicator(
-            activeIndex: value.activeIndex,
-            count: value.carousalList.length,
-            effect: const WormEffect(dotHeight: 10, dotWidth: 10),
+          Positioned(
+            top: 128,
+            left: 150,
+            child: AnimatedSmoothIndicator(
+              activeIndex: value.activeIndex,
+              count: value.carousalList.length,
+              effect: const WormEffect(dotHeight: 10, dotWidth: 10),
+            ),
           ),
         ],
       );

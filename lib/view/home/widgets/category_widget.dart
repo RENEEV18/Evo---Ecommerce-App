@@ -11,7 +11,7 @@ class CategoryWidget extends StatelessWidget {
     return Consumer<HomeProvider>(builder: (context, value, child) {
       return SizedBox(
         height: 100,
-        child: ListView.builder(
+        child: ListView.separated(
           itemBuilder: (context, index) {
             return Row(
               children: [
@@ -37,6 +37,9 @@ class CategoryWidget extends StatelessWidget {
           },
           scrollDirection: Axis.horizontal,
           itemCount: value.categoryList.length,
+          separatorBuilder: (BuildContext context, int index) {
+            return kWidth;
+          },
         ),
       );
     });

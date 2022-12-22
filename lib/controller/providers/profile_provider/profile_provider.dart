@@ -13,5 +13,6 @@ class ProfileProvider extends ChangeNotifier {
           builder: (context) => SigninScreen(),
         ),
         (route) => false);
+    notifyListeners();
   }
 }

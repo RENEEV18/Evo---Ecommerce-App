@@ -5,6 +5,7 @@ import 'package:evo_mart/controller/providers/authentication_provider/sign_in_pr
 import 'package:evo_mart/controller/providers/authentication_provider/sign_up_provider.dart';
 import 'package:evo_mart/controller/providers/authentication_provider/verify_otp_provider.dart';
 import 'package:evo_mart/controller/providers/onboard_provider/splash_provider.dart';
+import 'package:evo_mart/controller/providers/profile_provider/profile_provider.dart';
 import 'package:evo_mart/view/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -44,6 +45,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => HomeProvider(context),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ProfileProvider(),
         ),
       ],
       child: MaterialApp(

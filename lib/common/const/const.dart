@@ -23,6 +23,7 @@ const kHeadLineWidth = SizedBox(
 //colors
 const kWhite = Colors.white;
 const kBlue = Colors.blue;
+const kRed = Colors.red;
 const kBlack = Colors.black;
 const kHintBlack = Color.fromARGB(178, 0, 0, 0);
 const kTextfieldColor = Colors.orange;
