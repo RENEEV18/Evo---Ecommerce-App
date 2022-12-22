@@ -9,4 +9,5 @@ class ApiEndpoints {
   /*Home page End-points*/
   static String category = '/api/v1/category';
   static String carousal = '/api/v1/carousal';
+  static String product = '/api/v1/products';
 }

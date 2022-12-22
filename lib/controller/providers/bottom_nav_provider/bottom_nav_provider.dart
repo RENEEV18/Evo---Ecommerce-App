@@ -11,8 +11,8 @@ class BottomNavProvider extends ChangeNotifier {
   List<Widget> screens = const [
     HomeScreen(),
     SearchScreen(),
-    ProfileScreen(),
     SettingsScreen(),
+    ProfileScreen(),
   ];
 
   List<IconData> icons = [

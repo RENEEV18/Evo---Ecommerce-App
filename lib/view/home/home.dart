@@ -1,9 +1,10 @@
 import 'package:evo_mart/common/const/const.dart';
+import 'package:evo_mart/controller/providers/home_provider/home_controllers.dart';
 import 'package:evo_mart/view/home/widgets/SliderWidget.dart';
 import 'package:evo_mart/view/home/widgets/carousel_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -12,7 +13,6 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const Icon(FontAwesomeIcons.shopify),
         title: const CupertinoSearchTextField(),
       ),
       body: SafeArea(
@@ -20,6 +20,7 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             children: [
               kHeight,
+              const CarouselSliderWidget(),
               Row(
                 children: const [
                   kHeadLineWidth,
@@ -33,8 +34,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
               kSize,
-              const SlidingWidget(),
-              const CarouselSliderWidget(),
+              const CategoryWidget(),
               kHeight,
               Row(
                 children: const [
@@ -108,25 +108,32 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
               kSize,
-              Padding(
-                padding: const EdgeInsets.only(left: 10, right: 10),
-                child: GridView.builder(
-                  shrinkWrap: true,
-                  physics: const ScrollPhysics(),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      childAspectRatio: 3 / 4,
-                      mainAxisSpacing: 4,
-                      crossAxisSpacing: 4),
-                  itemBuilder: (context, index) {
-                    return Container(
-                      // height: 90,
-                      color: Colors.black.withOpacity(0.1),
-                    );
-                  },
-                  itemCount: 10,
-                ),
-              ),
+              Consumer<HomeProvider>(
+                builder: (context, value, child) {
+                  return Padding(
+                    padding: const EdgeInsets.only(left: 10, right: 10),
+                    child: GridView.builder(
+                      shrinkWrap: true,
+                      physics: const ScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              childAspectRatio: 3 / 4,
+                              mainAxisSpacing: 4,
+                              crossAxisSpacing: 4),
+                      itemBuilder: (context, index) {
+                        return Container(
+                          color: Colors.black.withOpacity(0.1),
+                          child: Image(
+                              image: NetworkImage(
+                                  'http://172.16.5.206:5005/uploads/products/${value.productList[index].image}')),
+                        );
+                      },
+                      itemCount: value.productList.length,
+                    ),
+                  );
+                },
+              )
             ],
           ),
         ),

@@ -1,5 +1,5 @@
 import 'package:evo_mart/common/const/const.dart';
-import 'package:evo_mart/controller/providers/sign_up_provider.dart';
+import 'package:evo_mart/controller/providers/authentication_provider/sign_up_provider.dart';
 import 'package:evo_mart/view/sign_in_screen/sign_in_screen.dart';
 import 'package:evo_mart/view/widgets/custom_textfield.dart';
 import 'package:flutter/gestures.dart';

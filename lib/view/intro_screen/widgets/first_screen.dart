@@ -1,5 +1,5 @@
 import 'package:evo_mart/common/const/const.dart';
-import 'package:evo_mart/controller/providers/intro_provider.dart';
+import 'package:evo_mart/controller/providers/onboard_provider/intro_provider.dart';
 import 'package:evo_mart/view/sign_in_screen/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -69,25 +69,6 @@ class FirstScreen extends StatelessWidget {
                   ),
                 ),
               ],
-            ),
-          ),
-        ),
-        Align(
-          alignment: Alignment.topRight,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: InkWell(
-              onTap: () => SigninScreen(),
-              child: Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.3),
-                    borderRadius: BorderRadius.circular(20)),
-                child: const Text(
-                  'Skip',
-                  style: TextStyle(fontSize: 15),
-                ),
-              ),
             ),
           ),
         ),

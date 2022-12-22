@@ -1,6 +1,6 @@
 import 'package:evo_mart/common/const/const.dart';
-import 'package:evo_mart/controller/providers/sign_up_provider.dart';
-import 'package:evo_mart/controller/providers/verify_otp_provider.dart';
+import 'package:evo_mart/controller/providers/authentication_provider/sign_up_provider.dart';
+import 'package:evo_mart/controller/providers/authentication_provider/verify_otp_provider.dart';
 import 'package:evo_mart/model/sign_up_model/sign_up_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';

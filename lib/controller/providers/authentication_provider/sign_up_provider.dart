@@ -4,6 +4,7 @@ import 'package:evo_mart/services/otp_api_service/send_otp.dart';
 import 'package:evo_mart/services/sign_up_services/signup_services.dart';
 import 'package:evo_mart/view/otp_screen/otp_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SignUpProvider extends ChangeNotifier {
   final TextEditingController fullName = TextEditingController();
@@ -14,6 +15,7 @@ class SignUpProvider extends ChangeNotifier {
   final TextEditingController confirmPassword = TextEditingController();
 
   SignupServices signupServices = SignupServices();
+  FlutterSecureStorage storage = const FlutterSecureStorage();
   bool isLoading = false;
   Future<void> signupUser(BuildContext context) async {
     isLoading = true;

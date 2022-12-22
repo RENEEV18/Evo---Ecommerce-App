@@ -1,5 +1,5 @@
 import 'package:evo_mart/common/const/const.dart';
-import 'package:evo_mart/controller/providers/sign_in_provider.dart';
+import 'package:evo_mart/controller/providers/authentication_provider/sign_in_provider.dart';
 import 'package:evo_mart/view/forgot_password_screen/forgot_password.dart';
 import 'package:evo_mart/view/sign_in_screen/widgets/custom_clippath.dart';
 import 'package:evo_mart/view/sign_up_screen/sign_up_screen.dart';

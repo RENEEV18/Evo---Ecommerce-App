@@ -1,6 +1,6 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:evo_mart/common/const/const.dart';
-import 'package:evo_mart/controller/providers/bottom_nav_provider.dart';
+import 'package:evo_mart/controller/providers/bottom_nav_provider/bottom_nav_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

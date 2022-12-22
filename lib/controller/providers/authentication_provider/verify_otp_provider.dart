@@ -6,9 +6,11 @@ import 'package:evo_mart/services/sign_up_services/signup_services.dart';
 import 'package:evo_mart/utils/error_popup/snackbar.dart';
 import 'package:evo_mart/view/bottom_nav.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class VerifyOtpProvider extends ChangeNotifier {
   VerifyOtpService verifyOtpService = VerifyOtpService();
+  FlutterSecureStorage storage = const FlutterSecureStorage();
   Dio dio = Dio();
   bool isLoading = false;
   String code = '';
@@ -36,13 +38,17 @@ class VerifyOtpProvider extends ChangeNotifier {
         (value) {
           if (value != null) {
             SignupServices().signupUser(model, context).then((value) {
-              Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
-                builder: (context) {
-                  return const BottomNav();
-                },
-              ), (route) => false);
-              isLoading = false;
-              notifyListeners();
+              if (value != null) {
+                storage.write(key: 'token', value: value.accessToken);
+                storage.write(key: 'refreshToken', value: value.refreshToken);
+                Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
+                  builder: (context) {
+                    return const BottomNav();
+                  },
+                ), (route) => false);
+                isLoading = false;
+                notifyListeners();
+              }
             });
           }
         },
