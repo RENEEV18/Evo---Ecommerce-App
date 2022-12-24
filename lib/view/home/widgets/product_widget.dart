@@ -19,13 +19,18 @@ class ProductWidget extends StatelessWidget {
             physics: const ScrollPhysics(),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 5 / 5,
-                mainAxisSpacing: 8,
-                crossAxisSpacing: 6),
+                childAspectRatio: 6 / 8,
+                mainAxisSpacing: 0,
+                crossAxisSpacing: 0),
             itemBuilder: (context, index) {
               return Container(
-                color: kWhite,
+                margin: const EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                  color: kWhite,
+                  borderRadius: BorderRadius.circular(20),
+                ),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image(
                       height: 130,
@@ -33,11 +38,18 @@ class ProductWidget extends StatelessWidget {
                           'http://172.16.5.206:5005/uploads/products/${value.productList[index].image[0]}'),
                       //fit: BoxFit.cover,
                     ),
-                    Text(value.productList[index].name),
+                    kSize,
+                    Text(
+                      value.productList[index].name,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                          fontSize: 15, fontWeight: FontWeight.bold),
+                    ),
+                    kSize,
                     Text(
                       "₹${value.productList[index].price}",
                       style: const TextStyle(
-                          fontSize: 18,
+                          fontSize: 20,
                           color: kRed,
                           fontWeight: FontWeight.bold),
                     ),

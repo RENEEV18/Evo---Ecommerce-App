@@ -24,9 +24,9 @@ class HomeScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: const [
-                  Text('Free Shipping |'),
-                  Text('Secure Payment |'),
-                  Text('Cash On Delivery |'),
+                  Text('Free Shipping'),
+                  Text('Secure Payment'),
+                  Text('Cash On Delivery'),
                 ],
               ),
               kHeight,
@@ -108,7 +108,7 @@ class HomeScreen extends StatelessWidget {
                 children: const [
                   kWidth,
                   Text(
-                    'Best Seller Phones',
+                    'All Products',
                     style: TextStyle(
                       fontFamily: 'Comfortaa',
                       fontSize: 18,

@@ -124,7 +124,9 @@ class SigninScreen extends StatelessWidget {
                         children: [
                           TextSpan(
                             text: ' Create Account',
-                            style: const TextStyle(color: kTextfieldColor),
+                            style: const TextStyle(
+                                color: kTextfieldColor,
+                                fontWeight: FontWeight.bold),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 Navigator.of(context).push(

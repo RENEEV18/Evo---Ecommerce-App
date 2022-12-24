@@ -64,7 +64,11 @@ class CarouselSliderWidget extends StatelessWidget {
             child: AnimatedSmoothIndicator(
               activeIndex: value.activeIndex,
               count: value.carousalList.length,
-              effect: const WormEffect(dotHeight: 10, dotWidth: 10),
+              effect: const WormEffect(
+                  dotHeight: 10,
+                  dotWidth: 10,
+                  dotColor: kWhite,
+                  activeDotColor: kTextfieldColor),
             ),
           ),
         ],
