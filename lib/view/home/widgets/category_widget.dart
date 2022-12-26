@@ -13,27 +13,31 @@ class CategoryWidget extends StatelessWidget {
         height: 100,
         child: ListView.separated(
           itemBuilder: (context, index) {
-            return Row(
-              children: [
-                kWidth,
-                Column(
-                  children: [
-                    InkWell(
-                      onTap: () {},
-                      child: CircleAvatar(
-                        backgroundColor: Colors.amber.withOpacity(0.5),
-                        backgroundImage: NetworkImage(
-                            'http://172.16.5.206:5005/uploads/category/${value.categoryList[index].image}'),
-                        radius: 30,
+            return value.isLoading == true
+                ? const CircularProgressIndicator(
+                    strokeWidth: 2,
+                  )
+                : Row(
+                    children: [
+                      kWidth,
+                      Column(
+                        children: [
+                          InkWell(
+                            onTap: () {},
+                            child: CircleAvatar(
+                              backgroundColor: Colors.amber.withOpacity(0.5),
+                              backgroundImage: NetworkImage(
+                                  'http://172.16.5.206:5005/uploads/category/${value.categoryList[index].image}'),
+                              radius: 30,
+                            ),
+                          ),
+                          Text(
+                            value.categoryList[index].name,
+                          ),
+                        ],
                       ),
-                    ),
-                    Text(
-                      value.categoryList[index].name,
-                    ),
-                  ],
-                ),
-              ],
-            );
+                    ],
+                  );
           },
           scrollDirection: Axis.horizontal,
           itemCount: value.categoryList.length,

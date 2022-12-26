@@ -5,7 +5,8 @@ import 'package:evo_mart/model/home/product_model.dart';
 import 'package:evo_mart/services/home_services/carousel_service.dart';
 import 'package:evo_mart/services/home_services/category_service.dart';
 import 'package:evo_mart/services/home_services/product_services.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:evo_mart/view/product_screen/product_view.dart';
+import 'package:flutter/material.dart';
 
 class HomeProvider extends ChangeNotifier {
   HomeProvider(context) {
@@ -81,6 +82,24 @@ class HomeProvider extends ChangeNotifier {
 
   void smoothIndicator(index) {
     activeIndex = index;
+    notifyListeners();
+  }
+
+  void inToProductScreen(
+      context, productId, name, price, offer, size, image, category, rating) {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => ProductView(
+        id: productId,
+        name: name,
+        price: price,
+        offer: offer,
+        size: size,
+        image: image,
+        category: category,
+        rating: rating,
+      ),
+    ));
+
     notifyListeners();
   }
 }
