@@ -85,21 +85,29 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void inToProductScreen(
-      context, productId, name, price, offer, size, image, category, rating) {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => ProductView(
-        id: productId,
-        name: name,
-        price: price,
-        offer: offer,
-        size: size,
-        image: image,
-        category: category,
-        rating: rating,
-      ),
-    ));
-
-    notifyListeners();
+  ProductModel findById(String id) {
+    return productList.firstWhere((element) => element.id == id);
   }
+
+  void toProductScreen(context, index) {
+    Navigator.of(context)
+        .pushNamed(ProductView.routeName, arguments: productList[index].id);
+  }
+
+  // void inToProductScreen(
+  //     context, productId, name, price, offer, size, image, category, rating) {
+  //   Navigator.of(context).push(MaterialPageRoute(
+  //     builder: (context) => ProductView(
+  //       id: productId,
+  //       name: name,
+  //       price: price,
+  //       offer: offer,
+  //       size: size,
+  //       image: image,
+  //       category: category,
+  //       rating: rating,
+  //     ),
+  //   ));
+
+  // notifyListeners();
 }

@@ -1,24 +1,24 @@
 class ProductModel {
-  String? id;
-  String? name;
-  int? price;
+  String id;
+  String name;
+  int price;
   dynamic discountPrice;
-  int? offer;
-  List<String>? size;
-  List<String>? image;
-  String? category;
-  String? rating;
+  int offer;
+  List<String> size;
+  List<String> image;
+  String category;
+  String rating;
 
   ProductModel(
-      {this.id,
-      this.name,
-      this.price,
-      this.discountPrice,
-      this.offer,
-      this.size,
-      this.image,
-      this.category,
-      this.rating});
+      {required this.id,
+      required this.name,
+      required this.price,
+      required this.discountPrice,
+      required this.offer,
+      required this.size,
+      required this.image,
+      required this.category,
+      required this.rating});
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(

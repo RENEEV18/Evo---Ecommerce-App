@@ -31,17 +31,7 @@ class ProductWidget extends StatelessWidget {
                         )
                       : InkWell(
                           onTap: () {
-                            value.inToProductScreen(
-                              context,
-                              value.productList[index].id,
-                              value.productList[index].name,
-                              value.productList[index].price,
-                              value.productList[index].offer,
-                              value.productList[index].size,
-                              value.productList[index].image,
-                              value.productList[index].category,
-                              value.productList[index].rating,
-                            );
+                            value.toProductScreen(context, index);
                           },
                           child: Container(
                             margin: const EdgeInsets.all(5),
@@ -55,12 +45,12 @@ class ProductWidget extends StatelessWidget {
                                 Image(
                                   height: 130,
                                   image: NetworkImage(
-                                      'http://172.16.5.206:5005/uploads/products/${value.productList[index].image![0]}'),
+                                      'http://172.16.5.206:5005/products/${value.productList[index].image[0]}'),
                                   //fit: BoxFit.cover,
                                 ),
                                 kSize,
                                 Text(
-                                  value.productList[index].name!,
+                                  value.productList[index].name,
                                   textAlign: TextAlign.center,
                                   style: const TextStyle(
                                       fontSize: 15,

@@ -1,16 +1,20 @@
 import 'package:evo_mart/common/const/const.dart';
+import 'package:evo_mart/controller/providers/home_provider/home_controllers.dart';
 import 'package:evo_mart/controller/providers/product_screen_provider/product_screen_provider.dart';
+import 'package:evo_mart/controller/providers/wishlist/wishlist_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class TopItemWidget extends StatelessWidget {
   const TopItemWidget({
     Key? key,
+    required this.id,
   }) : super(key: key);
-
+  final String id;
   @override
   Widget build(BuildContext context) {
-    return Consumer<ProductProvider>(builder: (context, value, child) {
+    return Consumer3<ProductProvider, WishlistProvider, HomeProvider>(
+        builder: (context, value, value2, home, child) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -51,15 +55,19 @@ class TopItemWidget extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  value2.addOrRemoveFromWishlist(context, id);
+                },
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.only(top: 3),
                   shape: const CircleBorder(),
                   backgroundColor: Colors.white.withOpacity(0.3),
                 ),
-                child: const Icon(
-                  Icons.favorite,
-                  color: kWhite,
+                child: Icon(
+                  value2.wishList.contains(id)
+                      ? Icons.favorite
+                      : Icons.favorite,
+                  color: value2.wishList.contains(id) ? kRed : kWhite,
                 ),
               ),
             ],

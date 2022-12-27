@@ -27,21 +27,4 @@ class ProductServices {
     }
     return null;
   }
-
-  // Future<ProductModel?> getAProduct(String id, context) async {
-  //   Dio dios = await ApiInterceptor().getApiUser(context);
-  //   try {
-  //     final Response response = await dios.get(
-  //       "${ApiBaseUrl().baseUrl + ApiEndpoints.product}/$id",
-  //     );
-  //     if (response.statusCode == 200 || response.statusCode == 201) {
-  //       final product = ProductModel.fromJson(response.data);
-  //       return product;
-  //     }
-  //   } on DioError catch (e) {
-  //     log(e.message);
-  //     DioException().dioError(e, context);
-  //   }
-  //   return null;
-  // }
 }

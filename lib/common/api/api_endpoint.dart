@@ -10,4 +10,8 @@ class ApiEndpoints {
   static String category = '/api/v1/category';
   static String carousal = '/api/v1/carousal';
   static String product = '/api/v1/products';
+
+  /* Product Page End-points */
+  static String cart = '/api/v1/cart';
+  static String wishlist = '/api/v1/wishlist';
 }

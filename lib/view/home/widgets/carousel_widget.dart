@@ -51,7 +51,7 @@ class CarouselSliderWidget extends StatelessWidget {
                         log(value.carousalList.length.toString());
                         return Image(
                           image: NetworkImage(
-                              "http://172.16.5.206:5005/uploads/carousal/${value.carousalList[index].image}"),
+                              "http://172.16.5.206:5005/carousal/${value.carousalList[index].image}"),
                           fit: BoxFit.cover,
                         );
                       },

@@ -15,28 +15,15 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 class ProductView extends StatelessWidget {
   const ProductView({
     super.key,
-    required this.id,
-    required this.name,
-    required this.price,
-    this.discountPrice,
-    required this.offer,
-    required this.size,
-    required this.image,
-    required this.category,
-    required this.rating,
   });
 
-  final String id;
-  final String name;
-  final int price;
-  final dynamic discountPrice;
-  final int offer;
-  final List<String> size;
-  final List<String> image;
-  final String category;
-  final String rating;
+  static const routeName = '/product_view.dart';
+
   @override
   Widget build(BuildContext context) {
+    final productId = ModalRoute.of(context)?.settings.arguments as String;
+    final provider =
+        Provider.of<HomeProvider>(context, listen: false).findById(productId);
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -50,7 +37,7 @@ class ProductView extends StatelessWidget {
                     Stack(
                       children: [
                         CarouselSlider.builder(
-                          itemCount: image.length,
+                          itemCount: provider.image.length,
                           itemBuilder: (context, index, realIndex) {
                             return value.isLoading == true
                                 ? const CircularProgressIndicator(
@@ -59,7 +46,7 @@ class ProductView extends StatelessWidget {
                                 : Center(
                                     child: Image(
                                       image: NetworkImage(
-                                        'http://172.16.5.206:5005/uploads/products/${image[index]}',
+                                        'http://172.16.5.206:5005/products/${provider.image[index]}',
                                       ),
                                     ),
                                   );
@@ -72,13 +59,15 @@ class ProductView extends StatelessWidget {
                             },
                           ),
                         ),
-                        const TopItemWidget(),
+                        TopItemWidget(
+                          id: provider.id,
+                        ),
                       ],
                     ),
                     kHeight,
                     AnimatedSmoothIndicator(
                       activeIndex: value2.activeIndex,
-                      count: image.length,
+                      count: provider.image.length,
                       effect: const WormEffect(
                         dotHeight: 10,
                         dotWidth: 10,
@@ -87,9 +76,10 @@ class ProductView extends StatelessWidget {
                       ),
                     ),
                     kHeight,
-                    PreviewProductWidget(image: image),
+                    PreviewProductWidget(image: provider.image),
                     kGapSize,
-                    ProductDetailsWidget(name: name, price: price),
+                    ProductDetailsWidget(
+                        name: provider.name, price: provider.price),
                     kSize,
                     Padding(
                       padding: const EdgeInsets.only(left: 15, right: 15),
@@ -106,11 +96,11 @@ class ProductView extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                rating,
+                                provider.rating,
                                 style: const TextStyle(fontSize: 22),
                               ),
                               RatingBar.builder(
-                                initialRating: double.parse(rating),
+                                initialRating: double.parse(provider.rating),
                                 itemSize: 30,
                                 minRating: 1,
                                 direction: Axis.horizontal,

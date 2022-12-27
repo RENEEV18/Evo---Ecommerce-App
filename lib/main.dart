@@ -7,6 +7,8 @@ import 'package:evo_mart/controller/providers/authentication_provider/verify_otp
 import 'package:evo_mart/controller/providers/onboard_provider/splash_provider.dart';
 import 'package:evo_mart/controller/providers/product_screen_provider/product_screen_provider.dart';
 import 'package:evo_mart/controller/providers/profile_provider/profile_provider.dart';
+import 'package:evo_mart/controller/providers/wishlist/wishlist_provider.dart';
+import 'package:evo_mart/view/product_screen/product_view.dart';
 import 'package:evo_mart/view/sign_in_screen/sign_in_screen.dart';
 import 'package:evo_mart/view/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -54,9 +56,17 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => ProductProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => WishlistProvider(context),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        routes: {
+          ProductView.routeName: (context) {
+            return const ProductView();
+          }
+        },
         theme: ThemeData(useMaterial3: true, primarySwatch: Colors.amber),
         home: const SplashScreen(),
       ),
