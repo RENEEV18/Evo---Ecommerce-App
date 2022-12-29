@@ -1,12 +1,12 @@
 import 'package:evo_mart/common/api/api_baseurl.dart';
 import 'package:evo_mart/common/const/const.dart';
+import 'package:evo_mart/controller/providers/cart/cart_provider.dart';
 import 'package:evo_mart/controller/providers/home_provider/home_controllers.dart';
-import 'package:evo_mart/controller/providers/wishlist/wishlist_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class WishlistScreen extends StatelessWidget {
-  const WishlistScreen({super.key});
+class CartScreen extends StatelessWidget {
+  const CartScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class WishlistScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Center(
           child: Text(
-            'My Wishlist',
+            'My Cart',
             style: TextStyle(
                 fontSize: 20,
                 fontFamily: "Manrope",
@@ -24,7 +24,7 @@ class WishlistScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: SingleChildScrollView(child:
-            Consumer2<HomeProvider, WishlistProvider>(
+            Consumer2<HomeProvider, CartProvider>(
                 builder: (context, home, wish, child) {
           return Column(
             children: [
@@ -41,11 +41,11 @@ class WishlistScreen extends StatelessWidget {
                             strokeWidth: 2,
                           ),
                         )
-                      : wish.model == null || wish.model!.products.isEmpty
+                      : wish.cartList == null || wish.cartList!.products.isEmpty
                           ? SizedBox(
                               height: MediaQuery.of(context).size.height / 2,
                               child: const Center(
-                                child: Text('Wishlist is Empty'),
+                                child: Text('Cart is Empty'),
                               ),
                             )
                           : ListTile(
@@ -56,33 +56,22 @@ class WishlistScreen extends StatelessWidget {
                                   image: DecorationImage(
                                     // fit: BoxFit.cover,
                                     image: NetworkImage(
-                                      '${ApiBaseUrl().baseUrl}/products/${wish.model!.products[index].product.image[0]}',
+                                      '${ApiBaseUrl().baseUrl}/products/${wish.cartList!.products[index].product.image[0]}',
                                     ),
                                   ),
                                 ),
                               ),
-                              trailing: IconButton(
-                                onPressed: () {
-                                  wish.addOrRemoveFromWishlist(context,
-                                      wish.model!.products[index].product.id);
-                                },
-                                icon: const Icon(
-                                  Icons.favorite,
-                                  color: kRed,
-                                ),
-                              ),
                               subtitle: Text(
-                                "₹${wish.model!.products[index].product.price}"
+                                "₹${wish.cartList!.products[index].product.price}"
                                     .toString(),
                                 style: const TextStyle(
                                   color: kRed,
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
-                                  fontFamily: "Manrope",
                                 ),
                               ),
                               title: Text(
-                                wish.model!.products[index].product.name,
+                                wish.cartList!.products[index].product.name,
                                 style: const TextStyle(
                                     fontSize: 16,
                                     fontFamily: 'Manrope',
@@ -93,7 +82,7 @@ class WishlistScreen extends StatelessWidget {
                 separatorBuilder: (context, index) {
                   return const Divider();
                 },
-                itemCount: wish.model?.products.length ?? 0,
+                itemCount: wish.cartList?.products.length ?? 0,
               ),
             ],
           );

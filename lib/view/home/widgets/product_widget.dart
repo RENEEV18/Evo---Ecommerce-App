@@ -54,7 +54,8 @@ class ProductWidget extends StatelessWidget {
                                   textAlign: TextAlign.center,
                                   style: const TextStyle(
                                       fontSize: 15,
-                                      fontWeight: FontWeight.bold),
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "Manrope"),
                                 ),
                                 kSize,
                                 Text(
@@ -62,7 +63,8 @@ class ProductWidget extends StatelessWidget {
                                   style: const TextStyle(
                                       fontSize: 20,
                                       color: kRed,
-                                      fontWeight: FontWeight.bold),
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Manrope'),
                                 ),
                               ],
                             ),

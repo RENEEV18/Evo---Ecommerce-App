@@ -24,9 +24,21 @@ class HomeScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: const [
-                  Text('Free Shipping'),
-                  Text('Secure Payment'),
-                  Text('Cash On Delivery'),
+                  Text(
+                    'Free Shipping',
+                    style: TextStyle(
+                        fontFamily: "Manrope", fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    'Secure Payment',
+                    style: TextStyle(
+                        fontFamily: "Manrope", fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    'Cash On Delivery',
+                    style: TextStyle(
+                        fontFamily: "Manrope", fontWeight: FontWeight.bold),
+                  ),
                 ],
               ),
               kHeight,
@@ -36,8 +48,10 @@ class HomeScreen extends StatelessWidget {
                   Text(
                     'Categories',
                     style: TextStyle(
-                      fontFamily: 'Comfortaa',
+                      fontFamily: 'Manrope',
                       fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1.2,
                     ),
                   ),
                 ],
@@ -51,8 +65,10 @@ class HomeScreen extends StatelessWidget {
                   Text(
                     'Newly Launched Phones !',
                     style: TextStyle(
-                      fontFamily: 'Comfortaa',
+                      fontFamily: 'Manrope',
                       fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1.2,
                     ),
                   ),
                 ],
@@ -93,8 +109,10 @@ class HomeScreen extends StatelessWidget {
                       children: const [
                         Text(
                           'Offer Zone !',
-                          style:
-                              TextStyle(fontSize: 28, fontFamily: 'Comfortaa'),
+                          style: TextStyle(
+                              fontSize: 28,
+                              fontFamily: 'Manrope',
+                              fontWeight: FontWeight.bold),
                         ),
                         Text(
                             'One Plus 10 Pro 5G series - GOES OFFICIAL \n From ₹49,999'),
@@ -110,7 +128,9 @@ class HomeScreen extends StatelessWidget {
                   Text(
                     'All Products',
                     style: TextStyle(
-                      fontFamily: 'Comfortaa',
+                      fontFamily: 'Manrope',
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1.2,
                       fontSize: 18,
                     ),
                   ),

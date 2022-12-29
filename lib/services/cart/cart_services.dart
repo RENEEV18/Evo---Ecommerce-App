@@ -5,16 +5,37 @@ import 'package:dio/dio.dart';
 import 'package:evo_mart/common/api/api_baseurl.dart';
 import 'package:evo_mart/common/api/api_endpoint.dart';
 import 'package:evo_mart/model/cart/add_to_cart_model.dart';
+import 'package:evo_mart/model/cart/get_cart_model.dart';
 import 'package:evo_mart/utils/dio_interceptor/interceptor.dart';
 import 'package:evo_mart/utils/exceptions/dio_exceptions.dart';
 
 class CartService {
-  Future<String?> addToCart(CartModel model, context) async {
+  // Future<int?> addOrRemoveCart(context, productId, CartModel model) async {
+  //   Dio dios = await ApiInterceptor().getApiUser(context);
+  //   try {
+  //     final Response response =
+  //         await dios.post(ApiBaseUrl().baseUrl + ApiEndpoints.cart, data: {
+  //       jsonEncode(
+  //         model.toString(),
+  //       ),
+  //     });
+  //     if (response.statusCode == 200 || response.statusCode == 201) {
+  //       return response.statusCode;
+  //     } else if (response.statusCode == 204) {
+  //       return response.statusCode;
+  //     }
+  //   } on DioError catch (e) {
+  //     log(e.message);
+  //     DioException().dioError(e, context);
+  //   }
+  //   return null;
+  // }
+  Future<String?> addToCart(AddToCartModel model, context) async {
     Dio dios = await ApiInterceptor().getApiUser(context);
     try {
       final Response response = await dios.post(
         ApiBaseUrl().baseUrl + ApiEndpoints.cart,
-        data: jsonEncode(model.toString()),
+        data: jsonEncode(model.toJson()),
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
         final cartResponse = response.data['message'];
@@ -35,7 +56,28 @@ class CartService {
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
         final CartModel model = CartModel.fromJson(response.data);
+        log(response.data.toString());
         return model;
+      }
+    } on DioError catch (e) {
+      log(e.message);
+      DioException().dioError(e, context);
+    }
+    return null;
+  }
+
+  Future<String?> removeFromCart(context, String id) async {
+    Dio dios = await ApiInterceptor().getApiUser(context);
+    try {
+      final Response response = await dios.patch(
+        ApiBaseUrl().baseUrl + ApiEndpoints.cart,
+        data: {
+          "product": id,
+        },
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final cartRemove = response.data['message'];
+        return cartRemove;
       }
     } on DioError catch (e) {
       log(e.message);

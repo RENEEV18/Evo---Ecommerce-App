@@ -79,51 +79,14 @@ class ProductView extends StatelessWidget {
                     PreviewProductWidget(image: provider.image),
                     kGapSize,
                     ProductDetailsWidget(
-                        name: provider.name, price: provider.price),
-                    kSize,
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15, right: 15),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: const [
-                              Text(
-                                'Rating',
-                                style: TextStyle(fontSize: 20),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                provider.rating,
-                                style: const TextStyle(fontSize: 22),
-                              ),
-                              RatingBar.builder(
-                                initialRating: double.parse(provider.rating),
-                                itemSize: 30,
-                                minRating: 1,
-                                direction: Axis.horizontal,
-                                allowHalfRating: true,
-                                itemCount: 5,
-                                ignoreGestures: true,
-                                itemPadding:
-                                    const EdgeInsets.symmetric(horizontal: 4.0),
-                                itemBuilder: (context, _) => const Icon(
-                                  Icons.star,
-                                  color: Colors.amber,
-                                ),
-                                onRatingUpdate: (startRating) {
-                                  log(startRating.toString());
-                                },
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                      name: provider.name,
+                      price: provider.price,
+                      rating: provider.rating,
                     ),
                     kSize,
-                    const BottomWidget()
+                    BottomWidget(
+                      id: provider.id,
+                    ),
                   ],
                 ),
               );

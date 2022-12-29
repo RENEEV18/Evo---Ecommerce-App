@@ -14,7 +14,7 @@ class PreviewProductWidget extends StatelessWidget {
     return Align(
       alignment: Alignment.center,
       child: SizedBox(
-        height: 70,
+        height: 80,
         child: ListView.separated(
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
@@ -23,6 +23,7 @@ class PreviewProductWidget extends StatelessWidget {
               height: 40,
               width: 50,
               decoration: BoxDecoration(
+                color: Colors.black.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(
                   fit: BoxFit.contain,
@@ -30,7 +31,7 @@ class PreviewProductWidget extends StatelessWidget {
                     'http://172.16.5.206:5005/products/${image[index]}',
                   ),
                 ),
-                border: Border.all(),
+                // border: Border.all(),
               ),
             );
           },
