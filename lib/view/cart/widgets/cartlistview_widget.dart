@@ -4,6 +4,7 @@ import 'package:evo_mart/common/api/api_baseurl.dart';
 import 'package:evo_mart/common/const/const.dart';
 import 'package:evo_mart/controller/providers/cart/cart_provider.dart';
 import 'package:evo_mart/controller/providers/home_provider/home_controllers.dart';
+import 'package:evo_mart/view/cart/widgets/shimmer/cart_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
@@ -17,26 +18,20 @@ class CartListviewWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer2<HomeProvider, CartProvider>(
         builder: (context, home, cart, child) {
-      return ListView.separated(
-        physics: const ScrollPhysics(),
-        shrinkWrap: true,
-        itemBuilder: (context, index) {
-          return cart.isLoading == true
-              ? SizedBox(
-                  height: MediaQuery.of(context).size.height / 2,
-                  width: MediaQuery.of(context).size.height / 2,
-                  child: const CircularProgressIndicator(
-                    strokeWidth: 2,
-                  ),
-                )
-              : cart.cartList == null || cart.cartList!.products.isEmpty
-                  ? SizedBox(
-                      height: MediaQuery.of(context).size.height / 2,
-                      child: const Center(
-                        child: Text('Cart is Empty'),
-                      ),
-                    )
-                  : Column(
+      return cart.cartList == null || cart.cartList!.products.isEmpty
+          ? SizedBox(
+              height: MediaQuery.of(context).size.height / 2,
+              child: const Center(
+                child: Text('Cart is Empty'),
+              ),
+            )
+          : cart.isLoading == true
+              ? const CartShimmer()
+              : ListView.separated(
+                  physics: const ScrollPhysics(),
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return Column(
                       children: [
                         Row(
                           children: [
@@ -126,9 +121,9 @@ class CartListviewWidget extends StatelessWidget {
                               child: ElevatedButton.icon(
                                 onPressed: () {
                                   cart.removeCart(
-                                      context,
-                                      cart.cartList!.products[index].product
-                                          .id);
+                                    context,
+                                    cart.cartList!.products[index].product.id,
+                                  );
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: kWhite,
@@ -153,9 +148,10 @@ class CartListviewWidget extends StatelessWidget {
                               child: ElevatedButton(
                                 onPressed: () {},
                                 style: ElevatedButton.styleFrom(
-                                    backgroundColor: kTextfieldColor,
-                                    elevation: 0,
-                                    shape: const RoundedRectangleBorder()),
+                                  backgroundColor: kTextfieldColor,
+                                  elevation: 0,
+                                  shape: const RoundedRectangleBorder(),
+                                ),
                                 child: const Text(
                                   'Buy Now',
                                   style: TextStyle(
@@ -169,12 +165,13 @@ class CartListviewWidget extends StatelessWidget {
                             const Divider(),
                           ],
                         ),
+                        kSize,
                       ],
                     );
-        },
-        itemCount: cart.cartList?.products.length ?? 0,
-        separatorBuilder: (context, index) => const Divider(),
-      );
+                  },
+                  itemCount: cart.cartList?.products.length ?? 0,
+                  separatorBuilder: (context, index) => const Divider(),
+                );
     });
   }
 }

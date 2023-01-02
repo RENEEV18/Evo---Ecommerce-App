@@ -27,9 +27,7 @@ class BottomItemWidgets extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: kWhite,
                 elevation: 0,
-                shape: const RoundedRectangleBorder(
-                  side: BorderSide(),
-                ),
+                shape: const RoundedRectangleBorder(),
               ),
               icon: const Icon(
                 Icons.shopping_cart,

@@ -22,6 +22,9 @@ const kWidth = SizedBox(
 const kHeadLineWidth = SizedBox(
   width: 15,
 );
+const kwishWidth = SizedBox(
+  width: 20,
+);
 const kRatingWidth = SizedBox(
   width: 22,
 );

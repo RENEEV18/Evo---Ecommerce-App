@@ -73,69 +73,67 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              kSize,
-              Padding(
-                padding: const EdgeInsets.only(left: 10, right: 10),
-                child: Container(
-                  height: 250,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    image: const DecorationImage(
-                        image: AssetImage(
-                            'assets/images/ezgif.com-gif-maker (4).png'),
-                        fit: BoxFit.cover),
-                  ),
-                ),
-              ),
-              kSize,
-              Row(
-                children: [
-                  kHeadLineWidth,
-                  Flexible(
-                    child: SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.35,
-                      width: MediaQuery.of(context).size.width * 0.45,
-                      child: const Image(
-                        image: AssetImage('assets/images/EU-IN_Green.png'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  kWidth,
-                  Flexible(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text(
-                          'Offer Zone !',
-                          style: TextStyle(
-                              fontSize: 28,
-                              fontFamily: 'Manrope',
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                            'One Plus 10 Pro 5G series - GOES OFFICIAL \n From ₹49,999'),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              kSize,
-              Row(
-                children: const [
-                  kWidth,
-                  Text(
-                    'All Products',
-                    style: TextStyle(
-                      fontFamily: 'Manrope',
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1.2,
-                      fontSize: 18,
-                    ),
-                  ),
-                ],
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.only(left: 10, right: 10),
+              //   child: Container(
+              //     height: 250,
+              //     width: double.infinity,
+              //     decoration: BoxDecoration(
+              //       borderRadius: BorderRadius.circular(20),
+              //       image: const DecorationImage(
+              //         image: AssetImage(
+              //             'assets/images/ezgif.com-gif-maker (4).png'),
+              //         fit: BoxFit.cover,
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              // Row(
+              //   children: [
+              //     kHeadLineWidth,
+              //     Flexible(
+              //       child: SizedBox(
+              //         height: MediaQuery.of(context).size.height * 0.35,
+              //         width: MediaQuery.of(context).size.width * 0.45,
+              //         child: const Image(
+              //           image: AssetImage('assets/images/EU-IN_Green.png'),
+              //           fit: BoxFit.cover,
+              //         ),
+              //       ),
+              //     ),
+              //     kWidth,
+              //     Flexible(
+              //       child: Column(
+              //         crossAxisAlignment: CrossAxisAlignment.start,
+              //         children: const [
+              //           Text(
+              //             'Offer Zone !',
+              //             style: TextStyle(
+              //                 fontSize: 28,
+              //                 fontFamily: 'Manrope',
+              //                 fontWeight: FontWeight.bold),
+              //           ),
+              //           Text(
+              //               'One Plus 10 Pro 5G series - GOES OFFICIAL \n From ₹49,999'),
+              //         ],
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // Row(
+              //   children: const [
+              //     kWidth,
+              //     Text(
+              //       'All Products',
+              //       style: TextStyle(
+              //         fontFamily: 'Manrope',
+              //         fontWeight: FontWeight.bold,
+              //         letterSpacing: 1.2,
+              //         fontSize: 18,
+              //       ),
+              //     ),
+              //   ],
+              // ),
               kSize,
               const ProductWidget()
             ],

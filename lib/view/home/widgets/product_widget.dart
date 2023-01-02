@@ -1,5 +1,6 @@
 import 'package:evo_mart/common/const/const.dart';
 import 'package:evo_mart/controller/providers/home_provider/home_controllers.dart';
+import 'package:evo_mart/view/home/shimmer/product_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,24 +13,22 @@ class ProductWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<HomeProvider>(
       builder: (context, value, child) {
-        return Padding(
-          padding: const EdgeInsets.only(left: 10, right: 10),
-          child: GridView.builder(
-            shrinkWrap: true,
-            physics: const ScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 6 / 8,
-                mainAxisSpacing: 0,
-                crossAxisSpacing: 0),
-            itemBuilder: (context, index) {
-              return Consumer<HomeProvider>(
-                builder: (context, value, child) {
-                  return value.isLoading == true
-                      ? const CircularProgressIndicator(
-                          strokeWidth: 2,
-                        )
-                      : InkWell(
+        return value.isLoading == true
+            ? const ProductShimmer()
+            : Padding(
+                padding: const EdgeInsets.only(left: 10, right: 10),
+                child: GridView.builder(
+                  shrinkWrap: true,
+                  physics: const ScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 6 / 8,
+                      mainAxisSpacing: 0,
+                      crossAxisSpacing: 0),
+                  itemBuilder: (context, index) {
+                    return Consumer<HomeProvider>(
+                      builder: (context, value, child) {
+                        return InkWell(
                           onTap: () {
                             value.toProductScreen(context, index);
                           },
@@ -70,12 +69,12 @@ class ProductWidget extends StatelessWidget {
                             ),
                           ),
                         );
-                },
+                      },
+                    );
+                  },
+                  itemCount: value.productList.length,
+                ),
               );
-            },
-            itemCount: value.productList.length,
-          ),
-        );
       },
     );
   }

@@ -23,7 +23,6 @@ class ProductDetailsWidget extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: Colors.orange.withOpacity(0.1),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
@@ -64,6 +63,7 @@ class ProductDetailsWidget extends StatelessWidget {
               ],
             ),
           ),
+          kSize,
           Text(
             '₹${price.toString()}',
             style: const TextStyle(

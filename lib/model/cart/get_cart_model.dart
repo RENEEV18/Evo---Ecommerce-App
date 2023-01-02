@@ -13,7 +13,7 @@ class CartModel {
   String userid;
   List<ProductElement> products;
   int totalPrice;
-  int totalDiscount;
+  dynamic totalDiscount;
 
   factory CartModel.fromJson(Map<String, dynamic> json) => CartModel(
         id: json["_id"],

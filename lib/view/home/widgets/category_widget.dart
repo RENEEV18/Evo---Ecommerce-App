@@ -1,5 +1,6 @@
 import 'package:evo_mart/common/const/const.dart';
 import 'package:evo_mart/controller/providers/home_provider/home_controllers.dart';
+import 'package:evo_mart/view/home/shimmer/category_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -9,15 +10,13 @@ class CategoryWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<HomeProvider>(builder: (context, value, child) {
-      return SizedBox(
-        height: 100,
-        child: ListView.separated(
-          itemBuilder: (context, index) {
-            return value.isLoading == true
-                ? const CircularProgressIndicator(
-                    strokeWidth: 2,
-                  )
-                : Row(
+      return value.categoryList.isEmpty
+          ? const CategoryShimmer()
+          : SizedBox(
+              height: 100,
+              child: ListView.separated(
+                itemBuilder: (context, index) {
+                  return Row(
                     children: [
                       kWidth,
                       Column(
@@ -38,14 +37,14 @@ class CategoryWidget extends StatelessWidget {
                       ),
                     ],
                   );
-          },
-          scrollDirection: Axis.horizontal,
-          itemCount: value.categoryList.length,
-          separatorBuilder: (BuildContext context, int index) {
-            return kWidth;
-          },
-        ),
-      );
+                },
+                scrollDirection: Axis.horizontal,
+                itemCount: value.isLoading ? 5 : value.categoryList.length,
+                separatorBuilder: (BuildContext context, int index) {
+                  return kWidth;
+                },
+              ),
+            );
     });
   }
 }

@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:evo_mart/common/const/const.dart';
 import 'package:evo_mart/controller/providers/home_provider/home_controllers.dart';
@@ -8,7 +7,6 @@ import 'package:evo_mart/view/product_screen/widgets/preview_product_widget.dart
 import 'package:evo_mart/view/product_screen/widgets/product_details_widget.dart';
 import 'package:evo_mart/view/product_screen/widgets/top_item_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 

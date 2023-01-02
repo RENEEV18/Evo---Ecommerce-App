@@ -28,18 +28,22 @@ class HomeProvider extends ChangeNotifier {
   void getCategory(context) async {
     isLoading = true;
     notifyListeners();
-    await category.categoryUsers(context).then((value) {
-      if (value != null) {
-        categoryList = value;
-        notifyListeners();
-        isLoading = false;
-        notifyListeners();
-      } else {
-        isLoading = false;
-        notifyListeners();
-        return null;
-      }
-    });
+    await category.categoryUsers(context).then(
+      (value) {
+        if (value != null) {
+          categoryList = value;
+          notifyListeners();
+          isLoading = false;
+          notifyListeners();
+        } else {
+          isLoading = false;
+          notifyListeners();
+          return null;
+        }
+      },
+    );
+    isLoading = false;
+    notifyListeners();
   }
 
   void getCarousel(context) async {

@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:evo_mart/common/const/const.dart';
 import 'package:evo_mart/controller/providers/home_provider/home_controllers.dart';
+import 'package:evo_mart/view/home/shimmer/carousel_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -20,11 +21,7 @@ class CarouselSliderWidget extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: value.isLoading == true
-                  ? const Center(
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                      ),
-                    )
+                  ? const CarouselShimmer()
                   : CarouselSlider.builder(
                       options: CarouselOptions(
                         height: 150,
@@ -55,22 +52,25 @@ class CarouselSliderWidget extends StatelessWidget {
                           fit: BoxFit.cover,
                         );
                       },
-                      itemCount: value.carousalList.length,
+                      itemCount:
+                          value.isLoading ? 5 : value.carousalList.length,
                     ),
             ),
             kHeight,
             Positioned(
               top: 128,
               left: 150,
-              child: AnimatedSmoothIndicator(
-                activeIndex: value.activeIndex,
-                count: value.carousalList.length,
-                effect: const WormEffect(
-                    dotHeight: 10,
-                    dotWidth: 10,
-                    dotColor: kWhite,
-                    activeDotColor: kTextfieldColor),
-              ),
+              child: value.isLoading
+                  ? const SizedBox()
+                  : AnimatedSmoothIndicator(
+                      activeIndex: value.activeIndex,
+                      count: value.carousalList.length,
+                      effect: const WormEffect(
+                          dotHeight: 10,
+                          dotWidth: 10,
+                          dotColor: kWhite,
+                          activeDotColor: kTextfieldColor),
+                    ),
             ),
           ],
         );

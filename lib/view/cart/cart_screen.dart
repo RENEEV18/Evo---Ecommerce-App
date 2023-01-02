@@ -46,8 +46,8 @@ class CartScreen extends StatelessWidget {
                 shape: const RoundedRectangleBorder(),
               ),
               child: Column(
-                children: [
-                  const Text(
+                children: const [
+                  Text(
                     'Total Price',
                     style: TextStyle(
                       color: kBlack,
@@ -56,15 +56,15 @@ class CartScreen extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Text(
-                    '${provider.cartList!.totalPrice}',
-                    style: const TextStyle(
-                      color: kRed,
-                      fontFamily: 'Manrope',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
-                  ),
+                  // Text(
+                  //   '${provider.cartList!.totalPrice}',
+                  //   style: const TextStyle(
+                  //     color: kRed,
+                  //     fontFamily: 'Manrope',
+                  //     fontWeight: FontWeight.bold,
+                  //     fontSize: 18,
+                  //   ),
+                  // ),
                 ],
               ),
             ),

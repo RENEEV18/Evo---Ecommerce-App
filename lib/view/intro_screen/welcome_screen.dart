@@ -53,7 +53,7 @@ class WelcomeScreen extends StatelessWidget {
                         ),
                       );
                     },
-                    child: Text(
+                    child: const Text(
                       'Skip',
                       style: TextStyle(color: kBlack),
                     ),

@@ -27,12 +27,11 @@ class PreviewProductWidget extends StatelessWidget {
                 // color: Colors.black.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(
-                  fit: BoxFit.cover,
+                  fit: BoxFit.contain,
                   image: NetworkImage(
                     'http://172.16.5.206:5005/products/${image[index]}',
                   ),
                 ),
-                // border: Border.all(),
               ),
             );
           },

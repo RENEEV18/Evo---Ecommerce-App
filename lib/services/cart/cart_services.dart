@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:evo_mart/common/api/api_baseurl.dart';
 import 'package:evo_mart/common/api/api_endpoint.dart';
@@ -8,7 +7,6 @@ import 'package:evo_mart/model/cart/add_to_cart_model.dart';
 import 'package:evo_mart/model/cart/get_cart_model.dart';
 import 'package:evo_mart/utils/dio_interceptor/interceptor.dart';
 import 'package:evo_mart/utils/exceptions/dio_exceptions.dart';
-import 'package:flutter/cupertino.dart';
 
 class CartService {
   // Future<int?> addOrRemoveCart(context, productId, CartModel model) async {
@@ -39,8 +37,12 @@ class CartService {
         data: jsonEncode(model.toJson()),
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
-        final cartResponse = response.data['message'];
-        return cartResponse;
+        if (response.data == null) {
+          return null;
+        } else {
+          final cartResponse = response.data['message'];
+          return cartResponse;
+        }
       }
     } on DioError catch (e) {
       log(e.message);
