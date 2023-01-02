@@ -1,6 +1,7 @@
 import 'package:evo_mart/common/const/const.dart';
 import 'package:evo_mart/controller/providers/onboard_provider/intro_provider.dart';
 import 'package:evo_mart/view/intro_screen/widgets/first_screen.dart';
+import 'package:evo_mart/view/intro_screen/widgets/second_screen.dart';
 import 'package:evo_mart/view/sign_in_screen/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +20,7 @@ class WelcomeScreen extends StatelessWidget {
                 controller: value.controller,
                 children: const [
                   FirstScreen(),
-                  FirstScreen(),
+                  SecondScreen(),
                   FirstScreen(),
                 ],
               ),
@@ -30,28 +31,34 @@ class WelcomeScreen extends StatelessWidget {
                   child: SmoothPageIndicator(
                     controller: value.controller,
                     count: 3,
-                    effect: const WormEffect(),
+                    effect: const WormEffect(
+                        dotHeight: 10,
+                        dotWidth: 10,
+                        dotColor: kgery,
+                        activeDotColor: kWhite),
                   ),
                 ),
               ),
               Align(
                 alignment: Alignment.topRight,
                 child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return SigninScreen();
-                              },
-                            ),
-                          );
-                        },
-                        child: Text(
-                          'Skip',
-                          style: TextStyle(color: kBlack),
-                        ))),
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return SigninScreen();
+                          },
+                        ),
+                      );
+                    },
+                    child: Text(
+                      'Skip',
+                      style: TextStyle(color: kBlack),
+                    ),
+                  ),
+                ),
               ),
             ],
           );

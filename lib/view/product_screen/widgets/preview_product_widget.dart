@@ -23,10 +23,11 @@ class PreviewProductWidget extends StatelessWidget {
               height: 40,
               width: 50,
               decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.2),
+                border: Border.all(),
+                // color: Colors.black.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(
-                  fit: BoxFit.contain,
+                  fit: BoxFit.cover,
                   image: NetworkImage(
                     'http://172.16.5.206:5005/products/${image[index]}',
                   ),

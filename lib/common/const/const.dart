@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 const kSize = SizedBox(
   height: 10,
 );
+const kheight = SizedBox(
+  height: 10,
+);
 const kGapSize = SizedBox(
   height: 30,
 );

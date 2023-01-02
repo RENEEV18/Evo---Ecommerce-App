@@ -1,8 +1,5 @@
 import 'package:evo_mart/common/const/const.dart';
-import 'package:evo_mart/controller/providers/onboard_provider/intro_provider.dart';
-import 'package:evo_mart/view/sign_in_screen/sign_in_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class FirstScreen extends StatelessWidget {
   const FirstScreen({
@@ -36,7 +33,7 @@ class FirstScreen extends StatelessWidget {
             TextSpan(
               children: [
                 TextSpan(
-                  text: 'Please your eyes on the ',
+                  text: 'Welcome to the ',
                   style: TextStyle(
                     fontFamily: 'Comfortaa',
                     color: kWhite,
@@ -44,12 +41,12 @@ class FirstScreen extends StatelessWidget {
                   ),
                 ),
                 TextSpan(
-                  text: 'trending\n items',
+                  text: 'World of Exciting Collection',
                   style: TextStyle(
                       color: kWhite,
                       fontFamily: 'Comfortaa',
                       fontSize: 30,
-                      fontWeight: FontWeight.bold),
+                      fontWeight: FontWeight.w300),
                 ),
                 TextSpan(
                   text: '\non',

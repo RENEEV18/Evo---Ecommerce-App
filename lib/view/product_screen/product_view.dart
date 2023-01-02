@@ -71,7 +71,7 @@ class ProductView extends StatelessWidget {
                       effect: const WormEffect(
                         dotHeight: 10,
                         dotWidth: 10,
-                        dotColor: kBlack,
+                        dotColor: kgery,
                         activeDotColor: kTextfieldColor,
                       ),
                     ),
@@ -84,15 +84,18 @@ class ProductView extends StatelessWidget {
                       rating: provider.rating,
                     ),
                     kSize,
-                    BottomWidget(
-                      id: provider.id,
-                    ),
+                    // BottomWidget(
+                    //   id: provider.id,
+                    // ),
                   ],
                 ),
               );
             },
           ),
         ),
+      ),
+      bottomNavigationBar: BottomItemWidgets(
+        id: provider.id,
       ),
     );
   }

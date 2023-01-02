@@ -23,53 +23,46 @@ class ProductDetailsWidget extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.1),
+        color: Colors.orange.withOpacity(0.1),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                name,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Manrope',
-                  letterSpacing: 1.2,
-                ),
-              ),
-              RichText(
-                text: TextSpan(
-                  text: rating,
-                  style: const TextStyle(color: kBlack),
-                  children: [
-                    WidgetSpan(
-                      child: RatingBar.builder(
-                        initialRating: double.parse(rating),
-                        itemSize: 15,
-                        minRating: 1,
-                        direction: Axis.horizontal,
-                        allowHalfRating: true,
-                        itemCount: 5,
-                        ignoreGestures: true,
-                        itemPadding:
-                            const EdgeInsets.symmetric(horizontal: 4.0),
-                        itemBuilder: (context, _) => const Icon(
-                          Icons.star,
-                          color: Colors.amber,
-                        ),
-                        onRatingUpdate: (startRating) {
-                          log(startRating.toString());
-                        },
-                      ),
-                    )
-                  ],
-                ),
-              )
-            ],
+          Text(
+            name,
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Manrope',
+              letterSpacing: 1.2,
+            ),
+          ),
+          RichText(
+            text: TextSpan(
+              text: rating,
+              style: const TextStyle(color: kBlack),
+              children: [
+                WidgetSpan(
+                  child: RatingBar.builder(
+                    initialRating: double.parse(rating),
+                    itemSize: 15,
+                    minRating: 1,
+                    direction: Axis.horizontal,
+                    allowHalfRating: true,
+                    itemCount: 5,
+                    ignoreGestures: true,
+                    itemBuilder: (context, _) => const Icon(
+                      Icons.star,
+                      color: Colors.amber,
+                    ),
+                    onRatingUpdate: (startRating) {
+                      log(startRating.toString());
+                    },
+                  ),
+                )
+              ],
+            ),
           ),
           Text(
             '₹${price.toString()}',

@@ -5,23 +5,23 @@ class CartModel {
     required this.id,
     required this.userid,
     required this.products,
-    // required this.totalPrice,
-    // required this.totalDiscount,
+    required this.totalPrice,
+    required this.totalDiscount,
   });
 
   String id;
   String userid;
   List<ProductElement> products;
-  // int totalPrice;
-  // int totalDiscount;
+  int totalPrice;
+  int totalDiscount;
 
   factory CartModel.fromJson(Map<String, dynamic> json) => CartModel(
         id: json["_id"],
         userid: json["userid"],
         products: List<ProductElement>.from(
             json["products"].map((x) => ProductElement.fromJson(x))),
-        // totalPrice: json["totalPrice"],
-        // totalDiscount: json["totalDiscount"],
+        totalPrice: json["totalPrice"],
+        totalDiscount: json["totalDiscount"],
       );
 }
 

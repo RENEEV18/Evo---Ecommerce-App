@@ -29,72 +29,72 @@ class WishlistScreen extends StatelessWidget {
           return Column(
             children: [
               kGapSize,
-              ListView.separated(
-                physics: const ScrollPhysics(),
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return wish.isLoading == true
-                      ? SizedBox(
-                          height: MediaQuery.of(context).size.height / 2,
-                          width: MediaQuery.of(context).size.height / 2,
-                          child: const CircularProgressIndicator(
-                            strokeWidth: 2,
-                          ),
-                        )
-                      : wish.model == null || wish.model!.products.isEmpty
-                          ? SizedBox(
-                              height: MediaQuery.of(context).size.height / 2,
-                              child: const Center(
-                                child: Text('Wishlist is Empty'),
-                              ),
-                            )
-                          : ListTile(
-                              leading: Container(
-                                height: 65,
-                                width: 50,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    // fit: BoxFit.cover,
-                                    image: NetworkImage(
-                                      '${ApiBaseUrl().baseUrl}/products/${wish.model!.products[index].product.image[0]}',
+              wish.model == null || wish.model!.products.isEmpty
+                  ? SizedBox(
+                      height: MediaQuery.of(context).size.height / 2,
+                      child: const Center(
+                        child: Text('Wishlist is Empty'),
+                      ),
+                    )
+                  : ListView.separated(
+                      physics: const ScrollPhysics(),
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return wish.isLoading == true
+                            ? SizedBox(
+                                height: MediaQuery.of(context).size.height / 2,
+                                width: MediaQuery.of(context).size.height / 2,
+                                child: const CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                ),
+                              )
+                            : ListTile(
+                                leading: Container(
+                                  height: 65,
+                                  width: 50,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      // fit: BoxFit.cover,
+                                      image: NetworkImage(
+                                        '${ApiBaseUrl().baseUrl}/products/${wish.model!.products[index].product.image[0]}',
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              trailing: IconButton(
-                                onPressed: () {
-                                  wish.addOrRemoveFromWishlist(context,
-                                      wish.model!.products[index].product.id);
-                                },
-                                icon: const Icon(
-                                  Icons.favorite,
-                                  color: kRed,
+                                trailing: IconButton(
+                                  onPressed: () {
+                                    wish.addOrRemoveFromWishlist(context,
+                                        wish.model!.products[index].product.id);
+                                  },
+                                  icon: const Icon(
+                                    Icons.favorite,
+                                    color: kRed,
+                                  ),
                                 ),
-                              ),
-                              subtitle: Text(
-                                "₹${wish.model!.products[index].product.price}"
-                                    .toString(),
-                                style: const TextStyle(
-                                  color: kRed,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "Manrope",
+                                subtitle: Text(
+                                  "₹${wish.model!.products[index].product.price}"
+                                      .toString(),
+                                  style: const TextStyle(
+                                    color: kRed,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "Manrope",
+                                  ),
                                 ),
-                              ),
-                              title: Text(
-                                wish.model!.products[index].product.name,
-                                style: const TextStyle(
-                                    fontSize: 16,
-                                    fontFamily: 'Manrope',
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            );
-                },
-                separatorBuilder: (context, index) {
-                  return const Divider();
-                },
-                itemCount: wish.model?.products.length ?? 0,
-              ),
+                                title: Text(
+                                  wish.model!.products[index].product.name,
+                                  style: const TextStyle(
+                                      fontSize: 16,
+                                      fontFamily: 'Manrope',
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              );
+                      },
+                      separatorBuilder: (context, index) {
+                        return const Divider();
+                      },
+                      itemCount: wish.model?.products.length ?? 0,
+                    ),
             ],
           );
         })),
