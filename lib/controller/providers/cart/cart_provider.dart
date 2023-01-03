@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:evo_mart/common/const/const.dart';
 import 'package:evo_mart/model/cart/add_to_cart_model.dart';
 import 'package:evo_mart/model/cart/get_cart_model.dart';
@@ -16,7 +15,8 @@ class CartProvider extends ChangeNotifier {
   CartModel? cartList;
   List<String> cartItemsId = [];
   int quantity = 1;
-  String size = "5 inch";
+  int totalproductCount = 1;
+  int? totalSave;
   CartService service = CartService();
 
   void getCart(context) async {
@@ -28,6 +28,8 @@ class CartProvider extends ChangeNotifier {
           cartList = value;
           notifyListeners();
           cartItemsId = cartList!.products.map((e) => e.product.id).toList();
+          totalSave = (cartList!.totalPrice - cartList!.totalDiscount).toInt();
+          totalProductCount();
           notifyListeners();
           isLoading = false;
           notifyListeners();
@@ -35,16 +37,17 @@ class CartProvider extends ChangeNotifier {
           isLoading = false;
           notifyListeners();
         }
+        return null;
       },
     );
   }
 
-  void addToCart(String productId, context) async {
+  void addToCart(String productId, context, String size) async {
     log('here');
     isLoading = true;
     notifyListeners();
     final AddToCartModel model = AddToCartModel(
-      size: size,
+      size: size.toString(),
       quantity: quantity,
       productId: productId,
     );
@@ -67,6 +70,8 @@ class CartProvider extends ChangeNotifier {
       (value) {
         if (value != null) {
           getCart(context);
+          log(totalSave.toString());
+          pop(context);
           SnackBarPop.popUp(
               context, 'Product removed from cart successfully', kRed);
           notifyListeners();
@@ -75,5 +80,85 @@ class CartProvider extends ChangeNotifier {
         }
       },
     );
+  }
+
+  void totalProductCount() {
+    int count = 0;
+    for (var i = 0; i < cartList!.products.length; i++) {
+      count = count + cartList!.products[i].qty;
+    }
+    totalproductCount = count;
+    notifyListeners();
+  }
+
+  // Future<void> quantityIncrement(context,String size,productId,int qty,int productQty) async {
+  //   final AddToCartModel model = AddToCartModel(
+  //     size: size.toString(),
+  //     quantity: quantity,
+  //     productId: productId,
+  //   );
+  //   if(qty == 1 && productQty>=1){
+  //             (value) async {
+  //         if (value != null) {
+  //           await CartService().getCart(context,model).then(
+  //             (value) {
+  //               if (value != null) {
+  //                 cartList = value;
+  //                 notifyListeners();
+  //                 totalProductCount();
+  //                 cartItemsId =
+  //                     cartList!.products.map((e) => e.product.id).toList();
+  //                 notifyListeners();
+  //                 totalSave = cartList!.totalDiscount.toInt() -
+  //                     cartList!.totalPrice.toInt();
+  //                 notifyListeners();
+  //               } else {
+  //                 null;
+  //               }
+  //             },
+  //           );
+  //        }
+  //      };
+  //   }
+
+  Future<void> incrementDecrementQty(int qty, String productId,
+      int productQuantity, context, String size) async {
+    final AddToCartModel model = AddToCartModel(
+      size: size.toString(),
+      quantity: quantity,
+      productId: productId,
+    );
+    if (qty == 1 && productQuantity >= 1) {
+      await CartService().addToCart(model, context).then(
+        (value) async {
+          if (value != null) {
+            await CartService().getCart(context).then(
+              (value) {
+                if (value != null) {
+                  cartList = value;
+                  notifyListeners();
+                  totalProductCount();
+                  cartItemsId =
+                      cartList!.products.map((e) => e.product.id).toList();
+                  notifyListeners();
+                  totalSave = cartList!.totalDiscount.toInt() -
+                      cartList!.totalPrice.toInt();
+                  notifyListeners();
+                } else {
+                  null;
+                }
+              },
+            );
+          } else {
+            null;
+          }
+        },
+      );
+    }
+  }
+
+  void pop(context) {
+    Navigator.of(context).pop();
+    notifyListeners();
   }
 }

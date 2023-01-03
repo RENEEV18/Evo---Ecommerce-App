@@ -9,7 +9,6 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<CartProvider>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: const Center(
@@ -33,64 +32,61 @@ class CartScreen extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: Row(
-        children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.07,
-            width: MediaQuery.of(context).size.width / 2,
-            child: ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                backgroundColor: kWhite,
-                elevation: 0,
-                shape: const RoundedRectangleBorder(),
-              ),
-              child: Column(
-                children: const [
-                  Text(
-                    'Total Price',
-                    style: TextStyle(
-                      color: kBlack,
-                      fontSize: 15,
-                      fontFamily: "Manrope",
-                      fontWeight: FontWeight.bold,
+      bottomNavigationBar: Consumer<CartProvider>(
+        builder: (context, value, child) {
+          return value.cartList == null || value.cartList!.products.isEmpty
+              ? const SizedBox()
+              : Row(
+                  children: [
+                    SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.07,
+                        width: MediaQuery.of(context).size.width / 2,
+                        child: Column(
+                          children: [
+                            const Text(
+                              'Total Price',
+                              style: TextStyle(
+                                color: kBlack,
+                                fontSize: 15,
+                                fontFamily: "Manrope",
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              '${value.totalSave}',
+                              style: const TextStyle(
+                                color: kRed,
+                                fontFamily: 'Manrope',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                            ),
+                          ],
+                        )),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.07,
+                      width: MediaQuery.of(context).size.width / 2,
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: kTextfieldColor,
+                            elevation: 0,
+                            shape: const RoundedRectangleBorder()),
+                        child: const Text(
+                          'Place Order',
+                          style: TextStyle(
+                            color: kWhite,
+                            fontFamily: 'Manrope',
+                            letterSpacing: 1,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                  // Text(
-                  //   '${provider.cartList!.totalPrice}',
-                  //   style: const TextStyle(
-                  //     color: kRed,
-                  //     fontFamily: 'Manrope',
-                  //     fontWeight: FontWeight.bold,
-                  //     fontSize: 18,
-                  //   ),
-                  // ),
-                ],
-              ),
-            ),
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.07,
-            width: MediaQuery.of(context).size.width / 2,
-            child: ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: kTextfieldColor,
-                  elevation: 0,
-                  shape: const RoundedRectangleBorder()),
-              child: const Text(
-                'Place Order',
-                style: TextStyle(
-                  color: kWhite,
-                  fontFamily: 'Manrope',
-                  letterSpacing: 1,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                ),
-              ),
-            ),
-          ),
-        ],
+                  ],
+                );
+        },
       ),
     );
   }

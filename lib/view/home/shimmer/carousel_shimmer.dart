@@ -9,32 +9,10 @@ class CarouselShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      children: [
+      children: const [
         SizedBox(
           width: double.infinity,
-          child: CarouselSlider.builder(
-            options: CarouselOptions(
-              height: 150,
-              aspectRatio: 16 / 9,
-              viewportFraction: 1,
-              initialPage: 0,
-              enableInfiniteScroll: true,
-              reverse: false,
-              autoPlay: true,
-              autoPlayInterval: const Duration(seconds: 5),
-              autoPlayAnimationDuration: const Duration(milliseconds: 800),
-              autoPlayCurve: Curves.fastOutSlowIn,
-              enlargeCenterPage: true,
-              enlargeFactor: 0.3,
-              onPageChanged: (index, reason) {},
-              scrollDirection: Axis.horizontal,
-            ),
-            itemBuilder: (BuildContext context, int index, int realIndex) {
-              return const ShimmerWidget.rectangle(
-                  height: 20, width: double.infinity);
-            },
-            itemCount: 5,
-          ),
+          child: ShimmerWidget.rectangle(height: 150, width: double.infinity),
         ),
         kHeight,
         // Positioned(

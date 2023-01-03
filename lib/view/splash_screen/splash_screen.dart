@@ -17,10 +17,9 @@ class SplashScreen extends StatelessWidget {
     return const Scaffold(
       backgroundColor: Colors.orange,
       body: Center(
-        child: Text(
-          'Evo',
-          style:
-              TextStyle(fontFamily: 'Comfortaa', color: kWhite, fontSize: 28),
+        child: Image(
+          height: 50,
+          image: AssetImage('assets/images/lOGO.png'),
         ),
       ),
     );

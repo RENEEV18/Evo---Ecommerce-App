@@ -51,9 +51,6 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
     await carousal.homeCarousel(context).then((value) {
       if (value != null) {
-        //log('hello');
-        // log('hai');
-        // log(value.toString());
         log('carousal no null');
         carousalList = value;
         notifyListeners();

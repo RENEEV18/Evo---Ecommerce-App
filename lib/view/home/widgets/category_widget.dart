@@ -24,7 +24,6 @@ class CategoryWidget extends StatelessWidget {
                           InkWell(
                             onTap: () {},
                             child: CircleAvatar(
-                              backgroundColor: Colors.amber.withOpacity(0.5),
                               backgroundImage: NetworkImage(
                                   'http://172.16.5.206:5005/category/${value.categoryList[index].image}'),
                               radius: 30,

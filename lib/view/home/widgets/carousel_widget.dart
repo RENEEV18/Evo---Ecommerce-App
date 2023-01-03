@@ -52,8 +52,9 @@ class CarouselSliderWidget extends StatelessWidget {
                           fit: BoxFit.cover,
                         );
                       },
-                      itemCount:
-                          value.isLoading ? 5 : value.carousalList.length,
+                      itemCount: value.isLoading
+                          ? value.carousalList.length
+                          : value.carousalList.length,
                     ),
             ),
             kHeight,

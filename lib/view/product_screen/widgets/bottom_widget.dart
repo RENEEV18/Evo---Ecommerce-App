@@ -8,9 +8,10 @@ class BottomItemWidgets extends StatelessWidget {
   const BottomItemWidgets({
     Key? key,
     required this.id,
+    required this.size,
   }) : super(key: key);
   final String id;
-
+  final List<String> size;
   @override
   Widget build(BuildContext context) {
     return Consumer<CartProvider>(builder: (context, value, child) {
@@ -21,7 +22,7 @@ class BottomItemWidgets extends StatelessWidget {
             width: MediaQuery.of(context).size.width / 2,
             child: ElevatedButton.icon(
               onPressed: () {
-                value.addToCart(id, context);
+                value.addToCart(id, context, size.toString());
                 log('add cart clicked');
               },
               style: ElevatedButton.styleFrom(
