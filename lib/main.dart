@@ -1,3 +1,4 @@
+import 'package:evo_mart/controller/providers/address/address_controller.dart';
 import 'package:evo_mart/controller/providers/bottom_nav_provider/bottom_nav_provider.dart';
 import 'package:evo_mart/controller/providers/cart/cart_provider.dart';
 import 'package:evo_mart/controller/providers/home_provider/home_controllers.dart';
@@ -51,7 +52,7 @@ class MyApp extends StatelessWidget {
           create: (context) => HomeProvider(context),
         ),
         ChangeNotifierProvider(
-          create: (context) => ProfileProvider(),
+          create: (context) => ProfileProvider(context),
         ),
         ChangeNotifierProvider(
           create: (context) => ProductProvider(),
@@ -61,6 +62,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => CartProvider(context),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => AddressProvider(),
         ),
       ],
       child: MaterialApp(

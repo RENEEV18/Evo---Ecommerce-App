@@ -17,8 +17,8 @@ class BottomNavProvider extends ChangeNotifier {
 
   List<IconData> icons = [
     FontAwesomeIcons.house,
+    FontAwesomeIcons.solidHeart,
     FontAwesomeIcons.bagShopping,
-    FontAwesomeIcons.cartShopping,
     FontAwesomeIcons.solidUser,
   ];
   void bottomNav(int value) {

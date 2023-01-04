@@ -40,6 +40,12 @@ const kGrey = Color.fromARGB(200, 255, 255, 255);
 const kgery = Colors.grey;
 
 //style
+const kCommonTextstyle = TextStyle(
+  fontFamily: "Manrope",
+  fontSize: 16,
+  letterSpacing: 1,
+  fontWeight: FontWeight.bold,
+);
 const kUsernameStyle = TextStyle(
     color: Color.fromARGB(255, 255, 255, 255),
     fontSize: 15,
@@ -76,3 +82,5 @@ List<Widget> images = [
 
 //text
 // List<String> text = ['Realme', 'Oppo', 'Apple', 'Samsung', 'Redmi'];
+
+

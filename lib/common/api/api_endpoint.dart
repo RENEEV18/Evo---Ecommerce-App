@@ -14,4 +14,7 @@ class ApiEndpoints {
   /* Product Page End-points */
   static String cart = '/api/v1/cart';
   static String wishlist = '/api/v1/wishlist';
+
+  /*Address Page End-point*/
+  static String address = '/api/v1/address';
 }

@@ -1,6 +1,7 @@
+import 'package:evo_mart/common/const/const.dart';
 import 'package:evo_mart/controller/providers/profile_provider/profile_provider.dart';
+import 'package:evo_mart/view/profile_screen/widgets/profile_listtile_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -8,22 +9,150 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final data = Provider.of<ProfileProvider>(context, listen: false);
-    return Scaffold(body: Consumer<ProfileProvider>(
+    return Consumer<ProfileProvider>(
       builder: (context, value, child) {
-        return Column(
-          children: [
-            Center(
-              child: IconButton(
-                onPressed: () {
-                  value.logOut(context);
-                },
-                icon: const Icon(FontAwesomeIcons.arrowRightToBracket),
+        return Scaffold(
+          appBar: AppBar(
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text(
+                  "Hello RJ",
+                  style: TextStyle(
+                    fontFamily: "Manrope",
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  "Explore on Evo",
+                  style: TextStyle(
+                    fontFamily: "Manrope",
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: kTextfieldColor,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          body: SafeArea(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  kHeight,
+                  Row(
+                    children: const [
+                      kWidth,
+                      Text('Account Settings', style: kCommonTextstyle),
+                    ],
+                  ),
+                  kSize,
+                  Card(
+                    elevation: 0.1,
+                    color: kWhite,
+                    child: Column(
+                      children: [
+                        ProfileListtileWidget(
+                          icon: const Icon(
+                            Icons.person,
+                          ),
+                          text: 'Edit profile',
+                          ontap: () {},
+                          trailIcon: const Icon(
+                            Icons.arrow_forward_ios_outlined,
+                          ),
+                        ),
+                        ProfileListtileWidget(
+                          icon: const Icon(
+                            Icons.location_on,
+                          ),
+                          text: 'Saved Address',
+                          ontap: () {
+                            value.goToAddressPage(context);
+                          },
+                          trailIcon: const Icon(
+                            Icons.arrow_forward_ios_outlined,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  kSize,
+                  Row(
+                    children: const [
+                      kWidth,
+                      Text('Information & Feedback', style: kCommonTextstyle),
+                    ],
+                  ),
+                  kSize,
+                  Card(
+                    elevation: 0.1,
+                    child: Column(
+                      children: [
+                        ProfileListtileWidget(
+                          icon: const Icon(
+                            Icons.description,
+                          ),
+                          text: 'Terms & Condition',
+                          ontap: () {},
+                          trailIcon: const Icon(
+                            Icons.arrow_forward_ios_outlined,
+                          ),
+                        ),
+                        ProfileListtileWidget(
+                          icon: const Icon(
+                            Icons.privacy_tip,
+                          ),
+                          text: 'Privacy Policy',
+                          ontap: () {},
+                          trailIcon: const Icon(
+                            Icons.arrow_forward_ios_outlined,
+                          ),
+                        ),
+                        ProfileListtileWidget(
+                          icon: const Icon(
+                            Icons.info,
+                          ),
+                          text: 'About',
+                          ontap: () {},
+                          trailIcon: const Icon(
+                            Icons.arrow_forward_ios_outlined,
+                          ),
+                        ),
+                        kGapSize,
+                        value.isLoading == true
+                            ? const CircularProgressIndicator(
+                                strokeWidth: 2,
+                              )
+                            : SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.92,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    value.logOut(context);
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: kTextfieldColor,
+                                  ),
+                                  child: const Text(
+                                    'Log Out',
+                                    style: TextStyle(
+                                      fontFamily: "Manrope",
+                                      fontSize: 15,
+                                      color: kWhite,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              )
+                      ],
+                    ),
+                  )
+                ],
               ),
             ),
-          ],
+          ),
         );
       },
-    ));
+    );
   }
 }

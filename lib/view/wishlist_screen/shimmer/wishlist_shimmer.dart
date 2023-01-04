@@ -9,9 +9,9 @@ class WishListShimmer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<WishlistProvider>(context, listen: false);
     return Consumer<WishlistProvider>(builder: (context, value, child) {
       return Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           ListView.separated(
             physics: const ScrollPhysics(),
@@ -20,12 +20,12 @@ class WishListShimmer extends StatelessWidget {
               return Column(
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       kWidth,
                       const ShimmerWidget.rectangle(height: 100, width: 100),
                       Padding(
-                        padding: const EdgeInsets.only(left: 10),
+                        padding: const EdgeInsets.only(left: 0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

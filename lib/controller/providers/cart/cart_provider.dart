@@ -91,36 +91,6 @@ class CartProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Future<void> quantityIncrement(context,String size,productId,int qty,int productQty) async {
-  //   final AddToCartModel model = AddToCartModel(
-  //     size: size.toString(),
-  //     quantity: quantity,
-  //     productId: productId,
-  //   );
-  //   if(qty == 1 && productQty>=1){
-  //             (value) async {
-  //         if (value != null) {
-  //           await CartService().getCart(context,model).then(
-  //             (value) {
-  //               if (value != null) {
-  //                 cartList = value;
-  //                 notifyListeners();
-  //                 totalProductCount();
-  //                 cartItemsId =
-  //                     cartList!.products.map((e) => e.product.id).toList();
-  //                 notifyListeners();
-  //                 totalSave = cartList!.totalDiscount.toInt() -
-  //                     cartList!.totalPrice.toInt();
-  //                 notifyListeners();
-  //               } else {
-  //                 null;
-  //               }
-  //             },
-  //           );
-  //        }
-  //      };
-  //   }
-
   Future<void> incrementDecrementQty(int qty, String productId,
       int productQuantity, context, String size) async {
     final AddToCartModel model = AddToCartModel(
