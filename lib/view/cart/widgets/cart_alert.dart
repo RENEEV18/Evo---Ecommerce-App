@@ -1,4 +1,3 @@
-import 'package:evo_mart/common/const/const.dart';
 import 'package:evo_mart/controller/providers/cart/cart_provider.dart';
 import 'package:flutter/material.dart';
 
@@ -19,11 +18,12 @@ class CartAlertWidget extends StatelessWidget {
         style: TextStyle(
           fontFamily: "Manrope",
           letterSpacing: 1,
+          fontSize: 22,
           fontWeight: FontWeight.bold,
         ),
       ),
       content: const Text(
-        'Are you sure want to remove ?',
+        'Are you sure want to remove \n item from cart?',
         style: TextStyle(
           fontFamily: "Manrope",
           letterSpacing: 1,
@@ -31,46 +31,74 @@ class CartAlertWidget extends StatelessWidget {
         ),
       ),
       actions: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: kTextfieldColor,
-              ),
-              child: const Text(
-                'No',
-                style: TextStyle(
-                  color: kWhite,
-                  fontFamily: "Manrope",
-                  fontWeight: FontWeight.bold,
+        FittedBox(
+          child: Row(
+            children: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text(
+                  'No',
+                  style: TextStyle(
+                    fontFamily: "Manrope",
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                cart.removeCart(
-                  context,
-                  cart.cartList!.products[index].product.id,
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: kTextfieldColor,
-              ),
-              child: const Text(
-                'Yes',
-                style: TextStyle(
-                  color: kWhite,
-                  fontFamily: "Manrope",
-                  fontWeight: FontWeight.bold,
+              TextButton(
+                onPressed: () {
+                  cart.removeCart(
+                    context,
+                    cart.cartList!.products[index].product.id,
+                  );
+                },
+                child: const Text(
+                  'Yes',
+                  style: TextStyle(
+                    fontFamily: "Manrope",
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
+            ],
+          ),
+        )
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+        //   children: [
+        //     ElevatedButton(
+        //       onPressed: () {
+        //         Navigator.of(context).pop();
+        //       },
+        //       child:
+        //const Text(
+        //         'No',
+        //         style: TextStyle(
+        //           color: kWhite,
+        //           fontFamily: "Manrope",
+        //           fontWeight: FontWeight.bold,
+        //         ),
+        //       ),
+        //     ),
+        //     ElevatedButton(
+        //       onPressed: () {
+        //         cart.removeCart(
+        //           context,
+        //           cart.cartList!.products[index].product.id,
+        //         );
+        //       },
+        //       child: const Text(
+        //         'Yes',
+        //         style: TextStyle(
+        //           color: kWhite,
+        //           fontFamily: "Manrope",
+        //           fontWeight: FontWeight.bold,
+        //         ),
+        //       ),
+        //     ),
+        //   ],
+        // ),
       ],
     );
   }

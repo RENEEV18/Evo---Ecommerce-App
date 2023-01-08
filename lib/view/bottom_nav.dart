@@ -17,6 +17,7 @@ class BottomNav extends StatelessWidget {
           icons: data.icons,
           gapLocation: GapLocation.none,
           activeIndex: data.currentIndex,
+          activeColor: kTextfieldColor,
           onTap: (value) {
             data.bottomNav(value);
           },

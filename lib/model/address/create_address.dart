@@ -19,6 +19,18 @@ class CreateAddressModel {
     required this.landMark,
   });
 
+  // factory CreateAddressModel.fromJson(Map<String, dynamic> json) {
+  //   return CreateAddressModel(
+  //     title: json['title'],
+  //     fullName: json['fullName'],
+  //     phone: json['phone'],
+  //     pin: json['pin'],
+  //     state: json['state'],
+  //     place: json['place'],
+  //     address: json['address'],
+  //     landMark: json['landMark'],
+  //   );
+  // }
   Map<String, dynamic> toJson() {
     return {
       "title": title,

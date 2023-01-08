@@ -44,6 +44,8 @@ class SignUpScreen extends StatelessWidget {
                             controller: provider.fullName,
                             validator: (value) => data.nameValidation(value),
                             keyboard: TextInputType.name,
+                            contentPadding:
+                                const EdgeInsets.symmetric(horizontal: 20),
                           ),
                           kHeight,
                           CustomTextField(
@@ -51,6 +53,8 @@ class SignUpScreen extends StatelessWidget {
                             controller: provider.emailId,
                             validator: (value) => data.emailValdation(value),
                             keyboard: TextInputType.emailAddress,
+                            contentPadding:
+                                const EdgeInsets.symmetric(horizontal: 20),
                           ),
                           kHeight,
                           CustomTextField(
@@ -58,6 +62,8 @@ class SignUpScreen extends StatelessWidget {
                             controller: provider.phoneNo,
                             validator: (value) => data.mobileValdation(value),
                             keyboard: TextInputType.phone,
+                            contentPadding:
+                                const EdgeInsets.symmetric(horizontal: 20),
                           ),
                           kHeight,
                           CustomTextField(
@@ -69,6 +75,8 @@ class SignUpScreen extends StatelessWidget {
                             text: 'Password',
                             obscureText: data.obscureText,
                             controller: provider.password,
+                            contentPadding:
+                                const EdgeInsets.symmetric(horizontal: 20),
                             validator: (passwordValue) =>
                                 provider.passwordValdation(passwordValue),
                             keyboard: TextInputType.visiblePassword,
@@ -79,6 +87,8 @@ class SignUpScreen extends StatelessWidget {
                             text: 'Confirm Password',
                             controller: provider.confirmPassword,
                             obscureText: data.obscureText,
+                            contentPadding:
+                                const EdgeInsets.symmetric(horizontal: 20),
                             validator: (passwordValue) =>
                                 data.passwordValdation(passwordValue),
                             keyboard: TextInputType.visiblePassword,

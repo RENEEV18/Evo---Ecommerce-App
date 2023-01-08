@@ -24,6 +24,7 @@ class CarousalService {
             .map((e) => CarousalModel.fromJson(e))
             .toList();
         log('carousal in decoded format');
+        log('nirmal shaji joseph');
         log(carousel[0].id.toString());
         return carousel;
       } else {

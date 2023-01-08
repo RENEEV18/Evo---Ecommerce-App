@@ -1,6 +1,7 @@
 import 'package:evo_mart/model/wishlist_model/wishlist_model.dart';
 import 'package:evo_mart/services/wishlist/wishlist_services.dart';
 import 'package:evo_mart/utils/error_popup/snackbar.dart';
+import 'package:evo_mart/view/product_screen/product_view.dart';
 import 'package:flutter/material.dart';
 
 class WishlistProvider extends ChangeNotifier {
@@ -61,5 +62,14 @@ class WishlistProvider extends ChangeNotifier {
         notifyListeners();
       }
     });
+  }
+
+  WishListModel findById(String id) {
+    return wishList.firstWhere((element) => element.id == id);
+  }
+
+  void toProductScreen(context, index) {
+    Navigator.of(context)
+        .pushNamed(ProductView.routeName, arguments: wishList[index]);
   }
 }

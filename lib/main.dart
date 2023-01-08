@@ -10,6 +10,7 @@ import 'package:evo_mart/controller/providers/onboard_provider/splash_provider.d
 import 'package:evo_mart/controller/providers/product_screen_provider/product_screen_provider.dart';
 import 'package:evo_mart/controller/providers/profile_provider/profile_provider.dart';
 import 'package:evo_mart/controller/providers/wishlist/wishlist_provider.dart';
+import 'package:evo_mart/view/home/widgets/view_category.dart';
 import 'package:evo_mart/view/product_screen/product_view.dart';
 import 'package:evo_mart/view/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -64,7 +65,7 @@ class MyApp extends StatelessWidget {
           create: (context) => CartProvider(context),
         ),
         ChangeNotifierProvider(
-          create: (context) => AddressProvider(),
+          create: (context) => AddressProvider(context),
         ),
       ],
       child: MaterialApp(
@@ -72,7 +73,10 @@ class MyApp extends StatelessWidget {
         routes: {
           ProductView.routeName: (context) {
             return const ProductView();
-          }
+          },
+          ViewCategoryScreen.routeName: (context) {
+            return const ViewCategoryScreen();
+          },
         },
         theme: ThemeData(useMaterial3: true, primarySwatch: Colors.amber),
         home: const SplashScreen(),

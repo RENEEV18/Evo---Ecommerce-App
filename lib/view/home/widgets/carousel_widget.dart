@@ -46,11 +46,13 @@ class CarouselSliderWidget extends StatelessWidget {
                           (BuildContext context, int index, int realIndex) {
                         log('lenght of carousalList');
                         log(value.carousalList.length.toString());
-                        return Image(
-                          image: NetworkImage(
-                              "http://172.16.5.206:5005/carousal/${value.carousalList[index].image}"),
-                          fit: BoxFit.cover,
-                        );
+                        return value.carousalList.isEmpty
+                            ? const Center(child: Icon(Icons.image_rounded))
+                            : Image(
+                                image: NetworkImage(
+                                    "http://172.16.5.206:5005/carousal/${value.carousalList[index].image}"),
+                                fit: BoxFit.cover,
+                              );
                       },
                       itemCount: value.isLoading
                           ? value.carousalList.length

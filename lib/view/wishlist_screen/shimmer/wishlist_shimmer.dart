@@ -19,20 +19,23 @@ class WishListShimmer extends StatelessWidget {
             itemBuilder: (context, index) {
               return Column(
                 children: [
+                  kSize,
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      kWidth,
                       const ShimmerWidget.rectangle(height: 100, width: 100),
                       Padding(
                         padding: const EdgeInsets.only(left: 0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            kSize,
                             const ShimmerWidget.rectangle(
-                                height: 10, width: 30),
+                                height: 10, width: 50),
+                            kSize,
                             const ShimmerWidget.rectangle(
-                                height: 10, width: 30),
+                                height: 10, width: 50),
+                            kSize,
                             Row(
                               children: const [
                                 ShimmerWidget.rectangle(height: 10, width: 20),

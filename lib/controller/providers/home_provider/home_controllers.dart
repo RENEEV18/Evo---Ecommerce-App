@@ -6,6 +6,7 @@ import 'package:evo_mart/services/home_services/carousel_service.dart';
 import 'package:evo_mart/services/home_services/category_service.dart';
 import 'package:evo_mart/services/home_services/product_services.dart';
 import 'package:evo_mart/view/product_screen/product_view.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomeProvider extends ChangeNotifier {
@@ -18,8 +19,9 @@ class HomeProvider extends ChangeNotifier {
   List<CarousalModel> carousalList = [];
   List<ProductModel> productList = [];
 
+  CategoryModel? model;
   int activeIndex = 0;
-
+  bool isSelected = false;
   bool isLoading = false;
   CategoryServices category = CategoryServices();
   CarousalService carousal = CarousalService();
@@ -95,20 +97,23 @@ class HomeProvider extends ChangeNotifier {
         .pushNamed(ProductView.routeName, arguments: productList[index].id);
   }
 
-  // void inToProductScreen(
-  //     context, productId, name, price, offer, size, image, category, rating) {
-  //   Navigator.of(context).push(MaterialPageRoute(
-  //     builder: (context) => ProductView(
-  //       id: productId,
-  //       name: name,
-  //       price: price,
-  //       offer: offer,
-  //       size: size,
-  //       image: image,
-  //       category: category,
-  //       rating: rating,
-  //     ),
-  //   ));
+  List<ProductModel> findByCategoryId(String categoryId) {
+    return productList
+        .where((element) => element.category.contains(categoryId))
+        .toList();
+  }
 
-  // notifyListeners();
+  CategoryModel findByName(String id) {
+    return categoryList.firstWhere((element) => element.id == id);
+  }
+
+  // List<CategoryModel> fromCategoryToProductView(String categoryId) {
+  //   return categoryList
+  //       .where((element) => element.id.contains(categoryId))
+  //       .toList();
+  // }
+  // void fromCategoryToProductView(context, index) {
+  //   Navigator.of(context)
+  //       .pushNamed(ProductView.routeName, arguments: model[index].);
+  // }
 }

@@ -11,14 +11,18 @@ class CustomTextField extends StatelessWidget {
     required this.keyboard,
     this.onChanged,
     required this.text,
+    this.contentPadding,
+    this.preffix,
   }) : super(key: key);
 
   final Widget? suffix;
+  final Widget? preffix;
   final TextEditingController controller;
   final String? Function(String?) validator;
   final bool? obscureText;
   final String text;
   final TextInputType keyboard;
+  final EdgeInsetsGeometry? contentPadding;
   final void Function(String)? onChanged;
   @override
   Widget build(BuildContext context) {
@@ -30,16 +34,18 @@ class CustomTextField extends StatelessWidget {
       style: const TextStyle(color: kBlack),
       validator: validator,
       decoration: InputDecoration(
-        // fillColor: Color.fromARGB(17, 0, 0, 0),
-        // filled: true,
         suffixIcon: suffix,
+        prefixIcon: preffix,
         label: Text(
           text,
-          style: const TextStyle(color: kBlack, fontFamily: 'Manrope'),
+          style: TextStyle(
+              color: Colors.black.withOpacity(0.6),
+              fontFamily: 'Manrope',
+              fontWeight: FontWeight.bold),
         ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+        contentPadding: contentPadding,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(20),
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: kBlack),

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:evo_mart/common/api/api_baseurl.dart';
@@ -11,15 +12,20 @@ class AddressService {
   Future<String?> addAddress(CreateAddressModel model, context) async {
     Dio dios = await ApiInterceptor().getApiUser(context);
     try {
+      log('try');
       final Response response = await dios.post(
-          ApiBaseUrl().baseUrl + ApiEndpoints.address,
-          data: model.toJson());
-      if (response.statusCode == 200 || response.statusCode == 201) {
+        ApiBaseUrl().baseUrl + ApiEndpoints.address,
+        data: model.toJson(),
+      );
+      log('response');
+
+      if (response.statusCode == 201) {
         if (response.data == null) {
           return null;
         } else {
-          final addressResponse = response.data['message'];
-          return addressResponse;
+          final String result = response.data['message'];
+          log(result.toString());
+          return result;
         }
       }
     } on DioError catch (e) {
@@ -54,26 +60,55 @@ class AddressService {
     return null;
   }
 
-  // Future<GetAddressModel?> getSingleAddress(context) async {
-  //   Dio dios = await ApiInterceptor().getApiUser(context);
-  //   try {
-  //     final Response response = await dios.get(
-  //       ApiBaseUrl().baseUrl + ApiEndpoints.address,
-  //     );
-  //     if (response.statusCode == 200 || response.statusCode == 201) {
-  //       if (response.data == null) {
-  //         return null;
-  //       } else {
-  //         final GetAddressModel model = GetAddressModel.fromJson(response.data);
+  Future<String?> updateAddress(
+      CreateAddressModel model, String addressId, context) async {
+    Dio dios = await ApiInterceptor().getApiUser(context);
+    try {
+      log('try');
+      final Response response = await dios.patch(
+        "${ApiBaseUrl().baseUrl + ApiEndpoints.address}/$addressId",
+        data: model.toJson(),
+      );
+      log('response');
 
-  //         log(response.data.toString());
-  //         return model;
-  //       }
-  //     }
-  //   } on DioError catch (e) {
-  //     log(e.message);
-  //     DioException().dioError(e, context);
-  //   }
-  //   return null;
-  // }
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        if (response.data == null) {
+          return null;
+        } else {
+          final String result = response.data['message'];
+          log(result.toString());
+          return result;
+        }
+      }
+    } on DioError catch (e) {
+      log(e.message);
+      DioException().dioError(e, context);
+    }
+    return null;
+  }
+
+  Future<String?> deleteAddress(String addressId, context) async {
+    Dio dios = await ApiInterceptor().getApiUser(context);
+    try {
+      log('try');
+      final Response response = await dios.delete(
+        "${ApiBaseUrl().baseUrl + ApiEndpoints.address}/$addressId",
+      );
+      log('response');
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        if (response.data == null) {
+          return null;
+        } else {
+          final String result = response.data['message'];
+          log(result.toString());
+          return result;
+        }
+      }
+    } on DioError catch (e) {
+      log(e.message);
+      DioException().dioError(e, context);
+    }
+    return null;
+  }
 }

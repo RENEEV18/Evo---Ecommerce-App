@@ -1,6 +1,5 @@
 import 'package:evo_mart/common/const/const.dart';
 import 'package:evo_mart/controller/providers/cart/cart_provider.dart';
-import 'package:evo_mart/controller/providers/wishlist/wishlist_provider.dart';
 import 'package:evo_mart/view/widgets/shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -27,8 +26,10 @@ class CartShimmer extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      const ShimmerWidget.rectangle(height: 10, width: 50),
+                      kSize,
                       const ShimmerWidget.rectangle(height: 10, width: 30),
-                      const ShimmerWidget.rectangle(height: 10, width: 30),
+                      kSize,
                       Row(
                         children: const [
                           ShimmerWidget.rectangle(height: 10, width: 30),
@@ -36,6 +37,20 @@ class CartShimmer extends StatelessWidget {
                           ShimmerWidget.rectangle(height: 10, width: 30),
                           kWidth,
                           ShimmerWidget.rectangle(height: 10, width: 30),
+                        ],
+                      ),
+                      kSize,
+                      Row(
+                        children: [
+                          ShimmerWidget.circle(height: 20, width: 20),
+                          kWidth,
+                          ShimmerWidget.rectangle(
+                            height: 20,
+                            width: 40,
+                            radius: BorderRadius.circular(10),
+                          ),
+                          kWidth,
+                          ShimmerWidget.circle(height: 20, width: 20),
                         ],
                       ),
                     ],
@@ -47,7 +62,7 @@ class CartShimmer extends StatelessWidget {
           ],
         );
       },
-      itemCount: provider.cartList?.products.length ?? 0,
+      itemCount: provider.cartList?.products.length ?? 10,
       separatorBuilder: (context, index) => const Divider(),
     );
   }

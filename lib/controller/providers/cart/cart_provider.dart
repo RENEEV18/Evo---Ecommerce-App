@@ -1,10 +1,14 @@
 import 'dart:developer';
 import 'package:evo_mart/common/const/const.dart';
+import 'package:evo_mart/controller/providers/bottom_nav_provider/bottom_nav_provider.dart';
 import 'package:evo_mart/model/cart/add_to_cart_model.dart';
 import 'package:evo_mart/model/cart/get_cart_model.dart';
 import 'package:evo_mart/services/cart/cart_services.dart';
 import 'package:evo_mart/utils/error_popup/snackbar.dart';
+import 'package:evo_mart/view/bottom_nav.dart';
+import 'package:evo_mart/view/product_screen/product_view.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CartProvider extends ChangeNotifier {
   CartProvider(context) {
@@ -125,6 +129,21 @@ class CartProvider extends ChangeNotifier {
         },
       );
     }
+  }
+
+  void gotToCartFromProduct(context) {
+    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
+      builder: (context) {
+        return const BottomNav();
+      },
+    ), (route) => false);
+    Provider.of<BottomNavProvider>(context, listen: false).currentIndex = 2;
+    notifyListeners();
+  }
+
+  void toProductScreen(context, index) {
+    Navigator.of(context)
+        .pushNamed(ProductView.routeName, arguments: cartItemsId[index]);
   }
 
   void pop(context) {

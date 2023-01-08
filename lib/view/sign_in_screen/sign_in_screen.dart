@@ -14,7 +14,6 @@ class SigninScreen extends StatelessWidget {
   final formGlobalKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    final data = Provider.of<SignInProvider>(context, listen: false);
     return Scaffold(
       backgroundColor: kWhite,
       body: SingleChildScrollView(
@@ -46,6 +45,8 @@ class SigninScreen extends StatelessWidget {
                           return CustomTextField(
                             text: 'Email',
                             controller: data.email,
+                            contentPadding:
+                                const EdgeInsets.symmetric(horizontal: 20),
                             validator: (value) => data.emailValdation(value),
                             keyboard: TextInputType.emailAddress,
                           );
@@ -62,6 +63,8 @@ class SigninScreen extends StatelessWidget {
                                   },
                                   icon: value.icon),
                               obscureText: value.obscureText,
+                              contentPadding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
                               validator: (passwordValue) =>
                                   value.passwordValdation(passwordValue),
                               keyboard: TextInputType.visiblePassword,

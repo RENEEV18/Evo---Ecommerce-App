@@ -22,7 +22,7 @@ class ProductWidget extends StatelessWidget {
                   physics: const ScrollPhysics(),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      childAspectRatio: 6 / 8,
+                      childAspectRatio: 5 / 8,
                       mainAxisSpacing: 0,
                       crossAxisSpacing: 0),
                   itemBuilder: (context, index) {
@@ -41,6 +41,30 @@ class ProductWidget extends StatelessWidget {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
+                                Row(
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.only(
+                                          left: 10, right: 10),
+                                      decoration: const BoxDecoration(
+                                        color: kTextfieldColor,
+                                        borderRadius: BorderRadius.only(
+                                          bottomRight: Radius.circular(30),
+                                        ),
+                                      ),
+                                      child: Text(
+                                        "${value.productList[index].offer}%Off",
+                                        style: const TextStyle(
+                                          color: kWhite,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                          fontFamily: "Manrope",
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                kSize,
                                 Image(
                                   height: 130,
                                   image: NetworkImage(
@@ -60,10 +84,20 @@ class ProductWidget extends StatelessWidget {
                                 Text(
                                   "₹${value.productList[index].price}",
                                   style: const TextStyle(
-                                      fontSize: 20,
-                                      color: kRed,
+                                      color: kgery,
                                       fontWeight: FontWeight.bold,
+                                      decoration: TextDecoration.lineThrough,
                                       fontFamily: 'Manrope'),
+                                ),
+                                kSize,
+                                Text(
+                                  "₹${(value.productList[index].price - value.productList[index].discountPrice).round()}",
+                                  style: const TextStyle(
+                                    color: kRed,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "Manrope",
+                                    fontSize: 18,
+                                  ),
                                 ),
                               ],
                             ),

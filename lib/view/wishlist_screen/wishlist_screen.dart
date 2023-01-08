@@ -14,6 +14,8 @@ class WishlistScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final productId = ModalRoute.of(context)!.settings.arguments as String;
+    // final provider = Provider.of<WishlistProvider>(context,listen: false).findById(productId);
     return Scaffold(
       appBar: AppBar(
         title: const Center(
@@ -46,119 +48,125 @@ class WishlistScreen extends StatelessWidget {
                                 physics: const ScrollPhysics(),
                                 shrinkWrap: true,
                                 itemBuilder: (context, index) {
-                                  return Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          kWidth,
-                                          Container(
-                                            height: 100,
-                                            width: 100,
-                                            decoration: BoxDecoration(
-                                                image: DecorationImage(
-                                              image: NetworkImage(
-                                                '${ApiBaseUrl().baseUrl}/products/${wish.model!.products[index].product.image[0]}',
-                                              ),
-                                            )),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(left: 10),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  wish.model!.products[index]
-                                                      .product.name,
-                                                  style: const TextStyle(
-                                                      fontSize: 18,
-                                                      fontFamily: 'Manrope',
-                                                      fontWeight:
-                                                          FontWeight.bold),
+                                  return GestureDetector(
+                                    onTap: () {
+                                      wish.toProductScreen(context, index);
+                                    },
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            kWidth,
+                                            Container(
+                                              height: 100,
+                                              width: 100,
+                                              decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                image: NetworkImage(
+                                                  '${ApiBaseUrl().baseUrl}/products/${wish.model!.products[index].product.image[0]}',
                                                 ),
-                                                RatingBar.builder(
-                                                  initialRating: double.parse(
-                                                      wish
-                                                          .model!
-                                                          .products[index]
-                                                          .product
-                                                          .rating),
-                                                  itemSize: 15,
-                                                  minRating: 1,
-                                                  direction: Axis.horizontal,
-                                                  allowHalfRating: true,
-                                                  ignoreGestures: true,
-                                                  itemBuilder: (context, _) =>
-                                                      const Icon(
-                                                    Icons.star,
-                                                    color: Colors.amber,
+                                              )),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 10),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    wish.model!.products[index]
+                                                        .product.name,
+                                                    style: const TextStyle(
+                                                        fontSize: 18,
+                                                        fontFamily: 'Manrope',
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   ),
-                                                  onRatingUpdate:
-                                                      (startRating) {
-                                                    log(startRating.toString());
-                                                  },
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Text(
-                                                      "${wish.model!.products[index].product.offer}%Off",
-                                                      style: const TextStyle(
-                                                        color: Colors.green,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 16,
-                                                        fontFamily: "Manrope",
-                                                      ),
+                                                  RatingBar.builder(
+                                                    initialRating: double.parse(
+                                                        wish
+                                                            .model!
+                                                            .products[index]
+                                                            .product
+                                                            .rating),
+                                                    itemSize: 15,
+                                                    minRating: 1,
+                                                    direction: Axis.horizontal,
+                                                    allowHalfRating: true,
+                                                    ignoreGestures: true,
+                                                    itemBuilder: (context, _) =>
+                                                        const Icon(
+                                                      Icons.star,
+                                                      color: Colors.amber,
                                                     ),
-                                                    kWidth,
-                                                    Text(
-                                                      "₹${wish.model!.products[index].product.price}",
-                                                      style: const TextStyle(
-                                                        color: kgery,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        decoration:
-                                                            TextDecoration
-                                                                .lineThrough,
-                                                        fontFamily: "Manrope",
+                                                    onRatingUpdate:
+                                                        (startRating) {
+                                                      log(startRating
+                                                          .toString());
+                                                    },
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      Text(
+                                                        "${wish.model!.products[index].product.offer}%Off",
+                                                        style: const TextStyle(
+                                                          color: Colors.green,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 16,
+                                                          fontFamily: "Manrope",
+                                                        ),
                                                       ),
-                                                    ),
-                                                    kWidth,
-                                                    Text(
-                                                      "₹${wish.model!.products[index].product.price - wish.model!.products[index].product.discountPrice}",
-                                                      style: const TextStyle(
-                                                        color: kRed,
-                                                        fontSize: 20,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontFamily: "Manrope",
+                                                      kWidth,
+                                                      Text(
+                                                        "₹${wish.model!.products[index].product.price}",
+                                                        style: const TextStyle(
+                                                          color: kgery,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          decoration:
+                                                              TextDecoration
+                                                                  .lineThrough,
+                                                          fontFamily: "Manrope",
+                                                        ),
                                                       ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
+                                                      kWidth,
+                                                      Text(
+                                                        "₹${(wish.model!.products[index].product.price - wish.model!.products[index].product.discountPrice).round()}",
+                                                        style: const TextStyle(
+                                                          color: kRed,
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontFamily: "Manrope",
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                          kwishWidth,
-                                          IconButton(
-                                            onPressed: () {
-                                              wish.addOrRemoveFromWishlist(
-                                                  context,
-                                                  wish.model!.products[index]
-                                                      .product.id);
-                                            },
-                                            icon: const Icon(
-                                              Icons.favorite,
-                                              color: kRed,
+                                            kwishWidth,
+                                            IconButton(
+                                              onPressed: () {
+                                                wish.addOrRemoveFromWishlist(
+                                                    context,
+                                                    wish.model!.products[index]
+                                                        .product.id);
+                                              },
+                                              icon: const Icon(
+                                                Icons.favorite,
+                                                color: kRed,
+                                              ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                      kSize,
-                                    ],
+                                          ],
+                                        ),
+                                        kSize,
+                                      ],
+                                    ),
                                   );
                                 },
                                 separatorBuilder: (context, index) {

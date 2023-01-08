@@ -20,6 +20,7 @@ class ProfileScreen extends StatelessWidget {
                   "Hello RJ",
                   style: TextStyle(
                     fontFamily: "Manrope",
+                    letterSpacing: 1,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -119,34 +120,49 @@ class ProfileScreen extends StatelessWidget {
                             Icons.arrow_forward_ios_outlined,
                           ),
                         ),
-                        kGapSize,
-                        value.isLoading == true
-                            ? const CircularProgressIndicator(
-                                strokeWidth: 2,
-                              )
-                            : SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.92,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    value.logOut(context);
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: kTextfieldColor,
-                                  ),
-                                  child: const Text(
-                                    'Log Out',
-                                    style: TextStyle(
-                                      fontFamily: "Manrope",
-                                      fontSize: 15,
-                                      color: kWhite,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              )
+                        ProfileListtileWidget(
+                          icon: const Icon(
+                            Icons.logout,
+                          ),
+                          text: 'Log Out',
+                          ontap: () {
+                            value.logOut(context);
+                          },
+                          trailIcon: const Icon(
+                            Icons.arrow_forward_ios_outlined,
+                          ),
+                        ),
                       ],
                     ),
-                  )
+                  ),
+                  kGapSize,
+                  // value.isLoading == true
+                  //     ? const CircularProgressIndicator(
+                  //         strokeWidth: 2,
+                  //       )
+                  //     : SizedBox(
+                  //         width: MediaQuery.of(context).size.width * 0.92,
+                  //         child: ElevatedButton(
+                  //           onPressed: () {
+                  //             value.logOut(context);
+                  //           },
+                  //           style: ElevatedButton.styleFrom(
+                  //               backgroundColor: kWhite,
+                  //               shape: RoundedRectangleBorder(
+                  //                 side: BorderSide(),
+                  //                 borderRadius: BorderRadius.circular(20),
+                  //               )),
+                  //           child: const Text(
+                  //             'Log Out',
+                  //             style: TextStyle(
+                  //               fontFamily: "Manrope",
+                  //               fontSize: 15,
+                  //               color: kRed,
+                  //               fontWeight: FontWeight.bold,
+                  //             ),
+                  //           ),
+                  //         ),
+                  //       )
                 ],
               ),
             ),
