@@ -1,5 +1,6 @@
 import 'package:evo_mart/common/const/const.dart';
 import 'package:evo_mart/controller/providers/address/address_controller.dart';
+import 'package:evo_mart/view/address/widgets/button.dart';
 import 'package:evo_mart/view/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -37,22 +38,9 @@ class AddressFormScreen extends StatelessWidget {
                       CustomTextField(
                         contentPadding:
                             const EdgeInsets.symmetric(horizontal: 20),
-                        controller: value.titleController,
-                        validator: (name) {
-                          // value.usernameValidation(name);
-                          return null;
-                        },
-                        keyboard: TextInputType.name,
-                        text: "title",
-                        preffix: const Icon(Icons.person),
-                      ),
-                      kGapSize,
-                      CustomTextField(
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 20),
                         controller: value.nameController,
                         validator: (name) {
-                          // value.usernameValidation(name);
+                          value.fullNameValidation(name);
                           return null;
                         },
                         keyboard: TextInputType.name,
@@ -64,8 +52,8 @@ class AddressFormScreen extends StatelessWidget {
                         contentPadding:
                             const EdgeInsets.symmetric(horizontal: 20),
                         controller: value.phoneController,
-                        validator: (name) {
-                          // value.usernameValidation(name);
+                        validator: (phone) {
+                          value.mobileValdation(phone);
                           return null;
                         },
                         keyboard: TextInputType.name,
@@ -80,8 +68,8 @@ class AddressFormScreen extends StatelessWidget {
                               contentPadding:
                                   const EdgeInsets.symmetric(horizontal: 20),
                               controller: value.pinController,
-                              validator: (name) {
-                                // value.usernameValidation(name);
+                              validator: (pin) {
+                                value.pincodeValdation(pin);
                                 return null;
                               },
                               keyboard: TextInputType.name,
@@ -95,8 +83,8 @@ class AddressFormScreen extends StatelessWidget {
                               contentPadding:
                                   const EdgeInsets.symmetric(horizontal: 20),
                               controller: value.stateController,
-                              validator: (name) {
-                                // value.usernameValidation(name);
+                              validator: (state) {
+                                value.stateValidation(state);
                                 return null;
                               },
                               keyboard: TextInputType.name,
@@ -111,8 +99,8 @@ class AddressFormScreen extends StatelessWidget {
                         contentPadding:
                             const EdgeInsets.symmetric(horizontal: 20),
                         controller: value.placeController,
-                        validator: (name) {
-                          // value.usernameValidation(name);
+                        validator: (place) {
+                          value.placeValidation(place);
                           return null;
                         },
                         keyboard: TextInputType.name,
@@ -124,8 +112,8 @@ class AddressFormScreen extends StatelessWidget {
                         contentPadding:
                             const EdgeInsets.symmetric(horizontal: 20),
                         controller: value.addressController,
-                        validator: (name) {
-                          // value.usernameValidation(name);
+                        validator: (address) {
+                          value.addressValidation(address);
                           return null;
                         },
                         keyboard: TextInputType.name,
@@ -139,8 +127,8 @@ class AddressFormScreen extends StatelessWidget {
                         contentPadding:
                             const EdgeInsets.symmetric(horizontal: 20),
                         controller: value.landmarkController,
-                        validator: (name) {
-                          // value.usernameValidation(name);
+                        validator: (land) {
+                          value.landmarkValidation(land);
                           return null;
                         },
                         keyboard: TextInputType.name,
@@ -148,11 +136,65 @@ class AddressFormScreen extends StatelessWidget {
                         preffix: const Icon(Icons.emoji_flags),
                       ),
                       kGapSize,
+                      Row(
+                        children: const [
+                          Text(
+                            'Type of address',
+                            style: TextStyle(
+                              color: kBlack,
+                              fontFamily: "Manrope",
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      kSize,
+                      Row(
+                        children: [
+                          AddressTypeButton(
+                            icon: Icons.home,
+                            onPressed: () {
+                              value.buttonSelection();
+                            },
+                            text: 'Home',
+                            color: value.isSelected == true
+                                ? kTextfieldColor
+                                : kgery,
+                            textColor: value.isSelected == true
+                                ? kTextfieldColor
+                                : kgery,
+                            borderColor: value.isSelected == true
+                                ? kTextfieldColor
+                                : kgery,
+                          ),
+                          kWidth,
+                          AddressTypeButton(
+                            icon: Icons.apartment,
+                            onPressed: () {
+                              value.buttonSelection();
+                            },
+                            text: 'Office',
+                            color: value.isSelected == false
+                                ? kTextfieldColor
+                                : kgery,
+                            textColor: value.isSelected == false
+                                ? kTextfieldColor
+                                : kgery,
+                            borderColor: value.isSelected == false
+                                ? kTextfieldColor
+                                : kgery,
+                          ),
+                        ],
+                      ),
+                      kSize,
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.92,
                         child: ElevatedButton(
                           onPressed: () {
-                            value.saveAddress(context);
+                            if (formGlobalKey.currentState!.validate()) {
+                              formGlobalKey.currentState!.save();
+                              value.saveAddress(context);
+                            }
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: kTextfieldColor,

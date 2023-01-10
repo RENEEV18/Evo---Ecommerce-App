@@ -229,11 +229,10 @@ class CartListviewWidget extends StatelessWidget {
                                       );
                                     },
                                     style: ElevatedButton.styleFrom(
-                                      backgroundColor: kWhite,
+                                      backgroundColor:
+                                          Colors.black.withOpacity(0.2),
                                       elevation: 0,
-                                      shape: const RoundedRectangleBorder(
-                                        side: BorderSide(),
-                                      ),
+                                      shape: const RoundedRectangleBorder(),
                                     ),
                                     icon: const Icon(
                                       Icons.delete,

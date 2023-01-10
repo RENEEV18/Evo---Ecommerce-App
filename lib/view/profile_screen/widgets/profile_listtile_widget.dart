@@ -5,21 +5,23 @@ class ProfileListtileWidget extends StatelessWidget {
     Key? key,
     required this.text,
     required this.ontap,
-    required this.icon,
+    this.icon,
     required this.trailIcon,
+    required this.size,
   }) : super(key: key);
   final String text;
   final Function() ontap;
-  final Widget icon;
+  final Widget? icon;
   final Widget trailIcon;
+  final double size;
   @override
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(
         text,
-        style: const TextStyle(
+        style: TextStyle(
           fontFamily: "Manrope",
-          fontSize: 15,
+          fontSize: size,
           fontWeight: FontWeight.bold,
         ),
       ),

@@ -57,6 +57,7 @@ class ProfileScreen extends StatelessWidget {
                           icon: const Icon(
                             Icons.person,
                           ),
+                          size: 15,
                           text: 'Edit profile',
                           ontap: () {},
                           trailIcon: const Icon(
@@ -74,6 +75,7 @@ class ProfileScreen extends StatelessWidget {
                           trailIcon: const Icon(
                             Icons.arrow_forward_ios_outlined,
                           ),
+                          size: 15,
                         ),
                       ],
                     ),
@@ -96,6 +98,7 @@ class ProfileScreen extends StatelessWidget {
                           ),
                           text: 'Terms & Condition',
                           ontap: () {},
+                          size: 15,
                           trailIcon: const Icon(
                             Icons.arrow_forward_ios_outlined,
                           ),
@@ -105,6 +108,7 @@ class ProfileScreen extends StatelessWidget {
                             Icons.privacy_tip,
                           ),
                           text: 'Privacy Policy',
+                          size: 15,
                           ontap: () {},
                           trailIcon: const Icon(
                             Icons.arrow_forward_ios_outlined,
@@ -116,6 +120,7 @@ class ProfileScreen extends StatelessWidget {
                           ),
                           text: 'About',
                           ontap: () {},
+                          size: 15,
                           trailIcon: const Icon(
                             Icons.arrow_forward_ios_outlined,
                           ),
@@ -128,6 +133,7 @@ class ProfileScreen extends StatelessWidget {
                           ontap: () {
                             value.logOut(context);
                           },
+                          size: 15,
                           trailIcon: const Icon(
                             Icons.arrow_forward_ios_outlined,
                           ),

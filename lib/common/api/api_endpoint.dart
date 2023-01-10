@@ -17,4 +17,7 @@ class ApiEndpoints {
 
   /*Address Page End-point*/
   static String address = '/api/v1/address';
+
+  /*Order Page End-point*/
+  static String orders = '/api/v1/orders';
 }

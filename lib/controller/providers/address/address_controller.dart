@@ -21,9 +21,11 @@ class AddressProvider extends ChangeNotifier {
 
   bool isLoading = false;
   bool isLoading2 = false;
-  List<GetAddressModel> addressList = [];
-  CreateAddressModel? createAddress;
+  bool isSelected = true;
+  bool isOfficeSelected = false;
 
+  List<GetAddressModel> addressList = [];
+  String addressType = 'Home';
   Future<String?> getAllAddress(context) async {
     isLoading = true;
     notifyListeners();
@@ -34,7 +36,7 @@ class AddressProvider extends ChangeNotifier {
         notifyListeners();
         isLoading = false;
         notifyListeners();
-        return 'Done';
+        // return 'Done';
       } else {
         isLoading = false;
         notifyListeners();
@@ -48,7 +50,7 @@ class AddressProvider extends ChangeNotifier {
     isLoading2 = true;
     notifyListeners();
     final CreateAddressModel model = CreateAddressModel(
-      title: titleController.text,
+      title: addressType,
       fullName: nameController.text,
       phone: phoneController.text,
       pin: pinController.text,
@@ -63,7 +65,9 @@ class AddressProvider extends ChangeNotifier {
         log('hai');
         clearAllControllers();
         Navigator.of(context).pop();
+        SnackBarPop.popUp(context, 'Address added successfully', Colors.green);
         isLoading2 = false;
+        getAllAddress(context);
         notifyListeners();
       } else {
         isLoading2 = false;
@@ -116,6 +120,7 @@ class AddressProvider extends ChangeNotifier {
         getAllAddress(context);
         pop(context);
         SnackBarPop.popUp(context, "Address removed successfully", Colors.red);
+        isLoading2 = false;
         notifyListeners();
       } else {
         return null;
@@ -125,15 +130,75 @@ class AddressProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // String? usernameValidation(String? value) {
-  //   if (value == null || value.isEmpty) {
-  //     return 'Please enter the username';
-  //   } else if (value.length < 2) {
-  //     return 'Too short username';
-  //   } else {
-  //     return null;
-  //   }
-  // }
+  void buttonSelection() {
+    isSelected = !isSelected;
+    notifyListeners();
+    isSelected == true ? addressType = 'Home' : addressType = 'Office';
+    notifyListeners();
+  }
+
+  String? fullNameValidation(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter the username';
+    } else if (value.length < 2) {
+      return 'Too short username';
+    } else {
+      return null;
+    }
+  }
+
+  String? mobileValdation(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your mobile number';
+    } else if (value.length < 10) {
+      return 'Invalid mobile number,make sure your entered 10 digits';
+    } else {
+      return null;
+    }
+  }
+
+  String? pincodeValdation(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your PIN number';
+    } else if (value.length < 6) {
+      return 'Invalid Pin No';
+    } else {
+      return null;
+    }
+  }
+
+  String? stateValidation(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter the state';
+    } else {
+      return null;
+    }
+  }
+
+  String? placeValidation(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter the state';
+    } else {
+      return null;
+    }
+  }
+
+  String? addressValidation(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter the state';
+    } else {
+      return null;
+    }
+  }
+
+  String? landmarkValidation(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter the state';
+    } else {
+      return null;
+    }
+  }
+
   void pop(context) {
     Navigator.of(context).pop();
     notifyListeners();
@@ -141,7 +206,7 @@ class AddressProvider extends ChangeNotifier {
 
   void clearAllControllers() {
     nameController.clear();
-    titleController.clear();
+    addressType = "Home";
     pinController.clear();
     stateController.clear();
     placeController.clear();

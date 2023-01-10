@@ -74,6 +74,32 @@ class CartService {
     return null;
   }
 
+  Future<List<CartModel>?> getSingleCart(
+      context, String productId, String cartId) async {
+    Dio dios = await ApiInterceptor().getApiUser(context);
+    try {
+      final Response response = await dios.get(
+        "${ApiBaseUrl().baseUrl + ApiEndpoints.cart}/$cartId/product/$productId",
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        if (response.data == null) {
+          return null;
+        } else {
+          final List<CartModel> model = (response.data as List)
+              .map((e) => CartModel.fromJson(e))
+              .toList();
+
+          log(response.data.toString());
+          return model;
+        }
+      }
+    } on DioError catch (e) {
+      log(e.message);
+      DioException().dioError(e, context);
+    }
+    return null;
+  }
+
   Future<String?> removeFromCart(context, String id) async {
     Dio dios = await ApiInterceptor().getApiUser(context);
     try {

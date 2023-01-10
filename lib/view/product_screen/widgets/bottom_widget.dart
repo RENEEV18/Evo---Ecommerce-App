@@ -2,7 +2,6 @@ import 'dart:developer';
 import 'package:evo_mart/common/const/const.dart';
 import 'package:evo_mart/controller/providers/bottom_nav_provider/bottom_nav_provider.dart';
 import 'package:evo_mart/controller/providers/cart/cart_provider.dart';
-import 'package:evo_mart/view/bottom_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -29,7 +28,7 @@ class BottomItemWidgets extends StatelessWidget {
                       value.gotToCartFromProduct(context);
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: kWhite,
+                      backgroundColor: Colors.black.withOpacity(0.2),
                       elevation: 0,
                       shape: const RoundedRectangleBorder(),
                     ),
@@ -58,11 +57,9 @@ class BottomItemWidgets extends StatelessWidget {
                       log('add cart clicked');
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: kWhite,
+                      backgroundColor: Colors.black.withOpacity(0.2),
                       elevation: 0,
-                      shape: const RoundedRectangleBorder(
-                        side: BorderSide(),
-                      ),
+                      shape: const RoundedRectangleBorder(),
                     ),
                     icon: const Icon(
                       Icons.shopping_cart,
@@ -84,7 +81,9 @@ class BottomItemWidgets extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.06,
             width: MediaQuery.of(context).size.width / 2,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                value2.toOrdersPage(context);
+              },
               style: ElevatedButton.styleFrom(
                   backgroundColor: kTextfieldColor,
                   elevation: 0,

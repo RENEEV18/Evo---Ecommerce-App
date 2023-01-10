@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:evo_mart/common/api/api_baseurl.dart';
@@ -19,7 +18,7 @@ class AddressService {
       );
       log('response');
 
-      if (response.statusCode == 201) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
         if (response.data == null) {
           return null;
         } else {
@@ -48,6 +47,29 @@ class AddressService {
           final List<GetAddressModel> model = (response.data as List)
               .map((e) => GetAddressModel.fromJson(e))
               .toList();
+
+          log(response.data.toString());
+          return model;
+        }
+      }
+    } on DioError catch (e) {
+      log(e.message);
+      DioException().dioError(e, context);
+    }
+    return null;
+  }
+
+  Future<GetAddressModel?> getSingleAddress(context, String addressId) async {
+    Dio dios = await ApiInterceptor().getApiUser(context);
+    try {
+      final Response response = await dios.get(
+        "${ApiBaseUrl().baseUrl + ApiEndpoints.address}/$addressId",
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        if (response.data == null) {
+          return null;
+        } else {
+          final GetAddressModel model = GetAddressModel.fromJson(response.data);
 
           log(response.data.toString());
           return model;

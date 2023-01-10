@@ -45,6 +45,7 @@ class ShowAddressScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(10),
                     itemBuilder: (context, index) {
                       return Card(
+                        color: kWhite,
                         child: Padding(
                           padding: const EdgeInsets.only(left: 20),
                           child: Column(
@@ -54,7 +55,8 @@ class ShowAddressScreen extends StatelessWidget {
                               Row(
                                 children: [
                                   Text(
-                                    value2.addressList[index].fullName,
+                                    value2.addressList[index].fullName
+                                        .toUpperCase(),
                                     style: const TextStyle(
                                       fontFamily: "Manrope",
                                       fontSize: 18,
@@ -75,7 +77,7 @@ class ShowAddressScreen extends StatelessWidget {
                                       textAlign: TextAlign.center,
                                       style: const TextStyle(
                                         fontFamily: "Manrope",
-                                        fontSize: 15,
+                                        fontSize: 14,
                                         color: kWhite,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -109,6 +111,26 @@ class ShowAddressScreen extends StatelessWidget {
                                   letterSpacing: 1,
                                   fontWeight: FontWeight.bold,
                                 ),
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "PIN : ${value2.addressList[index].pin}, ",
+                                    style: const TextStyle(
+                                      fontFamily: "Manrope",
+                                      letterSpacing: 1,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    value2.addressList[index].state,
+                                    style: const TextStyle(
+                                      fontFamily: "Manrope",
+                                      letterSpacing: 1,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
                               ),
                               Text(
                                 value2.addressList[index].phone,
