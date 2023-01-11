@@ -1,7 +1,10 @@
 import 'dart:developer';
 import 'package:evo_mart/common/const/const.dart';
+import 'package:evo_mart/controller/providers/address/address_controller.dart';
 import 'package:evo_mart/controller/providers/bottom_nav_provider/bottom_nav_provider.dart';
 import 'package:evo_mart/controller/providers/cart/cart_provider.dart';
+import 'package:evo_mart/controller/providers/orders/order_controller.dart';
+import 'package:evo_mart/view/orders/orders_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,13 +13,15 @@ class BottomItemWidgets extends StatelessWidget {
     Key? key,
     required this.id,
     required this.size,
+    required this.productId,
   }) : super(key: key);
   final String id;
+  final String productId;
   final List<String> size;
   @override
   Widget build(BuildContext context) {
-    return Consumer2<CartProvider, BottomNavProvider>(
-        builder: (context, value, value2, child) {
+    return Consumer3<CartProvider, BottomNavProvider, OrdersProvider>(
+        builder: (context, value, value2, value3, child) {
       return Row(
         children: [
           value.cartItemsId.contains(id)
@@ -82,7 +87,10 @@ class BottomItemWidgets extends StatelessWidget {
             width: MediaQuery.of(context).size.width / 2,
             child: ElevatedButton(
               onPressed: () {
-                value2.toOrdersPage(context);
+                value.addToCart(id, context, size.toString());
+
+                Navigator.of(context)
+                    .pushNamed(OrderPageScreen.routeName, arguments: productId);
               },
               style: ElevatedButton.styleFrom(
                   backgroundColor: kTextfieldColor,

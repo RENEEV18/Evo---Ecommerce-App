@@ -59,6 +59,29 @@ class OrderService {
     return null;
   }
 
+  Future<GetOrderModel?> getSingleOrders(context, String orderId) async {
+    Dio dios = await ApiInterceptor().getApiUser(context);
+    try {
+      final Response response = await dios.get(
+        "${ApiBaseUrl().baseUrl + ApiEndpoints.orders}/$orderId",
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        if (response.data == null) {
+          return null;
+        } else {
+          final GetOrderModel model = GetOrderModel.fromJson(response.data);
+
+          log(response.data.toString());
+          return model;
+        }
+      }
+    } on DioError catch (e) {
+      log(e.message);
+      DioException().dioError(e, context);
+    }
+    return null;
+  }
+
   Future<String?> cancelOrder(orderId, context) async {
     try {
       final Dio dios = await ApiInterceptor().getApiUser(context);

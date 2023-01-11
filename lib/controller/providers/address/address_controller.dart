@@ -26,6 +26,7 @@ class AddressProvider extends ChangeNotifier {
 
   List<GetAddressModel> addressList = [];
   String addressType = 'Home';
+
   Future<String?> getAllAddress(context) async {
     isLoading = true;
     notifyListeners();

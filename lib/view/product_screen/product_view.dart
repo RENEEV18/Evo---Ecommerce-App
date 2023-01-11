@@ -95,6 +95,7 @@ class ProductView extends StatelessWidget {
       bottomNavigationBar: BottomItemWidgets(
         size: provider.size,
         id: provider.id,
+        productId: provider.id,
       ),
     );
   }

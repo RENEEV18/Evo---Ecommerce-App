@@ -27,13 +27,7 @@ class BottomNavProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void toOrdersPage(context) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) {
-          return const OrderPageScreen();
-        },
-      ),
-    );
-  }
+  // void toOrdersPage(context, String productId) {
+
+  // }
 }

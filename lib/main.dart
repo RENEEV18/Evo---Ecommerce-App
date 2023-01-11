@@ -7,10 +7,13 @@ import 'package:evo_mart/controller/providers/authentication_provider/sign_in_pr
 import 'package:evo_mart/controller/providers/authentication_provider/sign_up_provider.dart';
 import 'package:evo_mart/controller/providers/authentication_provider/verify_otp_provider.dart';
 import 'package:evo_mart/controller/providers/onboard_provider/splash_provider.dart';
+import 'package:evo_mart/controller/providers/orders/order_controller.dart';
+import 'package:evo_mart/controller/providers/payment/payment_provider.dart';
 import 'package:evo_mart/controller/providers/product_screen_provider/product_screen_provider.dart';
 import 'package:evo_mart/controller/providers/profile_provider/profile_provider.dart';
 import 'package:evo_mart/controller/providers/wishlist/wishlist_provider.dart';
 import 'package:evo_mart/view/home/widgets/view_category.dart';
+import 'package:evo_mart/view/orders/orders_page.dart';
 import 'package:evo_mart/view/product_screen/product_view.dart';
 import 'package:evo_mart/view/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -67,6 +70,12 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => AddressProvider(context),
         ),
+        ChangeNotifierProvider(
+          create: (context) => OrdersProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => PaymentProvider(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -77,6 +86,7 @@ class MyApp extends StatelessWidget {
           ViewCategoryScreen.routeName: (context) {
             return const ViewCategoryScreen();
           },
+          OrderPageScreen.routeName: (context) => const OrderPageScreen(),
         },
         theme: ThemeData(useMaterial3: true, primarySwatch: Colors.amber),
         home: const SplashScreen(),
