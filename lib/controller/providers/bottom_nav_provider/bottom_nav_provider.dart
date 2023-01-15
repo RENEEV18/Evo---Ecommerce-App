@@ -1,6 +1,5 @@
 import 'package:evo_mart/view/cart/cart_screen.dart';
 import 'package:evo_mart/view/home/home.dart';
-import 'package:evo_mart/view/orders/orders_page.dart';
 import 'package:evo_mart/view/profile_screen/profle_screen.dart';
 import 'package:evo_mart/view/wishlist_screen/wishlist_screen.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +26,5 @@ class BottomNavProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // void toOrdersPage(context, String productId) {
-
-  // }
+  void toAddressScreen(context, String cartId, String productId) {}
 }

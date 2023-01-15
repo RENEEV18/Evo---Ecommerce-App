@@ -1,5 +1,6 @@
 import 'package:evo_mart/model/address/get_address.dart';
 import 'package:evo_mart/model/cart/get_cart_model.dart';
+import 'package:evo_mart/model/cart/get_single_model.dart';
 import 'package:evo_mart/model/orders/get_orders_model.dart';
 import 'package:evo_mart/services/address/address_service.dart';
 import 'package:evo_mart/services/cart/cart_services.dart';
@@ -12,7 +13,7 @@ class OrdersProvider extends ChangeNotifier {
   List<GetOrderModel> orderList = [];
   GetOrderModel? getSingleOrder;
   GetAddressModel? addressModel;
-  List<CartModel> cartModel = [];
+  List<GetSingelCartProduct> cartModel = [];
   int? totalSave;
 
   void getAllOrders(context) async {
@@ -88,8 +89,7 @@ class OrdersProvider extends ChangeNotifier {
       if (value != null) {
         cartModel = value;
         notifyListeners();
-        totalSave =
-            (cartModel[0].totalPrice - cartModel[0].totalDiscount).round();
+        totalSave = (cartModel[0].price - cartModel[0].discountPrice).round();
         notifyListeners();
       } else {
         isLoading = false;

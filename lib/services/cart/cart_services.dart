@@ -5,6 +5,7 @@ import 'package:evo_mart/common/api/api_baseurl.dart';
 import 'package:evo_mart/common/api/api_endpoint.dart';
 import 'package:evo_mart/model/cart/add_to_cart_model.dart';
 import 'package:evo_mart/model/cart/get_cart_model.dart';
+import 'package:evo_mart/model/cart/get_single_model.dart';
 import 'package:evo_mart/utils/dio_interceptor/interceptor.dart';
 import 'package:evo_mart/utils/exceptions/dio_exceptions.dart';
 
@@ -74,7 +75,7 @@ class CartService {
     return null;
   }
 
-  Future<List<CartModel>?> getSingleCart(
+  Future<List<GetSingelCartProduct>?> getSingleCart(
       context, String productId, String cartId) async {
     Dio dios = await ApiInterceptor().getApiUser(context);
     try {
@@ -85,8 +86,8 @@ class CartService {
         if (response.data == null) {
           return null;
         } else {
-          final List<CartModel> model = (response.data as List)
-              .map((e) => CartModel.fromJson(e))
+          final List<GetSingelCartProduct> model = (response.data as List)
+              .map((e) => GetSingelCartProduct.fromJson(e))
               .toList();
 
           log(response.data.toString());

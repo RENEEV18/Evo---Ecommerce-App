@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:evo_mart/common/const/const.dart';
 import 'package:evo_mart/view/widgets/shimmer.dart';
 import 'package:flutter/material.dart';

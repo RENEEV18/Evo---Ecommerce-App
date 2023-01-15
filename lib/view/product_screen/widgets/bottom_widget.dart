@@ -33,7 +33,6 @@ class BottomItemWidgets extends StatelessWidget {
                       value.gotToCartFromProduct(context);
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.black.withOpacity(0.2),
                       elevation: 0,
                       shape: const RoundedRectangleBorder(),
                     ),
@@ -88,6 +87,9 @@ class BottomItemWidgets extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {
                 value.addToCart(id, context, size.toString());
+                //  Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                //    return const OrderPageScreen();
+                //  },),);
 
                 Navigator.of(context)
                     .pushNamed(OrderPageScreen.routeName, arguments: productId);

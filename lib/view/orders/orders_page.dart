@@ -5,8 +5,10 @@ import 'package:evo_mart/controller/providers/address/address_controller.dart';
 import 'package:evo_mart/controller/providers/cart/cart_provider.dart';
 import 'package:evo_mart/controller/providers/home_provider/home_controllers.dart';
 import 'package:evo_mart/controller/providers/orders/order_controller.dart';
-import 'package:evo_mart/model/home/product_model.dart';
+import 'package:evo_mart/controller/providers/payment/payment_provider.dart';
+import 'package:evo_mart/view/orders/model/order_argument.dart';
 import 'package:evo_mart/view/orders/widgets/order_address_widget.dart';
+import 'package:evo_mart/view/orders/widgets/order_bottom_nav.dart';
 import 'package:evo_mart/view/orders/widgets/row_order_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -18,6 +20,9 @@ class OrderPageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //  final args = ModalRoute.of(context)?.settings.arguments as OrderArgumnetsModel;
+    //    final provider =
+    //       Provider.of<PaymentProvider>(context, listen: false).findByProduct(context,args);
     final args = ModalRoute.of(context)?.settings.arguments as String;
     final provider =
         Provider.of<HomeProvider>(context, listen: false).findById(args);
@@ -67,9 +72,7 @@ class OrderPageScreen extends StatelessWidget {
                                   height: 100,
                                   width: 100,
                                   image: NetworkImage(
-                                    "http://172.16.5.206:5005/products/${provider.image[0]}",
-                                    // order.cartModel[index].products[index]
-                                    //     .product.image[0],
+                                    order.cartModel[index].product.image[0],
                                   ),
                                 ),
                                 Column(
@@ -163,7 +166,7 @@ class OrderPageScreen extends StatelessWidget {
                         ),
                       );
                     },
-                    itemCount: 1,
+                    itemCount: order.cartModel.length,
                   ),
                   kSize,
                   Container(
@@ -210,7 +213,7 @@ class OrderPageScreen extends StatelessWidget {
                   ),
                   kGapSize,
                   Row(
-                    children: [
+                    children: const [
                       kHeadLineWidth,
                       Image(
                         height: 40,
@@ -231,57 +234,7 @@ class OrderPageScreen extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: Material(
-        elevation: 10,
-        child: Row(
-          children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.06,
-              width: MediaQuery.of(context).size.width / 2,
-              child: ElevatedButton(
-                onPressed: () {
-                  // value.gotToCartFromProduct(context);
-                },
-                style: ElevatedButton.styleFrom(
-                  elevation: 0,
-                  shape: const RoundedRectangleBorder(),
-                ),
-                child: Text(
-                  "₹${(provider.price - provider.discountPrice).round()}",
-                  style: const TextStyle(
-                    color: kBlack,
-                    fontFamily: "Manrope",
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1,
-                    fontSize: 18,
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.06,
-              width: MediaQuery.of(context).size.width / 2,
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: kTextfieldColor,
-                    elevation: 0,
-                    shape: const RoundedRectangleBorder()),
-                child: const Text(
-                  'Continue',
-                  style: TextStyle(
-                    color: kWhite,
-                    fontFamily: "Manrope",
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1,
-                    fontSize: 18,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+      bottomNavigationBar: OrderBottomNav(provider: provider),
     );
   }
 }

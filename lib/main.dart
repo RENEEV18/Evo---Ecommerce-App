@@ -32,6 +32,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    precacheImage(
+        const AssetImage('assets/images/Evo-removebg-preview.png'), context);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
