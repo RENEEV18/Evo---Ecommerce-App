@@ -1,32 +1,63 @@
 import 'dart:developer';
-
+import 'dart:ffi';
 import 'package:evo_mart/common/const/const.dart';
 import 'package:evo_mart/controller/providers/address/address_controller.dart';
 import 'package:evo_mart/controller/providers/cart/cart_provider.dart';
 import 'package:evo_mart/controller/providers/home_provider/home_controllers.dart';
 import 'package:evo_mart/controller/providers/orders/order_controller.dart';
 import 'package:evo_mart/controller/providers/payment/payment_provider.dart';
-import 'package:evo_mart/view/orders/model/order_argument.dart';
 import 'package:evo_mart/view/orders/widgets/order_address_widget.dart';
 import 'package:evo_mart/view/orders/widgets/order_bottom_nav.dart';
 import 'package:evo_mart/view/orders/widgets/row_order_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 
-class OrderPageScreen extends StatelessWidget {
+class OrderPageScreen extends StatefulWidget {
   static const routeName = "/orders_page";
   const OrderPageScreen({super.key});
 
   @override
+  State<OrderPageScreen> createState() => _OrderPageScreenState();
+}
+
+class _OrderPageScreenState extends State<OrderPageScreen> {
+  late PaymentProvider paymentProvider;
+
+  @override
+  void initState() {
+    final paymentProvider =
+        Provider.of<PaymentProvider>(context, listen: false);
+    final razorpay = paymentProvider.razorpay;
+    razorpay.on(
+        Razorpay.EVENT_PAYMENT_SUCCESS, paymentProvider.handlerPaymentSuccess);
+    razorpay.on(
+        Razorpay.EVENT_PAYMENT_ERROR, paymentProvider.handlerErrorFailure);
+    razorpay.on(
+        Razorpay.EVENT_EXTERNAL_WALLET, paymentProvider.handlerExternalWallet);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    paymentProvider.razorpay.clear();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    //  final args = ModalRoute.of(context)?.settings.arguments as OrderArgumnetsModel;
-    //    final provider =
-    //       Provider.of<PaymentProvider>(context, listen: false).findByProduct(context,args);
     final args = ModalRoute.of(context)?.settings.arguments as String;
     final provider =
         Provider.of<HomeProvider>(context, listen: false).findById(args);
     final data = Provider.of<CartProvider>(context, listen: false);
+
+    //  final args2 = ModalRoute.of(context)?.settings.arguments as OrderArgumnetsModel;
+    //    final provider2 =
+    //       Provider.of<PaymentProvider>(context, listen: false).findByProduct(context,args2);
+    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    //   paymentProvider.totalAmount(provider.id[0], product.productList[0].price, )
+    // });
 
     return Scaffold(
       appBar: AppBar(
@@ -72,7 +103,8 @@ class OrderPageScreen extends StatelessWidget {
                                   height: 100,
                                   width: 100,
                                   image: NetworkImage(
-                                    order.cartModel[index].product.image[0],
+                                    'http://172.16.5.206:5005/products/${provider.image[0]}',
+                                    // order.cartModel[index].product.image[0],
                                   ),
                                 ),
                                 Column(
@@ -166,7 +198,7 @@ class OrderPageScreen extends StatelessWidget {
                         ),
                       );
                     },
-                    itemCount: order.cartModel.length,
+                    itemCount: 1,
                   ),
                   kSize,
                   Container(
@@ -234,7 +266,11 @@ class OrderPageScreen extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: OrderBottomNav(provider: provider),
+      bottomNavigationBar: OrderBottomNav(
+        provider: provider,
+        payableAmount: int.parse(
+            (provider.price - provider.discountPrice).round().toString()),
+      ),
     );
   }
 }

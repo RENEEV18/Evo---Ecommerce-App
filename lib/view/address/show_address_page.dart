@@ -34,6 +34,7 @@ class ShowAddressScreen extends StatelessWidget {
             shape: const CircleBorder(),
             child: const Icon(
               Icons.add,
+              color: kWhite,
             ),
           ),
           body: SafeArea(
@@ -44,7 +45,7 @@ class ShowAddressScreen extends StatelessWidget {
                     shrinkWrap: true,
                     padding: const EdgeInsets.all(10),
                     itemBuilder: (context, index) {
-                      return Card(
+                      return Container(
                         color: kWhite,
                         child: Padding(
                           padding: const EdgeInsets.only(left: 20),
@@ -69,7 +70,7 @@ class ShowAddressScreen extends StatelessWidget {
                                     width: 60,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(5),
-                                      color: Colors.black.withOpacity(0.3),
+                                      color: Colors.black.withOpacity(0.2),
                                     ),
                                     child: Text(
                                       value2.addressList[index].title
@@ -132,6 +133,15 @@ class ShowAddressScreen extends StatelessWidget {
                                   ),
                                 ],
                               ),
+                              Text(
+                                value2.addressList[index].landMark,
+                                style: const TextStyle(
+                                  fontFamily: "Manrope",
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 1,
+                                ),
+                              ),
+                              kSize,
                               Text(
                                 value2.addressList[index].phone,
                                 style: const TextStyle(

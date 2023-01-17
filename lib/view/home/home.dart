@@ -2,6 +2,7 @@ import 'package:evo_mart/common/const/const.dart';
 import 'package:evo_mart/view/home/widgets/category_widget.dart';
 import 'package:evo_mart/view/home/widgets/carousel_widget.dart';
 import 'package:evo_mart/view/home/widgets/product_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -17,16 +18,14 @@ class HomeScreen extends StatelessWidget {
               "assets/images/EVO_Final-removebg-preview 1.png"),
           // color: kBlack,
         ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.shopping_cart),
-            style: ElevatedButton.styleFrom(
-              shape: const CircleBorder(),
+        bottom: AppBar(
+          title: CupertinoSearchTextField(
+            decoration: BoxDecoration(
+              color: Colors.black.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(10),
             ),
           ),
-        ],
-        bottom: AppBar(),
+        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(

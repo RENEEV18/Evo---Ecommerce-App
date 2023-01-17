@@ -1,0 +1,4 @@
+enum AddressScreen{
+  addAddressScreen,
+  editAddressScreen
+}

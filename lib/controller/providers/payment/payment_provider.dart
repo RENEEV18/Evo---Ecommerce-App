@@ -1,11 +1,7 @@
 import 'dart:developer';
-
 import 'package:evo_mart/common/const/const.dart';
 import 'package:evo_mart/model/orders/orders_model.dart';
-import 'package:evo_mart/services/orders/orders_service.dart';
-import 'package:evo_mart/services/payment/payment.dart';
 import 'package:evo_mart/utils/error_popup/snackbar.dart';
-import 'package:evo_mart/view/orders/model/order_argument.dart';
 import 'package:evo_mart/view/orders/orders_page.dart';
 import 'package:flutter/material.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
@@ -20,43 +16,39 @@ class PaymentProvider extends ChangeNotifier {
 
   Razorpay razorpay = Razorpay();
 
-  void totalAmount(List<String> productId, amount, address) async {
-    final totalAmount = "${(num.parse(amount) * 100)}";
-    final payableAmount = totalAmount.toString();
-    openCheckout(payableAmount);
-    products = productId.map((e) => Product(id: e)).toList();
-    addressId = address;
-    notifyListeners();
-  }
-
-  void openCheckout(String payableAmount) {
+  void openCheckout(int payableAmount) {
     options = {
-      "key": "[YOUR_API_KEY]",
-      "amount": payableAmount,
+      "key": "rzp_test_boWotLKxahxvUM",
+      "amount": payableAmount * 100,
       "name": "Evo-Cart",
       "description": "Mobile Phones",
       "prefill": {"contact": "8848066170", "email": "evo@gmail.com"},
+      'external': {
+        'wallets': ['paytm']
+      }
     };
-    notifyListeners();
-  }
-
-  void orders(context) async {
-    if (paymentType == 'Cash On Delivery') {
-      await payProducts(addressId!, 'COD', context);
-    } else if (paymentType == 'Online Payment') {
-      PaymentService().razorpayPayment(razorpay, options, context);
+    try {
+      razorpay.open(options);
+      notifyListeners();
+    } on PaymentFailureResponse catch (e) {
+      log(e.error.toString());
     }
   }
 
   // payment handlers.
   void handlerPaymentSuccess(PaymentSuccessResponse response, context) {
     log("Pament success");
-    payProducts(addressId!, "ONLINE_PAYMENT", context);
+    SnackBarPop.popUp(
+        context, "Payment Success${response.paymentId}", Colors.green);
+    // payProducts(addressId!, "ONLINE_PAYMENT", context);
   }
 
   void handlerErrorFailure(PaymentFailureResponse response, context) {
     log("Pament error");
-    SnackBarPop.popUp(context, 'Payment Cancelled', kRed);
+    SnackBarPop.popUp(
+        context,
+        'Payment Cancelled${response.code.toString()} - ${response.message}',
+        kRed);
   }
 
   void handlerExternalWallet(context) {
@@ -67,26 +59,26 @@ class PaymentProvider extends ChangeNotifier {
   //------------------------------------------------------------------
 
 // function for payment of products.
-  Future<void> payProducts(String addressId, paymentType, context) async {
-    isLoading = true;
-    notifyListeners();
-    final OrdersModel model = OrdersModel(
-      addressId: addressId,
-      paymentType: paymentType,
-      products: products,
-    );
-    await OrderService().placeOrder(model, context).then((value) {
-      if (value != null) {
-        isLoading = false;
-        notifyListeners();
-        final OrderArgumnetsModel model = OrderArgumnetsModel(orderId: value);
-        findByProduct(context, model);
-      } else {
-        isLoading = false;
-        notifyListeners();
-      }
-    });
-  }
+  // Future<void> payProducts(String addressId, paymentType, context) async {
+  //   isLoading = true;
+  //   notifyListeners();
+  //   final OrdersModel model = OrdersModel(
+  //     addressId: addressId,
+  //     paymentType: paymentType,
+  //     products: products,
+  //   );
+  //   await OrderService().placeOrder(model, context).then((value) {
+  //     if (value != null) {
+  //       isLoading = false;
+  //       notifyListeners();
+  //       final OrderArgumnetsModel model = OrderArgumnetsModel(orderId: value);
+  //       findByProduct(context, model);
+  //     } else {
+  //       isLoading = false;
+  //       notifyListeners();
+  //     }
+  //   });
+  // }
 
   void findByProduct(context, model) {
     Navigator.of(context)

@@ -1,5 +1,5 @@
+import 'dart:developer';
 import 'package:evo_mart/model/address/get_address.dart';
-import 'package:evo_mart/model/cart/get_cart_model.dart';
 import 'package:evo_mart/model/cart/get_single_model.dart';
 import 'package:evo_mart/model/orders/get_orders_model.dart';
 import 'package:evo_mart/services/address/address_service.dart';
@@ -70,6 +70,8 @@ class OrdersProvider extends ChangeNotifier {
     notifyListeners();
     await AddressService().getSingleAddress(context, addressId).then((value) {
       if (value != null) {
+        log("message");
+
         addressModel = value;
         notifyListeners();
         isLoading = false;
@@ -98,11 +100,4 @@ class OrdersProvider extends ChangeNotifier {
     });
     return null;
   }
-
-  void toPaymentScreen(context) {}
-  // void placeOrder(context)async{
-  //   isLoading = true;
-  //   notifyListeners();
-  //   await OrderService().placeOrder(model, context);
-  // }
 }

@@ -229,9 +229,8 @@ class CartListviewWidget extends StatelessWidget {
                                       );
                                     },
                                     style: ElevatedButton.styleFrom(
-                                      backgroundColor:
-                                          Colors.black.withOpacity(0.2),
-                                      elevation: 0,
+                                      elevation: 1,
+                                      backgroundColor: kWhite,
                                       shape: const RoundedRectangleBorder(),
                                     ),
                                     icon: const Icon(
@@ -253,7 +252,7 @@ class CartListviewWidget extends StatelessWidget {
                                     onPressed: () {},
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: kTextfieldColor,
-                                      elevation: 0,
+                                      elevation: 1,
                                       shape: const RoundedRectangleBorder(),
                                     ),
                                     child: const Text(

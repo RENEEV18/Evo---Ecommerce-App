@@ -1,6 +1,7 @@
 import 'package:evo_mart/common/const/const.dart';
 import 'package:evo_mart/controller/providers/address/address_controller.dart';
 import 'package:evo_mart/view/address/widgets/button.dart';
+import 'package:evo_mart/view/widgets/custom_form.dart';
 import 'package:evo_mart/view/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +36,7 @@ class AddressFormScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       kGapSize,
-                      CustomTextField(
+                      CustomFormWidget(
                         contentPadding:
                             const EdgeInsets.symmetric(horizontal: 20),
                         controller: value.nameController,
@@ -48,7 +49,7 @@ class AddressFormScreen extends StatelessWidget {
                         preffix: const Icon(Icons.person),
                       ),
                       kGapSize,
-                      CustomTextField(
+                      CustomFormWidget(
                         contentPadding:
                             const EdgeInsets.symmetric(horizontal: 20),
                         controller: value.phoneController,
@@ -64,7 +65,7 @@ class AddressFormScreen extends StatelessWidget {
                       Row(
                         children: [
                           Flexible(
-                            child: CustomTextField(
+                            child: CustomFormWidget(
                               contentPadding:
                                   const EdgeInsets.symmetric(horizontal: 20),
                               controller: value.pinController,
@@ -79,7 +80,7 @@ class AddressFormScreen extends StatelessWidget {
                           ),
                           kHeadLineWidth,
                           Flexible(
-                            child: CustomTextField(
+                            child: CustomFormWidget(
                               contentPadding:
                                   const EdgeInsets.symmetric(horizontal: 20),
                               controller: value.stateController,
@@ -95,7 +96,7 @@ class AddressFormScreen extends StatelessWidget {
                         ],
                       ),
                       kGapSize,
-                      CustomTextField(
+                      CustomFormWidget(
                         contentPadding:
                             const EdgeInsets.symmetric(horizontal: 20),
                         controller: value.placeController,
@@ -108,7 +109,7 @@ class AddressFormScreen extends StatelessWidget {
                         preffix: const Icon(Icons.location_on),
                       ),
                       kGapSize,
-                      CustomTextField(
+                      CustomFormWidget(
                         contentPadding:
                             const EdgeInsets.symmetric(horizontal: 20),
                         controller: value.addressController,
@@ -123,7 +124,7 @@ class AddressFormScreen extends StatelessWidget {
                         ),
                       ),
                       kGapSize,
-                      CustomTextField(
+                      CustomFormWidget(
                         contentPadding:
                             const EdgeInsets.symmetric(horizontal: 20),
                         controller: value.landmarkController,

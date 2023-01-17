@@ -1,8 +1,8 @@
 import 'package:evo_mart/common/const/const.dart';
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatelessWidget {
-  const CustomTextField({
+class CustomFormWidget extends StatelessWidget {
+  const CustomFormWidget({
     Key? key,
     this.suffix,
     required this.controller,
@@ -25,7 +25,6 @@ class CustomTextField extends StatelessWidget {
   final String? Function(String?) validator;
   final bool? obscureText;
   final String text;
-
   final TextInputType keyboard;
   final EdgeInsetsGeometry? contentPadding;
   final void Function(String)? onChanged;
@@ -39,6 +38,7 @@ class CustomTextField extends StatelessWidget {
       style: const TextStyle(color: kBlack),
       validator: validator,
       decoration: InputDecoration(
+        filled: true,
         fillColor: colorFill,
         suffixIcon: suffix,
         hintText: hintText,
@@ -52,13 +52,12 @@ class CustomTextField extends StatelessWidget {
         ),
         contentPadding: contentPadding,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(10),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: kBlack),
-          borderRadius: BorderRadius.circular(20),
+          borderSide: const BorderSide(color: kWhite),
+          borderRadius: BorderRadius.circular(10),
         ),
-        enabled: true,
       ),
     );
   }

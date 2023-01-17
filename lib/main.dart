@@ -33,7 +33,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     precacheImage(
-        const AssetImage('assets/images/Evo-removebg-preview.png'), context);
+        const AssetImage('assets/images/EVO_Final-removebg-preview 1.png'),
+        context);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(

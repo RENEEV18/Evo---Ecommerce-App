@@ -1,4 +1,6 @@
 import 'package:evo_mart/common/const/const.dart';
+import 'package:evo_mart/controller/providers/address/address_controller.dart';
+import 'package:evo_mart/controller/providers/orders/order_controller.dart';
 import 'package:evo_mart/view/profile_screen/widgets/profile_listtile_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -6,11 +8,12 @@ class OrderAddressWidget extends StatelessWidget {
   const OrderAddressWidget({
     Key? key,
     required this.index,
-    this.value,
+    required this.value,
   }) : super(key: key);
 
   final int index;
-  final dynamic value;
+  // final dynamic value;
+  final AddressProvider value;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -58,6 +61,7 @@ class OrderAddressWidget extends StatelessWidget {
                 Row(
                   children: [
                     Text(
+                      // value.addressModel?.fullName ?? "",
                       value.addressList[index].fullName.toUpperCase(),
                       style: const TextStyle(
                         fontFamily: "Manrope",
@@ -93,8 +97,8 @@ class OrderAddressWidget extends StatelessWidget {
                         ),
                         IconButton(
                           onPressed: () {
-                            value.deleteAddress(
-                                value.addressList[index].id, context);
+                            // value.deleteAddress(
+                            //     value.addressList[index].id, context);
                           },
                           icon: const Icon(
                             Icons.delete,
@@ -115,7 +119,7 @@ class OrderAddressWidget extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      "PIN : ${value.addressList[index].pin}, ",
+                      "PIN :${value.addressList[index].pin}, ",
                       style: const TextStyle(
                         fontFamily: "Manrope",
                         letterSpacing: 1,
@@ -132,6 +136,15 @@ class OrderAddressWidget extends StatelessWidget {
                     ),
                   ],
                 ),
+                Text(
+                  value.addressList[index].place,
+                  style: const TextStyle(
+                    fontFamily: "Manrope",
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1,
+                  ),
+                ),
+                kSize,
                 Text(
                   value.addressList[index].phone,
                   style: const TextStyle(

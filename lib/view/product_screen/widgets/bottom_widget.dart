@@ -61,7 +61,6 @@ class BottomItemWidgets extends StatelessWidget {
                       log('add cart clicked');
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.black.withOpacity(0.2),
                       elevation: 0,
                       shape: const RoundedRectangleBorder(),
                     ),
