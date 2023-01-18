@@ -38,31 +38,34 @@ class CartScreen extends StatelessWidget {
               ? const SizedBox()
               : Row(
                   children: [
-                    SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.07,
-                        width: MediaQuery.of(context).size.width / 2,
-                        child: Column(
-                          children: [
-                            const Text(
-                              'Total Price',
-                              style: TextStyle(
-                                color: kBlack,
-                                fontSize: 15,
-                                fontFamily: "Manrope",
-                                fontWeight: FontWeight.bold,
+                    Material(
+                      elevation: 10,
+                      child: SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.07,
+                          width: MediaQuery.of(context).size.width / 2,
+                          child: Column(
+                            children: [
+                              const Text(
+                                'Total Price',
+                                style: TextStyle(
+                                  color: kBlack,
+                                  fontSize: 15,
+                                  fontFamily: "Manrope",
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                            Text(
-                              '${value.totalSave}',
-                              style: const TextStyle(
-                                color: kRed,
-                                fontFamily: 'Manrope',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
+                              Text(
+                                '${value.totalSave}',
+                                style: const TextStyle(
+                                  color: kRed,
+                                  fontFamily: 'Manrope',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                ),
                               ),
-                            ),
-                          ],
-                        )),
+                            ],
+                          )),
+                    ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.07,
                       width: MediaQuery.of(context).size.width / 2,
@@ -70,7 +73,7 @@ class CartScreen extends StatelessWidget {
                         onPressed: () {},
                         style: ElevatedButton.styleFrom(
                             backgroundColor: kTextfieldColor,
-                            elevation: 0,
+                            elevation: 1,
                             shape: const RoundedRectangleBorder()),
                         child: const Text(
                           'Place Order',

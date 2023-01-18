@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'dart:ffi';
 import 'package:evo_mart/common/const/const.dart';
 import 'package:evo_mart/controller/providers/address/address_controller.dart';
 import 'package:evo_mart/controller/providers/cart/cart_provider.dart';
@@ -23,7 +22,7 @@ class OrderPageScreen extends StatefulWidget {
 }
 
 class _OrderPageScreenState extends State<OrderPageScreen> {
-  late PaymentProvider paymentProvider;
+  PaymentProvider paymentProvider = PaymentProvider();
 
   @override
   void initState() {
@@ -51,13 +50,6 @@ class _OrderPageScreenState extends State<OrderPageScreen> {
     final provider =
         Provider.of<HomeProvider>(context, listen: false).findById(args);
     final data = Provider.of<CartProvider>(context, listen: false);
-
-    //  final args2 = ModalRoute.of(context)?.settings.arguments as OrderArgumnetsModel;
-    //    final provider2 =
-    //       Provider.of<PaymentProvider>(context, listen: false).findByProduct(context,args2);
-    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-    //   paymentProvider.totalAmount(provider.id[0], product.productList[0].price, )
-    // });
 
     return Scaffold(
       appBar: AppBar(
@@ -107,6 +99,7 @@ class _OrderPageScreenState extends State<OrderPageScreen> {
                                     // order.cartModel[index].product.image[0],
                                   ),
                                 ),
+                                kWidth,
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [

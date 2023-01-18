@@ -107,13 +107,9 @@ class HomeProvider extends ChangeNotifier {
     return categoryList.firstWhere((element) => element.id == id);
   }
 
-  // List<CategoryModel> fromCategoryToProductView(String categoryId) {
-  //   return categoryList
-  //       .where((element) => element.id.contains(categoryId))
-  //       .toList();
-  // }
-  // void fromCategoryToProductView(context, index) {
-  //   Navigator.of(context)
-  //       .pushNamed(ProductView.routeName, arguments: model[index].);
-  // }
+  void fromCategoryToProductView(context, index, provider) {
+    Navigator.of(context)
+        .pushNamed(ProductView.routeName, arguments: provider[index].id);
+    notifyListeners();
+  }
 }

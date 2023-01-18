@@ -80,6 +80,7 @@ class ProductView extends StatelessWidget {
                       name: provider.name,
                       price: provider.price,
                       rating: provider.rating,
+                      discountPrice: provider.discountPrice,
                     ),
                     kSize,
                     // BottomWidget(

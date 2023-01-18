@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:evo_mart/model/address/create_address.dart';
+import 'package:evo_mart/model/address/enum_address_.dart';
 import 'package:evo_mart/model/address/get_address.dart';
 import 'package:evo_mart/services/address/address_service.dart';
 import 'package:evo_mart/utils/error_popup/snackbar.dart';
@@ -10,7 +11,6 @@ class AddressProvider extends ChangeNotifier {
   AddressProvider(context) {
     getAllAddress(context);
   }
-  final TextEditingController titleController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController pinController = TextEditingController();
@@ -78,16 +78,47 @@ class AddressProvider extends ChangeNotifier {
     return null;
   }
 
-  void saveAddress(context) {
-    addAddress(context);
-    notifyListeners();
+  void saveAddress(context, AddressScreen addressScreenCheck, String id) {
+    if (addressScreenCheck == AddressScreen.addAddressScreen) {
+      addAddress(context);
+      notifyListeners();
+    } else {
+      updateAddress(id, context);
+      Navigator.pop(context);
+      getAllAddress(context);
+      notifyListeners();
+    }
+  }
+
+  void setAddressScreen(
+      AddressScreen addressScreenCheck, String? addressId, context) async {
+    if (addressScreenCheck == AddressScreen.addAddressScreen) {
+      clearAllControllers();
+    } else {
+      await AddressService()
+          .getSingleAddress(context, addressId!)
+          .then((value) {
+        if (value != null) {
+          nameController.text = value.fullName;
+          phoneController.text = value.phone;
+          pinController.text = value.pin;
+          stateController.text = value.state;
+          placeController.text = value.place;
+          addressController.text = value.address;
+          landmarkController.text = value.landMark;
+          notifyListeners();
+          value.title == "Home" ? isSelected = true : isSelected = false;
+          notifyListeners();
+        }
+      });
+    }
   }
 
   void updateAddress(String addressId, context) async {
     isLoading2 = true;
     notifyListeners();
     final CreateAddressModel model = CreateAddressModel(
-      title: titleController.text,
+      title: addressType,
       fullName: nameController.text,
       phone: phoneController.text,
       pin: pinController.text,
@@ -101,7 +132,8 @@ class AddressProvider extends ChangeNotifier {
         .then((value) {
       if (value != null) {
         clearAllControllers();
-        Navigator.of(context).pop();
+        getAllAddress(context);
+        notifyListeners();
         isLoading2 = false;
         notifyListeners();
       } else {
@@ -113,22 +145,17 @@ class AddressProvider extends ChangeNotifier {
   }
 
   void deleteAddress(String addressId, context) async {
-    log('delete function entered');
     isLoading2 = true;
     notifyListeners();
+    log('delete function entered');
     await AddressService().deleteAddress(addressId, context).then((value) {
       if (value != null) {
-        getAllAddress(context);
-        pop(context);
-        SnackBarPop.popUp(context, "Address removed successfully", Colors.red);
         isLoading2 = false;
         notifyListeners();
       } else {
-        return null;
+        return;
       }
     });
-    isLoading = false;
-    notifyListeners();
   }
 
   void buttonSelection() {
@@ -139,7 +166,7 @@ class AddressProvider extends ChangeNotifier {
   }
 
   String? fullNameValidation(String? value) {
-    if (value == null || value.isEmpty) {
+    if (value!.isEmpty) {
       return 'Please enter the username';
     } else if (value.length < 2) {
       return 'Too short username';
@@ -149,7 +176,7 @@ class AddressProvider extends ChangeNotifier {
   }
 
   String? mobileValdation(String? value) {
-    if (value == null || value.isEmpty) {
+    if (value!.isEmpty) {
       return 'Please enter your mobile number';
     } else if (value.length < 10) {
       return 'Invalid mobile number,make sure your entered 10 digits';
@@ -159,7 +186,7 @@ class AddressProvider extends ChangeNotifier {
   }
 
   String? pincodeValdation(String? value) {
-    if (value == null || value.isEmpty) {
+    if (value!.isEmpty) {
       return 'Please enter your PIN number';
     } else if (value.length < 6) {
       return 'Invalid Pin No';
@@ -169,7 +196,7 @@ class AddressProvider extends ChangeNotifier {
   }
 
   String? stateValidation(String? value) {
-    if (value == null || value.isEmpty) {
+    if (value!.isEmpty) {
       return 'Please enter the state';
     } else {
       return null;
@@ -177,7 +204,7 @@ class AddressProvider extends ChangeNotifier {
   }
 
   String? placeValidation(String? value) {
-    if (value == null || value.isEmpty) {
+    if (value!.isEmpty) {
       return 'Please enter the state';
     } else {
       return null;
@@ -185,7 +212,7 @@ class AddressProvider extends ChangeNotifier {
   }
 
   String? addressValidation(String? value) {
-    if (value == null || value.isEmpty) {
+    if (value!.isEmpty) {
       return 'Please enter the state';
     } else {
       return null;
@@ -193,7 +220,7 @@ class AddressProvider extends ChangeNotifier {
   }
 
   String? landmarkValidation(String? value) {
-    if (value == null || value.isEmpty) {
+    if (value!.isEmpty) {
       return 'Please enter the state';
     } else {
       return null;
@@ -214,5 +241,9 @@ class AddressProvider extends ChangeNotifier {
     addressController.clear();
     phoneController.clear();
     landmarkController.clear();
+  }
+
+  GetAddressModel findById(String id) {
+    return addressList.firstWhere((element) => element.id == id);
   }
 }

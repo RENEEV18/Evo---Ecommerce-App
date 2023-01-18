@@ -33,13 +33,13 @@ class CartListviewWidget extends StatelessWidget {
                             child: Text('Cart is Empty'),
                           ),
                         )
-                      : Column(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                cart.toProductScreen(context, index);
-                              },
-                              child: Row(
+                      : GestureDetector(
+                          onTap: () {
+                            cart.toProductScreen(context, index);
+                          },
+                          child: Column(
+                            children: [
+                              Row(
                                 children: [
                                   kWidth,
                                   Container(
@@ -210,66 +210,68 @@ class CartListviewWidget extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                            ),
-                            kHeight,
-                            Row(
-                              children: [
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width / 2,
-                                  child: ElevatedButton.icon(
-                                    onPressed: () {
-                                      showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          return CartAlertWidget(
-                                            cart: cart,
-                                            index: index,
-                                          );
-                                        },
-                                      );
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      elevation: 1,
-                                      backgroundColor: kWhite,
-                                      shape: const RoundedRectangleBorder(),
-                                    ),
-                                    icon: const Icon(
-                                      Icons.delete,
-                                      color: kBlack,
-                                    ),
-                                    label: const Text(
-                                      'Remove',
-                                      style: TextStyle(
-                                          color: kBlack,
-                                          fontFamily: 'Manrope',
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width / 2,
-                                  child: ElevatedButton(
-                                    onPressed: () {},
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: kTextfieldColor,
-                                      elevation: 1,
-                                      shape: const RoundedRectangleBorder(),
-                                    ),
-                                    child: const Text(
-                                      'Buy Now',
-                                      style: TextStyle(
-                                          color: kWhite,
-                                          fontFamily: 'Manrope',
-                                          letterSpacing: 1,
-                                          fontWeight: FontWeight.bold),
+                              kHeight,
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width / 2,
+                                    child: ElevatedButton.icon(
+                                      onPressed: () {
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return CartAlertWidget(
+                                              cart: cart,
+                                              index: index,
+                                            );
+                                          },
+                                        );
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        elevation: 1,
+                                        backgroundColor: kWhite,
+                                        shape: const RoundedRectangleBorder(),
+                                      ),
+                                      icon: const Icon(
+                                        Icons.delete,
+                                        color: kBlack,
+                                      ),
+                                      label: const Text(
+                                        'Remove',
+                                        style: TextStyle(
+                                            color: kBlack,
+                                            fontFamily: 'Manrope',
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                     ),
                                   ),
-                                ),
-                                const Divider(),
-                              ],
-                            ),
-                            kSize,
-                          ],
+                                  SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width / 2,
+                                    child: ElevatedButton(
+                                      onPressed: () {},
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: kTextfieldColor,
+                                        elevation: 1,
+                                        shape: const RoundedRectangleBorder(),
+                                      ),
+                                      child: const Text(
+                                        'Buy Now',
+                                        style: TextStyle(
+                                            color: kWhite,
+                                            fontFamily: 'Manrope',
+                                            letterSpacing: 1,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
+                                  const Divider(),
+                                ],
+                              ),
+                              kSize,
+                            ],
+                          ),
                         );
                 },
                 itemCount: cart.cartList?.products.length ?? 0,

@@ -51,12 +51,12 @@ class ProfileProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void goToAddAddressPage(context) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => AddressFormScreen(),
-      ),
-    );
-    notifyListeners();
-  }
+  // void goToAddAddressPage(context) {
+  //   Navigator.of(context).push(
+  //     MaterialPageRoute(
+  //       builder: (context) => AddressFormScreen(addressScreenCheck: ,),
+  //     ),
+  //   );
+  //   notifyListeners();
+  // }
 }

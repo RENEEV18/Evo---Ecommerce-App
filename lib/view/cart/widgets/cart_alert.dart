@@ -64,41 +64,6 @@ class CartAlertWidget extends StatelessWidget {
             ],
           ),
         )
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-        //   children: [
-        //     ElevatedButton(
-        //       onPressed: () {
-        //         Navigator.of(context).pop();
-        //       },
-        //       child:
-        //const Text(
-        //         'No',
-        //         style: TextStyle(
-        //           color: kWhite,
-        //           fontFamily: "Manrope",
-        //           fontWeight: FontWeight.bold,
-        //         ),
-        //       ),
-        //     ),
-        //     ElevatedButton(
-        //       onPressed: () {
-        //         cart.removeCart(
-        //           context,
-        //           cart.cartList!.products[index].product.id,
-        //         );
-        //       },
-        //       child: const Text(
-        //         'Yes',
-        //         style: TextStyle(
-        //           color: kWhite,
-        //           fontFamily: "Manrope",
-        //           fontWeight: FontWeight.bold,
-        //         ),
-        //       ),
-        //     ),
-        //   ],
-        // ),
       ],
     );
   }

@@ -1,6 +1,9 @@
 import 'package:evo_mart/common/const/const.dart';
 import 'package:evo_mart/controller/providers/address/address_controller.dart';
 import 'package:evo_mart/controller/providers/profile_provider/profile_provider.dart';
+import 'package:evo_mart/model/address/enum_address_.dart';
+import 'package:evo_mart/view/address/address_form.dart';
+import 'package:evo_mart/view/address/widgets/popup_address_delete.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -29,7 +32,17 @@ class ShowAddressScreen extends StatelessWidget {
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              value.goToAddAddressPage(context);
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) {
+                    return AddressFormScreen(
+                      addressScreenCheck: AddressScreen.addAddressScreen,
+                      addressId: "",
+                    );
+                  },
+                ),
+              );
+              // value.goToAddAddressPage(context);
             },
             shape: const CircleBorder(),
             child: const Icon(
@@ -88,14 +101,32 @@ class ShowAddressScreen extends StatelessWidget {
                                   Row(
                                     children: [
                                       IconButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) {
+                                                return AddressFormScreen(
+                                                  addressScreenCheck:
+                                                      AddressScreen
+                                                          .editAddressScreen,
+                                                  addressId: value2
+                                                      .addressList[index].id,
+                                                );
+                                              },
+                                            ),
+                                          );
+                                        },
                                         icon: const Icon(Icons.edit),
                                       ),
                                       IconButton(
                                         onPressed: () {
-                                          value2.deleteAddress(
-                                              value2.addressList[index].id,
-                                              context);
+                                          showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return AddressAlertWidget(
+                                                  index: index);
+                                            },
+                                          );
                                         },
                                         icon: const Icon(
                                           Icons.delete,

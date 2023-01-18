@@ -1,5 +1,6 @@
 import 'package:evo_mart/common/const/const.dart';
 import 'package:evo_mart/controller/providers/home_provider/home_controllers.dart';
+import 'package:evo_mart/view/product_screen/product_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -44,6 +45,8 @@ class ViewCategoryScreen extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
+                        value.fromCategoryToProductView(
+                            context, index, provider);
                         // value.fromCategoryToProductView(context, index);
                       },
                       child: Container(

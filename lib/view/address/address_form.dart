@@ -1,18 +1,27 @@
 import 'package:evo_mart/common/const/const.dart';
 import 'package:evo_mart/controller/providers/address/address_controller.dart';
+import 'package:evo_mart/model/address/enum_address_.dart';
 import 'package:evo_mart/view/address/widgets/button.dart';
 import 'package:evo_mart/view/widgets/custom_form.dart';
-import 'package:evo_mart/view/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class AddressFormScreen extends StatelessWidget {
-  AddressFormScreen({super.key});
+  AddressFormScreen(
+      {super.key, required this.addressScreenCheck, required this.addressId});
 
   final GlobalKey<FormState> formGlobalKey = GlobalKey<FormState>();
-
+  final AddressScreen addressScreenCheck;
+  final String addressId;
+  static const routeAddressName = '/address_form';
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (timeStamp) {
+        Provider.of<AddressProvider>(context, listen: false)
+            .setAddressScreen(addressScreenCheck, addressId, context);
+      },
+    );
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -33,6 +42,7 @@ class AddressFormScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 20, right: 20),
                 child: Form(
                   key: formGlobalKey,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   child: Column(
                     children: [
                       kGapSize,
@@ -41,8 +51,7 @@ class AddressFormScreen extends StatelessWidget {
                             const EdgeInsets.symmetric(horizontal: 20),
                         controller: value.nameController,
                         validator: (name) {
-                          value.fullNameValidation(name);
-                          return null;
+                          return value.fullNameValidation(name);
                         },
                         keyboard: TextInputType.name,
                         text: "Full Name ",
@@ -54,8 +63,7 @@ class AddressFormScreen extends StatelessWidget {
                             const EdgeInsets.symmetric(horizontal: 20),
                         controller: value.phoneController,
                         validator: (phone) {
-                          value.mobileValdation(phone);
-                          return null;
+                          return value.mobileValdation(phone);
                         },
                         keyboard: TextInputType.name,
                         preffix: const Icon(Icons.phone),
@@ -70,8 +78,7 @@ class AddressFormScreen extends StatelessWidget {
                                   const EdgeInsets.symmetric(horizontal: 20),
                               controller: value.pinController,
                               validator: (pin) {
-                                value.pincodeValdation(pin);
-                                return null;
+                                return value.pincodeValdation(pin);
                               },
                               keyboard: TextInputType.name,
                               text: "PIN Code",
@@ -85,8 +92,7 @@ class AddressFormScreen extends StatelessWidget {
                                   const EdgeInsets.symmetric(horizontal: 20),
                               controller: value.stateController,
                               validator: (state) {
-                                value.stateValidation(state);
-                                return null;
+                                return value.stateValidation(state);
                               },
                               keyboard: TextInputType.name,
                               text: "State",
@@ -101,8 +107,7 @@ class AddressFormScreen extends StatelessWidget {
                             const EdgeInsets.symmetric(horizontal: 20),
                         controller: value.placeController,
                         validator: (place) {
-                          value.placeValidation(place);
-                          return null;
+                          return value.placeValidation(place);
                         },
                         keyboard: TextInputType.name,
                         text: "Place",
@@ -114,8 +119,7 @@ class AddressFormScreen extends StatelessWidget {
                             const EdgeInsets.symmetric(horizontal: 20),
                         controller: value.addressController,
                         validator: (address) {
-                          value.addressValidation(address);
-                          return null;
+                          return value.addressValidation(address);
                         },
                         keyboard: TextInputType.name,
                         text: "Address",
@@ -129,8 +133,7 @@ class AddressFormScreen extends StatelessWidget {
                             const EdgeInsets.symmetric(horizontal: 20),
                         controller: value.landmarkController,
                         validator: (land) {
-                          value.landmarkValidation(land);
-                          return null;
+                          return value.landmarkValidation(land);
                         },
                         keyboard: TextInputType.name,
                         text: "LandMark",
@@ -194,7 +197,8 @@ class AddressFormScreen extends StatelessWidget {
                           onPressed: () {
                             if (formGlobalKey.currentState!.validate()) {
                               formGlobalKey.currentState!.save();
-                              value.saveAddress(context);
+                              value.saveAddress(
+                                  context, addressScreenCheck, addressId);
                             }
                           },
                           style: ElevatedButton.styleFrom(
