@@ -70,7 +70,9 @@ class CartScreen extends StatelessWidget {
                       height: MediaQuery.of(context).size.height * 0.07,
                       width: MediaQuery.of(context).size.width / 2,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          // value.gotoOrdersScreen(OrderSummaryScreenEnum.normalOrderSummaryScreen, value.cartItemsId[i], productId, context)
+                        },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: kTextfieldColor,
                             elevation: 1,

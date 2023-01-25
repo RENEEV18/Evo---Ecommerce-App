@@ -173,13 +173,29 @@ class ShowAddressScreen extends StatelessWidget {
                                 ),
                               ),
                               kSize,
-                              Text(
-                                value2.addressList[index].phone,
-                                style: const TextStyle(
-                                  fontFamily: "Manrope",
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 1,
-                                ),
+                              Row(
+                                children: [
+                                  Text(
+                                    value2.addressList[index].phone,
+                                    style: const TextStyle(
+                                      fontFamily: "Manrope",
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 1,
+                                    ),
+                                  ),
+                                  index == value2.selectIndex
+                                      ? const Text(
+                                          'Default',
+                                        )
+                                      : TextButton(
+                                          onPressed: () {
+                                            value2.selectDefault(index);
+                                          },
+                                          child: const Text(
+                                            'Select Default',
+                                          ),
+                                        ),
+                                ],
                               ),
                               kSize,
                             ],

@@ -18,6 +18,7 @@ class HomeProvider extends ChangeNotifier {
   List<CategoryModel> categoryList = [];
   List<CarousalModel> carousalList = [];
   List<ProductModel> productList = [];
+  List<ProductModel> dataFound = [];
 
   CategoryModel? model;
   int activeIndex = 0;
@@ -110,6 +111,25 @@ class HomeProvider extends ChangeNotifier {
   void fromCategoryToProductView(context, index, provider) {
     Navigator.of(context)
         .pushNamed(ProductView.routeName, arguments: provider[index].id);
+    notifyListeners();
+  }
+
+//badge
+  void search(String keyboard) {
+    List<ProductModel> results = [];
+    if (keyboard.isEmpty) {
+      results = productList;
+    } else {
+      results = productList
+          .where(
+            (element) => element.name.toLowerCase().contains(
+                  keyboard.toLowerCase(),
+                ),
+          )
+          .toList();
+    }
+
+    dataFound = results;
     notifyListeners();
   }
 }

@@ -69,15 +69,9 @@ class _OrderPageScreenState extends State<OrderPageScreen> {
             builder: (context, value, order, child) {
               return Column(
                 children: [
-                  ListView.builder(
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return OrderAddressWidget(
-                        index: index,
-                        value: value,
-                      );
-                    },
-                    itemCount: value.addressList.length,
+                  OrderAddressWidget(
+                    index: value.selectIndex,
+                    value: value,
                   ),
                   kheight,
                   ListView.builder(

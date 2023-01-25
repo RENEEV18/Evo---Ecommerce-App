@@ -2,10 +2,13 @@ import 'dart:developer';
 import 'package:evo_mart/common/const/const.dart';
 import 'package:evo_mart/controller/providers/bottom_nav_provider/bottom_nav_provider.dart';
 import 'package:evo_mart/model/cart/add_to_cart_model.dart';
+import 'package:evo_mart/model/cart/cart_to_orders_model.dart';
 import 'package:evo_mart/model/cart/get_cart_model.dart';
 import 'package:evo_mart/services/cart/cart_services.dart';
 import 'package:evo_mart/utils/error_popup/snackbar.dart';
 import 'package:evo_mart/view/bottom_nav.dart';
+import 'package:evo_mart/view/orders/model/order_screen_enum.dart';
+import 'package:evo_mart/view/orders/orders_page.dart';
 import 'package:evo_mart/view/product_screen/product_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -149,5 +152,22 @@ class CartProvider extends ChangeNotifier {
   void pop(context) {
     Navigator.of(context).pop();
     notifyListeners();
+  }
+
+  void gotoOrdersScreen(OrderSummaryScreenEnum screenCheck,String? cartId,String? productId,context){
+ final args = CarttoOrderScreenArguementModel(
+      screenCheck: screenCheck,
+      cartId: cartId,
+      productId: productId,
+      // visibility: true,
+      
+    );
+      Navigator.of(context).pushNamed(
+      OrderPageScreen.routeName,
+      arguments: args,
+    );
+    // Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+    //   return const  OrderPageScreen();
+    // },));
   }
 }

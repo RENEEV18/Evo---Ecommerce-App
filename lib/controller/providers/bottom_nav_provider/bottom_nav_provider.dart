@@ -8,11 +8,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class BottomNavProvider extends ChangeNotifier {
   int currentIndex = 0;
 
-  List<Widget> screens = const [
+  List<Widget> screens = [
     HomeScreen(),
-    WishlistScreen(),
-    CartScreen(),
-    ProfileScreen(),
+    const WishlistScreen(),
+    const CartScreen(),
+    const ProfileScreen(),
   ];
 
   List<IconData> icons = [

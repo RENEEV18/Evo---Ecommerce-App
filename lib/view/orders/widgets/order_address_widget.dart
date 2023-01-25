@@ -1,6 +1,6 @@
 import 'package:evo_mart/common/const/const.dart';
 import 'package:evo_mart/controller/providers/address/address_controller.dart';
-import 'package:evo_mart/controller/providers/orders/order_controller.dart';
+import 'package:evo_mart/view/address/show_address_page.dart';
 import 'package:evo_mart/view/profile_screen/widgets/profile_listtile_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -28,7 +28,15 @@ class OrderAddressWidget extends StatelessWidget {
             trailIcon: SizedBox(
               height: 32,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return const ShowAddressScreen();
+                      },
+                    ),
+                  );
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: kWhite,
                   elevation: 0,
@@ -61,7 +69,6 @@ class OrderAddressWidget extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      // value.addressModel?.fullName ?? "",
                       value.addressList[index].fullName.toUpperCase(),
                       style: const TextStyle(
                         fontFamily: "Manrope",

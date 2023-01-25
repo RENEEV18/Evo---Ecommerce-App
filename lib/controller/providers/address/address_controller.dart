@@ -23,6 +23,7 @@ class AddressProvider extends ChangeNotifier {
   bool isLoading2 = false;
   bool isSelected = true;
   bool isOfficeSelected = false;
+  int selectIndex = 0;
 
   List<GetAddressModel> addressList = [];
   String addressType = 'Home';
@@ -245,5 +246,10 @@ class AddressProvider extends ChangeNotifier {
 
   GetAddressModel findById(String id) {
     return addressList.firstWhere((element) => element.id == id);
+  }
+
+  void selectDefault(int index) {
+    selectIndex = index;
+    notifyListeners();
   }
 }

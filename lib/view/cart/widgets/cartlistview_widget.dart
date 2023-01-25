@@ -127,17 +127,23 @@ class CartListviewWidget extends StatelessWidget {
                                             children: [
                                               InkWell(
                                                 onTap: () {
-                                                  // cart.incrementDecrementQty(
-                                                  //   -1,
-                                                  //   cart.cartList!.products[index]
-                                                  //       .product.id,
-                                                  //   cart.cartList!.products[index]
-                                                  //       .qty,
-                                                  //   context,
-                                                  //   cart.cartList!.products[index]
-                                                  //       .product.size
-                                                  //       .toString(),
-                                                  // );
+                                                  cart.incrementDecrementQty(
+                                                    -1,
+                                                    cart
+                                                        .cartList!
+                                                        .products[index]
+                                                        .product
+                                                        .id,
+                                                    cart.cartList!
+                                                        .products[index].qty,
+                                                    context,
+                                                    cart
+                                                        .cartList!
+                                                        .products[index]
+                                                        .product
+                                                        .size
+                                                        .toString(),
+                                                  );
                                                 },
                                                 child: Container(
                                                   height: 25,

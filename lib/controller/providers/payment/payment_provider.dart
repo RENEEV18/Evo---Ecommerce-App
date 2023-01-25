@@ -1,7 +1,9 @@
 import 'dart:developer';
 import 'package:evo_mart/common/const/const.dart';
 import 'package:evo_mart/model/orders/orders_model.dart';
+import 'package:evo_mart/services/orders/orders_service.dart';
 import 'package:evo_mart/utils/error_popup/snackbar.dart';
+import 'package:evo_mart/view/orders/model/order_argument.dart';
 import 'package:evo_mart/view/orders/orders_page.dart';
 import 'package:flutter/material.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
@@ -29,6 +31,7 @@ class PaymentProvider extends ChangeNotifier {
     };
     try {
       razorpay.open(options);
+     
       notifyListeners();
     } on PaymentFailureResponse catch (e) {
       log(e.error.toString());
@@ -36,10 +39,12 @@ class PaymentProvider extends ChangeNotifier {
   }
 
   // payment handlers.
-  void handlerPaymentSuccess(PaymentSuccessResponse response, context) {
-    log("Pament success");
-    SnackBarPop.popUp(
-        context, "Payment Success${response.paymentId}", Colors.green);
+  void handlerPaymentSuccess(PaymentSuccessResponse response, context,addressId) {
+    payProducts(addressId, paymentType, context);
+    // log("Pament success");
+    // SnackBarPop.popUp(
+    //     context, "Payment Success${response.paymentId}", Colors.green);
+    // notifyListeners();
     // payProducts(addressId!, "ONLINE_PAYMENT", context);
   }
 
@@ -49,36 +54,38 @@ class PaymentProvider extends ChangeNotifier {
         context,
         'Payment Cancelled${response.code.toString()} - ${response.message}',
         kRed);
+    notifyListeners();
   }
 
   void handlerExternalWallet(context) {
     log("External Wallet");
     SnackBarPop.popUp(context, 'Externall Wallet', Colors.green);
+    notifyListeners();
   }
 
   //------------------------------------------------------------------
 
 // function for payment of products.
-  // Future<void> payProducts(String addressId, paymentType, context) async {
-  //   isLoading = true;
-  //   notifyListeners();
-  //   final OrdersModel model = OrdersModel(
-  //     addressId: addressId,
-  //     paymentType: paymentType,
-  //     products: products,
-  //   );
-  //   await OrderService().placeOrder(model, context).then((value) {
-  //     if (value != null) {
-  //       isLoading = false;
-  //       notifyListeners();
-  //       final OrderArgumnetsModel model = OrderArgumnetsModel(orderId: value);
-  //       findByProduct(context, model);
-  //     } else {
-  //       isLoading = false;
-  //       notifyListeners();
-  //     }
-  //   });
-  // }
+  Future<void> payProducts(String addressId, paymentType, context) async {
+    isLoading = true;
+    notifyListeners();
+    final OrdersModel model = OrdersModel(
+      addressId: addressId,
+      paymentType: paymentType,
+      products: products,
+    );
+    await OrderService().placeOrder(model, context).then((value) {
+      if (value != null) {
+        isLoading = false;
+        notifyListeners();
+        final OrderArgumnetsModel model = OrderArgumnetsModel(orderId: value);
+        findByProduct(context, model);
+      } else {
+        isLoading = false;
+        notifyListeners();
+      }
+    });
+  }
 
   void findByProduct(context, model) {
     Navigator.of(context)
