@@ -90,7 +90,7 @@ class MyApp extends StatelessWidget {
           ViewCategoryScreen.routeName: (context) {
             return const ViewCategoryScreen();
           },
-          OrderPageScreen.routeName: (context) => const OrderPageScreen(),
+         // OrderPageScreen.routeName: (context) => const OrderPageScreen(),
         },
         theme: ThemeData(useMaterial3: true, primarySwatch: Colors.amber),
         home: const SplashScreen(),

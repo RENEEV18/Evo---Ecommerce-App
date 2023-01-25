@@ -1,6 +1,8 @@
 import 'package:evo_mart/common/const/const.dart';
 import 'package:evo_mart/controller/providers/cart/cart_provider.dart';
 import 'package:evo_mart/view/cart/widgets/cartlistview_widget.dart';
+import 'package:evo_mart/view/orders/model/order_screen_enum.dart';
+import 'package:evo_mart/view/orders/orders_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -71,7 +73,18 @@ class CartScreen extends StatelessWidget {
                       width: MediaQuery.of(context).size.width / 2,
                       child: ElevatedButton(
                         onPressed: () {
-                          // value.gotoOrdersScreen(OrderSummaryScreenEnum.normalOrderSummaryScreen, value.cartItemsId[i], productId, context)
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return const OrderPageScreen(
+                                  cartId: "",
+                                  productId: "",
+                                  screenCheck: OrderSummaryScreenEnum
+                                      .normalOrderSummaryScreen,
+                                );
+                              },
+                            ),
+                          );
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: kTextfieldColor,

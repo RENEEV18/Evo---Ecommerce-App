@@ -5,6 +5,8 @@ import 'package:evo_mart/model/orders/get_orders_model.dart';
 import 'package:evo_mart/services/address/address_service.dart';
 import 'package:evo_mart/services/cart/cart_services.dart';
 import 'package:evo_mart/services/orders/orders_service.dart';
+import 'package:evo_mart/view/orders/model/order_screen_enum.dart';
+import 'package:evo_mart/view/orders/orders_page.dart';
 import 'package:flutter/material.dart';
 
 class OrdersProvider extends ChangeNotifier {
@@ -99,5 +101,23 @@ class OrdersProvider extends ChangeNotifier {
       }
     });
     return null;
+  }
+
+  void toOrderScreen(context, productId, cartId) {
+    getSingleCart(
+      context,
+      productId,
+      cartId,
+    );
+    notifyListeners();
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) {
+        return OrderPageScreen(
+            cartId: cartId,
+            productId: productId,
+            screenCheck:
+                OrderSummaryScreenEnum.buyOneProductOrderSummaryScreen);
+      },
+    ));
   }
 }

@@ -2,9 +2,9 @@ import 'dart:developer';
 import 'package:evo_mart/common/const/const.dart';
 import 'package:evo_mart/controller/providers/address/address_controller.dart';
 import 'package:evo_mart/controller/providers/cart/cart_provider.dart';
-import 'package:evo_mart/controller/providers/home_provider/home_controllers.dart';
 import 'package:evo_mart/controller/providers/orders/order_controller.dart';
 import 'package:evo_mart/controller/providers/payment/payment_provider.dart';
+import 'package:evo_mart/view/orders/model/order_screen_enum.dart';
 import 'package:evo_mart/view/orders/widgets/order_address_widget.dart';
 import 'package:evo_mart/view/orders/widgets/order_bottom_nav.dart';
 import 'package:evo_mart/view/orders/widgets/row_order_widget.dart';
@@ -14,8 +14,16 @@ import 'package:provider/provider.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class OrderPageScreen extends StatefulWidget {
-  static const routeName = "/orders_page";
-  const OrderPageScreen({super.key});
+  // static const routeName = "/orders_page";
+  const OrderPageScreen(
+      {super.key,
+      required this.cartId,
+      required this.productId,
+      required this.screenCheck});
+
+  final String cartId;
+  final String productId;
+  final OrderSummaryScreenEnum screenCheck;
 
   @override
   State<OrderPageScreen> createState() => _OrderPageScreenState();
@@ -46,9 +54,13 @@ class _OrderPageScreenState extends State<OrderPageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)?.settings.arguments as String;
-    final provider =
-        Provider.of<HomeProvider>(context, listen: false).findById(args);
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Provider.of<OrdersProvider>(context, listen: false)
+          .getSingleCart(context, widget.productId, widget.cartId);
+    });
+    // final args = ModalRoute.of(context)?.settings.arguments as String;
+    // final provider =
+    //     Provider.of<HomeProvider>(context, listen: false).findById(args);
     final data = Provider.of<CartProvider>(context, listen: false);
 
     return Scaffold(
@@ -65,8 +77,8 @@ class _OrderPageScreenState extends State<OrderPageScreen> {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Consumer2<AddressProvider, OrdersProvider>(
-            builder: (context, value, order, child) {
+          child: Consumer3<AddressProvider, OrdersProvider, CartProvider>(
+            builder: (context, value, order, cart, child) {
               return Column(
                 children: [
                   OrderAddressWidget(
@@ -75,6 +87,7 @@ class _OrderPageScreenState extends State<OrderPageScreen> {
                   ),
                   kheight,
                   ListView.builder(
+                    physics:const ScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return Container(
@@ -89,8 +102,12 @@ class _OrderPageScreenState extends State<OrderPageScreen> {
                                   height: 100,
                                   width: 100,
                                   image: NetworkImage(
-                                    'http://172.16.5.206:5005/products/${provider.image[0]}',
-                                    // order.cartModel[index].product.image[0],
+                                    widget.screenCheck ==
+                                            OrderSummaryScreenEnum
+                                                .normalOrderSummaryScreen
+                                        ? 'http://172.16.5.206:5005/products/${cart.cartList!.products[index].product.image[0]}'
+                                        : 'http://172.16.5.206:5005/products/${order.cartModel[0].product.image[0]}',
+                                    // order.cartModel[0].product.image[0],
                                   ),
                                 ),
                                 kWidth,
@@ -98,15 +115,26 @@ class _OrderPageScreenState extends State<OrderPageScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      provider.name,
+                                      widget.screenCheck ==
+                                              OrderSummaryScreenEnum
+                                                  .normalOrderSummaryScreen
+                                          ? cart.cartList!.products[index]
+                                              .product.name
+                                          : order.cartModel[0].product.name,
                                       style: const TextStyle(
                                           fontSize: 18,
                                           fontFamily: 'Manrope',
                                           fontWeight: FontWeight.bold),
                                     ),
                                     RatingBar.builder(
-                                      initialRating:
-                                          double.parse(provider.rating),
+                                      initialRating: double.parse(
+                                        widget.screenCheck ==
+                                                OrderSummaryScreenEnum
+                                                    .normalOrderSummaryScreen
+                                            ? cart.cartList!.products[index]
+                                                .product.rating
+                                            : order.cartModel[0].product.rating,
+                                      ),
                                       itemSize: 15,
                                       minRating: 1,
                                       direction: Axis.horizontal,
@@ -123,7 +151,11 @@ class _OrderPageScreenState extends State<OrderPageScreen> {
                                     Row(
                                       children: [
                                         Text(
-                                          "${provider.offer}%Off",
+                                          widget.screenCheck ==
+                                                  OrderSummaryScreenEnum
+                                                      .normalOrderSummaryScreen
+                                              ? "${cart.cartList!.products[index].product.offer}%Off"
+                                              : "${order.cartModel[0].product.offer}%Off",
                                           style: const TextStyle(
                                             color: Colors.green,
                                             fontWeight: FontWeight.bold,
@@ -133,7 +165,11 @@ class _OrderPageScreenState extends State<OrderPageScreen> {
                                         ),
                                         kWidth,
                                         Text(
-                                          "₹${provider.price}",
+                                          widget.screenCheck ==
+                                                  OrderSummaryScreenEnum
+                                                      .normalOrderSummaryScreen
+                                              ? "₹${cart.cartList!.products[index].product.price}"
+                                              : "₹${order.cartModel[0].product.price}",
                                           style: const TextStyle(
                                             color: kgery,
                                             fontWeight: FontWeight.bold,
@@ -144,7 +180,11 @@ class _OrderPageScreenState extends State<OrderPageScreen> {
                                         ),
                                         kWidth,
                                         Text(
-                                          "₹${(provider.price - provider.discountPrice).round()}",
+                                          widget.screenCheck ==
+                                                  OrderSummaryScreenEnum
+                                                      .normalOrderSummaryScreen
+                                              ? "₹${(cart.cartList!.products[index].product.price - cart.cartList!.products[index].product.discountPrice).round()}"
+                                              : "₹${(order.cartModel[0].product.price - order.cartModel[0].product.discountPrice).round()}",
                                           style: const TextStyle(
                                             color: kRed,
                                             overflow: TextOverflow.ellipsis,
@@ -185,7 +225,10 @@ class _OrderPageScreenState extends State<OrderPageScreen> {
                         ),
                       );
                     },
-                    itemCount: 1,
+                    itemCount: widget.screenCheck ==
+                            OrderSummaryScreenEnum.normalOrderSummaryScreen
+                        ? cart.cartList!.products.length
+                        : 1,
                   ),
                   kSize,
                   Container(
@@ -209,8 +252,11 @@ class _OrderPageScreenState extends State<OrderPageScreen> {
                         kSize,
                         RowOrderWidget(
                           text: 'Price',
-                          text2:
-                              "₹${(provider.price - provider.discountPrice).round()}",
+                          text2: widget.screenCheck ==
+                                  OrderSummaryScreenEnum
+                                      .normalOrderSummaryScreen
+                              ? "₹${(cart.cartList!.totalPrice - cart.cartList!.totalDiscount).round()}"
+                              : "₹${(order.cartModel[0].product.price - order.cartModel[0].product.discountPrice).round()}",
                           color: kRed,
                         ),
                         kSize,
@@ -224,8 +270,11 @@ class _OrderPageScreenState extends State<OrderPageScreen> {
                         ),
                         RowOrderWidget(
                           text: 'Total Amout',
-                          text2:
-                              "₹${(provider.price - provider.discountPrice).round()}",
+                          text2: widget.screenCheck ==
+                                  OrderSummaryScreenEnum
+                                      .normalOrderSummaryScreen
+                              ? "₹${(cart.cartList!.totalPrice - cart.cartList!.totalDiscount).round()}"
+                              : "₹${(order.cartModel[0].product.price - order.cartModel[0].product.discountPrice).round()}",
                         ),
                       ],
                     ),
@@ -254,9 +303,7 @@ class _OrderPageScreenState extends State<OrderPageScreen> {
         ),
       ),
       bottomNavigationBar: OrderBottomNav(
-        provider: provider,
-        payableAmount: int.parse(
-            (provider.price - provider.discountPrice).round().toString()),
+        screenCheck: widget.screenCheck,
       ),
     );
   }

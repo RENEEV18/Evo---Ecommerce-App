@@ -90,8 +90,8 @@ class BottomItemWidgets extends StatelessWidget {
                 //    return const OrderPageScreen();
                 //  },),);
 
-                Navigator.of(context)
-                    .pushNamed(OrderPageScreen.routeName, arguments: productId);
+                // Navigator.of(context)
+                //     .pushNamed(OrderPageScreen.routeName, arguments: productId);
               },
               style: ElevatedButton.styleFrom(
                   backgroundColor: kTextfieldColor,

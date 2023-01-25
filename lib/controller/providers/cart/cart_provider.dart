@@ -154,20 +154,20 @@ class CartProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void gotoOrdersScreen(OrderSummaryScreenEnum screenCheck,String? cartId,String? productId,context){
- final args = CarttoOrderScreenArguementModel(
-      screenCheck: screenCheck,
-      cartId: cartId,
-      productId: productId,
-      // visibility: true,
+//   void gotoOrdersScreen(OrderSummaryScreenEnum screenCheck,String? cartId,String? productId,context){
+//  final args = CarttoOrderScreenArguementModel(
+//       screenCheck: screenCheck,
+//       cartId: cartId,
+//       productId: productId,
+//       // visibility: true,
       
-    );
-      Navigator.of(context).pushNamed(
-      OrderPageScreen.routeName,
-      arguments: args,
-    );
+//     );
+//       Navigator.of(context).pushNamed(
+//       OrderPageScreen.routeName,
+//       arguments: args,
+//     );
     // Navigator.of(context).push(MaterialPageRoute(builder: (context) {
     //   return const  OrderPageScreen();
     // },));
   }
-}
+

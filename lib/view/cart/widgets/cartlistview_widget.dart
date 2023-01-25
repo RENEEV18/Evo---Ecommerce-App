@@ -4,6 +4,7 @@ import 'package:evo_mart/common/api/api_baseurl.dart';
 import 'package:evo_mart/common/const/const.dart';
 import 'package:evo_mart/controller/providers/cart/cart_provider.dart';
 import 'package:evo_mart/controller/providers/home_provider/home_controllers.dart';
+import 'package:evo_mart/controller/providers/orders/order_controller.dart';
 import 'package:evo_mart/view/cart/widgets/cart_alert.dart';
 import 'package:evo_mart/view/cart/widgets/shimmer/cart_shimmer.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +18,8 @@ class CartListviewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer2<HomeProvider, CartProvider>(
-      builder: (context, home, cart, child) {
+    return Consumer3<HomeProvider, CartProvider,OrdersProvider>(
+      builder: (context, home, cart,order, child) {
         return cart.isLoading == true
             ? const CartShimmer()
             : ListView.separated(
@@ -256,7 +257,9 @@ class CartListviewWidget extends StatelessWidget {
                                     width:
                                         MediaQuery.of(context).size.width / 2,
                                     child: ElevatedButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        order.toOrderScreen(context, cart.cartList!.products[index].product.id, cart.cartList!.id);
+                                      },
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: kTextfieldColor,
                                         elevation: 1,

@@ -53,7 +53,7 @@ class ProductWidget extends StatelessWidget {
                                         ),
                                       ),
                                       child: Text(
-                                        "${value.dataFound[index].offer}%Off",
+                                        "${value.productList[index].offer}%Off",
                                         style: const TextStyle(
                                           color: kWhite,
                                           fontWeight: FontWeight.bold,
@@ -68,12 +68,12 @@ class ProductWidget extends StatelessWidget {
                                 Image(
                                   height: 130,
                                   image: NetworkImage(
-                                      'http://172.16.5.206:5005/products/${value.dataFound[index].image[0]}'),
+                                      'http://172.16.5.206:5005/products/${value.productList[index].image[0]}'),
                                   //fit: BoxFit.cover,
                                 ),
                                 kSize,
                                 Text(
-                                  value.dataFound[index].name,
+                                  value.productList[index].name,
                                   textAlign: TextAlign.center,
                                   style: const TextStyle(
                                       fontSize: 15,
@@ -82,7 +82,7 @@ class ProductWidget extends StatelessWidget {
                                 ),
                                 kSize,
                                 Text(
-                                  "₹${value.dataFound[index].price}",
+                                  "₹${value.productList[index].price}",
                                   style: const TextStyle(
                                       color: kgery,
                                       fontWeight: FontWeight.bold,
@@ -91,7 +91,7 @@ class ProductWidget extends StatelessWidget {
                                 ),
                                 kSize,
                                 Text(
-                                  "₹${(value.dataFound[index].price - value.dataFound[index].discountPrice).round()}",
+                                  "₹${(value.productList[index].price - value.productList[index].discountPrice).round()}",
                                   style: const TextStyle(
                                     color: kRed,
                                     fontWeight: FontWeight.bold,
@@ -106,7 +106,7 @@ class ProductWidget extends StatelessWidget {
                       },
                     );
                   },
-                  itemCount: value.dataFound.length,
+                  itemCount: value.productList.length,
                 ),
               );
       },

@@ -18,7 +18,7 @@ class PaymentProvider extends ChangeNotifier {
 
   Razorpay razorpay = Razorpay();
 
-  void openCheckout(int payableAmount) {
+  void openCheckout( payableAmount) {
     options = {
       "key": "rzp_test_boWotLKxahxvUM",
       "amount": payableAmount * 100,
@@ -88,8 +88,8 @@ class PaymentProvider extends ChangeNotifier {
   }
 
   void findByProduct(context, model) {
-    Navigator.of(context)
-        .pushNamed(OrderPageScreen.routeName, arguments: model);
+    // Navigator.of(context)
+    //     .pushNamed(OrderPageScreen.routeName, arguments: model);
   }
   //---------------------------------------------------------------------
 }
