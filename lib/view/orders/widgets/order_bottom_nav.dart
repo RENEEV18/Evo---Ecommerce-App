@@ -3,7 +3,6 @@ import 'package:evo_mart/controller/providers/address/address_controller.dart';
 import 'package:evo_mart/controller/providers/cart/cart_provider.dart';
 import 'package:evo_mart/controller/providers/orders/order_controller.dart';
 import 'package:evo_mart/controller/providers/payment/payment_provider.dart';
-import 'package:evo_mart/model/home/product_model.dart';
 import 'package:evo_mart/view/address/show_address_page.dart';
 import 'package:evo_mart/view/orders/model/order_screen_enum.dart';
 import 'package:flutter/material.dart';
@@ -40,19 +39,22 @@ class OrderBottomNav extends StatelessWidget {
                     elevation: 0,
                     shape: const RoundedRectangleBorder(),
                   ),
-                  child: Text(
-                    screenCheck ==
-                            OrderSummaryScreenEnum.normalOrderSummaryScreen
-                        ? "₹${(cart.cartList!.totalPrice - cart.cartList!.totalDiscount).round()}"
-                        : "₹${(order.cartModel[0].product.price - order.cartModel[0].product.discountPrice).round()}",
-                    style: const TextStyle(
-                      color: kBlack,
-                      fontFamily: "Manrope",
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1,
-                      fontSize: 18,
-                    ),
-                  ),
+                  child: order.isLoading == true
+                      ? CircularProgressIndicator()
+                      : Text(
+                          screenCheck ==
+                                  OrderSummaryScreenEnum
+                                      .normalOrderSummaryScreen
+                              ? "₹${(cart.cartList!.totalPrice - cart.cartList!.totalDiscount).round()}"
+                              : "₹${(order.cartModel[0].product.price - order.cartModel[0].product.discountPrice).round()}",
+                          style: const TextStyle(
+                            color: kBlack,
+                            fontFamily: "Manrope",
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 1,
+                            fontSize: 18,
+                          ),
+                        ),
                 ),
               ),
               value2.addressList.isNotEmpty
@@ -65,8 +67,14 @@ class OrderBottomNav extends StatelessWidget {
                             screenCheck ==
                                     OrderSummaryScreenEnum
                                         .normalOrderSummaryScreen
-                                ? "₹${(cart.cartList!.totalPrice - cart.cartList!.totalDiscount).round()}"
-                                : "₹${(order.cartModel[0].product.price - order.cartModel[0].product.discountPrice).round()}",
+                                ? int.parse((cart.cartList!.totalPrice -
+                                        cart.cartList!.totalDiscount)
+                                    .round()
+                                    .toString())
+                                : int.parse((order.cartModel[0].price -
+                                        order.cartModel[0].discountPrice)
+                                    .round()
+                                    .toString()),
                           );
                         },
                         style: ElevatedButton.styleFrom(

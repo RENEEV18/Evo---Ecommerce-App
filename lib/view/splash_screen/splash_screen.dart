@@ -1,4 +1,3 @@
-import 'package:evo_mart/common/const/const.dart';
 import 'package:evo_mart/controller/providers/onboard_provider/splash_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

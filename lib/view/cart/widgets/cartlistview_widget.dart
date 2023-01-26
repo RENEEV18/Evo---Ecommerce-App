@@ -18,8 +18,8 @@ class CartListviewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer3<HomeProvider, CartProvider,OrdersProvider>(
-      builder: (context, home, cart,order, child) {
+    return Consumer3<HomeProvider, CartProvider, OrdersProvider>(
+      builder: (context, home, cart, order, child) {
         return cart.isLoading == true
             ? const CartShimmer()
             : ListView.separated(
@@ -258,7 +258,12 @@ class CartListviewWidget extends StatelessWidget {
                                         MediaQuery.of(context).size.width / 2,
                                     child: ElevatedButton(
                                       onPressed: () {
-                                        order.toOrderScreen(context, cart.cartList!.products[index].product.id, cart.cartList!.id);
+                                        order.toOrderScreen(
+                                            context,
+                                            cart.cartList!.products[index]
+                                                .product.id,
+                                            cart.cartList!.id);
+                                        order.isLoading = true;
                                       },
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: kTextfieldColor,

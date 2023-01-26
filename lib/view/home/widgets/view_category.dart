@@ -1,6 +1,5 @@
 import 'package:evo_mart/common/const/const.dart';
 import 'package:evo_mart/controller/providers/home_provider/home_controllers.dart';
-import 'package:evo_mart/view/product_screen/product_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

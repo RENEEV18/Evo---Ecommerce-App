@@ -54,22 +54,10 @@ class TopItemWidget extends StatelessWidget {
                   color: kWhite,
                 ),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  value2.addOrRemoveFromWishlist(context, id);
-                },
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.only(top: 3),
-                  shape: const CircleBorder(),
-                  backgroundColor: Colors.white.withOpacity(0.3),
-                ),
-                child: Icon(
-                  value2.wishList.contains(id)
-                      ? Icons.favorite
-                      : Icons.favorite,
-                  color: value2.wishList.contains(id) ? kRed : kWhite,
-                ),
-              ),
+              const CircleAvatar(
+                radius: 23,
+                backgroundColor: Colors.transparent,
+              )
             ],
           ),
         ],

@@ -10,7 +10,14 @@ import 'package:evo_mart/view/orders/orders_page.dart';
 import 'package:flutter/material.dart';
 
 class OrdersProvider extends ChangeNotifier {
+  OrdersProvider() {
+    startLoading();
+  }
   bool isLoading = false;
+  void startLoading() {
+    isLoading = true;
+    notifyListeners();
+  }
 
   List<GetOrderModel> orderList = [];
   GetOrderModel? getSingleOrder;
@@ -87,13 +94,12 @@ class OrdersProvider extends ChangeNotifier {
   }
 
   void getSingleCart(context, String productId, String cartId) async {
-    isLoading = false;
-    notifyListeners();
     await CartService().getSingleCart(context, productId, cartId).then((value) {
       if (value != null) {
         cartModel = value;
         notifyListeners();
         totalSave = (cartModel[0].price - cartModel[0].discountPrice).round();
+        isLoading = false;
         notifyListeners();
       } else {
         isLoading = false;
@@ -110,14 +116,16 @@ class OrdersProvider extends ChangeNotifier {
       cartId,
     );
     notifyListeners();
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) {
-        return OrderPageScreen(
-            cartId: cartId,
-            productId: productId,
-            screenCheck:
-                OrderSummaryScreenEnum.buyOneProductOrderSummaryScreen);
-      },
-    ));
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) {
+          return OrderPageScreen(
+              cartId: cartId,
+              productId: productId,
+              screenCheck:
+                  OrderSummaryScreenEnum.buyOneProductOrderSummaryScreen);
+        },
+      ),
+    );
   }
 }

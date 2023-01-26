@@ -1,5 +1,6 @@
 import 'package:evo_mart/common/const/const.dart';
 import 'package:evo_mart/controller/providers/cart/cart_provider.dart';
+import 'package:evo_mart/controller/providers/orders/order_controller.dart';
 import 'package:evo_mart/view/cart/widgets/cartlistview_widget.dart';
 import 'package:evo_mart/view/orders/model/order_screen_enum.dart';
 import 'package:evo_mart/view/orders/orders_page.dart';
@@ -34,8 +35,8 @@ class CartScreen extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: Consumer<CartProvider>(
-        builder: (context, value, child) {
+      bottomNavigationBar: Consumer2<CartProvider, OrdersProvider>(
+        builder: (context, value, order, child) {
           return value.cartList == null || value.cartList!.products.isEmpty
               ? const SizedBox()
               : Row(
@@ -85,6 +86,7 @@ class CartScreen extends StatelessWidget {
                               },
                             ),
                           );
+                          order.isLoading = false;
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: kTextfieldColor,

@@ -42,7 +42,7 @@ class CartShimmer extends StatelessWidget {
                       kSize,
                       Row(
                         children: [
-                          ShimmerWidget.circle(height: 20, width: 20),
+                          const ShimmerWidget.circle(height: 20, width: 20),
                           kWidth,
                           ShimmerWidget.rectangle(
                             height: 20,
@@ -50,7 +50,7 @@ class CartShimmer extends StatelessWidget {
                             radius: BorderRadius.circular(10),
                           ),
                           kWidth,
-                          ShimmerWidget.circle(height: 20, width: 20),
+                         const  ShimmerWidget.circle(height: 20, width: 20),
                         ],
                       ),
                     ],

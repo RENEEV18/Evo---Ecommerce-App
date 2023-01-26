@@ -62,107 +62,109 @@ class OrderAddressWidget extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                kSize,
-                Row(
-                  children: [
-                    Text(
-                      value.addressList[index].fullName.toUpperCase(),
-                      style: const TextStyle(
-                        fontFamily: "Manrope",
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+            child: value.isLoading == true
+                ? Center(child: CircularProgressIndicator())
+                : Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      kSize,
+                      Row(
+                        children: [
+                          Text(
+                            value.addressList[index].fullName.toUpperCase(),
+                            style: const TextStyle(
+                              fontFamily: "Manrope",
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          kWidth,
+                          Container(
+                            height: 20,
+                            width: 60,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Colors.black.withOpacity(0.3),
+                            ),
+                            child: Text(
+                              value.addressList[index].title.toUpperCase(),
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontFamily: "Manrope",
+                                fontSize: 14,
+                                color: kWhite,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          const Spacer(),
+                          Row(
+                            children: [
+                              IconButton(
+                                onPressed: () {},
+                                icon: const Icon(Icons.edit),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  // value.deleteAddress(
+                                  //     value.addressList[index].id, context);
+                                },
+                                icon: const Icon(
+                                  Icons.delete,
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
                       ),
-                    ),
-                    kWidth,
-                    Container(
-                      height: 20,
-                      width: 60,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        color: Colors.black.withOpacity(0.3),
-                      ),
-                      child: Text(
-                        value.addressList[index].title.toUpperCase(),
-                        textAlign: TextAlign.center,
+                      Text(
+                        value.addressList[index].address,
                         style: const TextStyle(
                           fontFamily: "Manrope",
-                          fontSize: 14,
-                          color: kWhite,
+                          letterSpacing: 1,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ),
-                    const Spacer(),
-                    Row(
-                      children: [
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Icons.edit),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            // value.deleteAddress(
-                            //     value.addressList[index].id, context);
-                          },
-                          icon: const Icon(
-                            Icons.delete,
+                      Row(
+                        children: [
+                          Text(
+                            "PIN :${value.addressList[index].pin}, ",
+                            style: const TextStyle(
+                              fontFamily: "Manrope",
+                              letterSpacing: 1,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
+                          Text(
+                            value.addressList[index].state,
+                            style: const TextStyle(
+                              fontFamily: "Manrope",
+                              letterSpacing: 1,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Text(
+                        value.addressList[index].place,
+                        style: const TextStyle(
+                          fontFamily: "Manrope",
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 1,
                         ),
-                      ],
-                    )
-                  ],
-                ),
-                Text(
-                  value.addressList[index].address,
-                  style: const TextStyle(
-                    fontFamily: "Manrope",
-                    letterSpacing: 1,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Row(
-                  children: [
-                    Text(
-                      "PIN :${value.addressList[index].pin}, ",
-                      style: const TextStyle(
-                        fontFamily: "Manrope",
-                        letterSpacing: 1,
-                        fontWeight: FontWeight.bold,
                       ),
-                    ),
-                    Text(
-                      value.addressList[index].state,
-                      style: const TextStyle(
-                        fontFamily: "Manrope",
-                        letterSpacing: 1,
-                        fontWeight: FontWeight.bold,
+                      kSize,
+                      Text(
+                        value.addressList[index].phone,
+                        style: const TextStyle(
+                          fontFamily: "Manrope",
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 1,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Text(
-                  value.addressList[index].place,
-                  style: const TextStyle(
-                    fontFamily: "Manrope",
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1,
+                      kSize,
+                    ],
                   ),
-                ),
-                kSize,
-                Text(
-                  value.addressList[index].phone,
-                  style: const TextStyle(
-                    fontFamily: "Manrope",
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1,
-                  ),
-                ),
-                kSize,
-              ],
-            ),
           ),
         ],
       ),

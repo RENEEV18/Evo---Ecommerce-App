@@ -3,93 +3,167 @@ import 'package:evo_mart/common/const/const.dart';
 import 'package:evo_mart/model/orders/orders_model.dart';
 import 'package:evo_mart/services/orders/orders_service.dart';
 import 'package:evo_mart/utils/error_popup/snackbar.dart';
+import 'package:evo_mart/view/order_placed_screen/order_placed_screen.dart';
 import 'package:evo_mart/view/orders/model/order_argument.dart';
-import 'package:evo_mart/view/orders/orders_page.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
+
+
+import 'dart:developer';
+
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class PaymentProvider extends ChangeNotifier {
-  bool isLoading = false;
-  String paymentType = 'Online Payment';
-  List<Product> products = [];
-  Map<String, dynamic> options = {};
-  List<String>? productId;
-  String? addressId;
-
   Razorpay razorpay = Razorpay();
 
-  void openCheckout( payableAmount) {
-    options = {
-      "key": "rzp_test_boWotLKxahxvUM",
-      "amount": payableAmount * 100,
-      "name": "Evo-Cart",
-      "description": "Mobile Phones",
-      "prefill": {"contact": "8848066170", "email": "evo@gmail.com"},
+  void openCheckout(price) async {
+    var options = {
+      'key': 'rzp_test_boWotLKxahxvUM',
+      'amount': price * 100,
+      'name': 'EvoCart',
+      'description': 'Mobile Phones',
+      'prefill': {'contact': '9961735029', 'email': 'Evo@razorpay.com'},
       'external': {
         'wallets': ['paytm']
       }
     };
+    notifyListeners();
     try {
       razorpay.open(options);
-     
+      razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS,
+          (PaymentSuccessResponse response) {
+        handlePaymentSuccess(response);
+      });
+      razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, (PaymentFailureResponse resp) {
+        handlePaymentError(resp);
+      });
+      
       notifyListeners();
     } on PaymentFailureResponse catch (e) {
       log(e.error.toString());
     }
   }
 
-  // payment handlers.
-  void handlerPaymentSuccess(PaymentSuccessResponse response, context,addressId) {
-    payProducts(addressId, paymentType, context);
-    // log("Pament success");
-    // SnackBarPop.popUp(
-    //     context, "Payment Success${response.paymentId}", Colors.green);
-    // notifyListeners();
-    // payProducts(addressId!, "ONLINE_PAYMENT", context);
-  }
-
-  void handlerErrorFailure(PaymentFailureResponse response, context) {
-    log("Pament error");
-    SnackBarPop.popUp(
-        context,
-        'Payment Cancelled${response.code.toString()} - ${response.message}',
-        kRed);
+  void handlePaymentSuccess(PaymentSuccessResponse response) {
+    Fluttertoast.showToast(
+        msg: "SUCCESS:${response.paymentId}", timeInSecForIosWeb: 4);
     notifyListeners();
+    // PopUpSnackBar.popUp(context, "SUCCESS:${response.paymentId}", greyColor);
   }
 
-  void handlerExternalWallet(context) {
-    log("External Wallet");
-    SnackBarPop.popUp(context, 'Externall Wallet', Colors.green);
+  void handlePaymentError(PaymentFailureResponse response) {
+    Fluttertoast.showToast(
+        msg: "ERROR:${response.code} - ${response.message}",
+        timeInSecForIosWeb: 4);
     notifyListeners();
+
+    // PopUpSnackBar.popUp(
+    //     context, "ERROR:${response.code} - ${response.message}", greyColor);
   }
 
-  //------------------------------------------------------------------
-
-// function for payment of products.
-  Future<void> payProducts(String addressId, paymentType, context) async {
-    isLoading = true;
+  void handleExternalWallet(ExternalWalletResponse response, context) {
+    Fluttertoast.showToast(
+        msg: "EXTERNAL_WALLET:${response.walletName}", timeInSecForIosWeb: 4);
     notifyListeners();
-    final OrdersModel model = OrdersModel(
-      addressId: addressId,
-      paymentType: paymentType,
-      products: products,
-    );
-    await OrderService().placeOrder(model, context).then((value) {
-      if (value != null) {
-        isLoading = false;
-        notifyListeners();
-        final OrderArgumnetsModel model = OrderArgumnetsModel(orderId: value);
-        findByProduct(context, model);
-      } else {
-        isLoading = false;
-        notifyListeners();
-      }
-    });
-  }
 
-  void findByProduct(context, model) {
-    // Navigator.of(context)
-    //     .pushNamed(OrderPageScreen.routeName, arguments: model);
+    // PopUpSnackBar.popUp(
+    //     context, "EXTERNAL_WALLET:${response.walletName}", greyColor);
   }
-  //---------------------------------------------------------------------
 }
+// class PaymentProvider extends ChangeNotifier {
+//   bool isLoading = false;
+//   String paymentType = 'Online Payment';
+//   List<Product> products = [];
+//   Map<String, dynamic> options = {};
+//   List<String>? productId;
+//   String? addressId;
+
+//   Razorpay razorpay = Razorpay();
+
+//   void openCheckout( payableAmount) {
+//     options = {
+//       "key": "rzp_test_boWotLKxahxvUM",
+//       "amount": payableAmount * 100,
+//       "name": "Evo-Cart",
+//       "description": "Mobile Phones",
+//       "prefill": {"contact": "8848066170", "email": "evo@gmail.com"},
+//       'external': {
+//         'wallets': ['paytm']
+//       }
+//     };
+//     notifyListeners();
+//     try {
+//       razorpay.open(options);
+//       log('razorpay open');
+//       razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS,
+//           (PaymentSuccessResponse response) {
+//             Fluttertoast.showToast(msg: "Payment Success${response.paymentId}",backgroundColor: Colors.green);
+      
+//       });
+//       notifyListeners();
+//     } on PaymentFailureResponse catch (e) {
+//       log(e.message.toString());
+//     }
+//   }
+
+//   // payment handlers.
+//   void handlerPaymentSuccess(PaymentSuccessResponse response, context) {
+//     orderProducts(addressId!, paymentType, context);
+//     log("Pament success");
+//               Fluttertoast.showToast(msg: "Payment Success${response.paymentId}",backgroundColor: Colors.green);
+
+//     notifyListeners();
+//   }
+
+//   void handlerErrorFailure(PaymentFailureResponse response, context) {
+//     log("Pament error");
+//                 Fluttertoast.showToast(msg: "Payment Success${response.code}",backgroundColor: Colors.red);
+
+//     notifyListeners();
+//   }
+
+//   void handlerExternalWallet(context) {
+//     log("External Wallet");
+//                 Fluttertoast.showToast(msg: "Payment Wallet",backgroundColor: Colors.red);
+
+
+//     notifyListeners();
+//   }
+
+//   //------------------------------------------------------------------
+
+// // function for payment of products.
+//   Future<void> orderProducts(String addressId, paymentType, context) async {
+//     isLoading = true;
+//     notifyListeners();
+//     final OrdersModel model = OrdersModel(
+//       addressId: addressId,
+//       paymentType: paymentType,
+//       products: products,
+//     );
+//     await OrderService().placeOrder(model, context).then((value) {
+//       if (value != null) {
+//         isLoading = false;
+//         notifyListeners();
+//         final OrderArgumnetsModel args = OrderArgumnetsModel(orderId: value);
+//         Navigator.of(context).push(
+//           MaterialPageRoute(
+//             builder: (context) {
+//               return OrderPlacedScreen(
+//                 args: args,
+//               );
+//             },
+//           ),
+//         );
+//       } else {
+//         isLoading = false;
+//         notifyListeners();
+//       }
+//     });
+//   }
+
+//   //---------------------------------------------------------------------
+// }

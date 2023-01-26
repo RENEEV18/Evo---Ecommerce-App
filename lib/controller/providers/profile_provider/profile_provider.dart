@@ -1,7 +1,6 @@
 import 'package:evo_mart/controller/providers/bottom_nav_provider/bottom_nav_provider.dart';
 import 'package:evo_mart/model/sign_up_model/sign_up_model.dart';
 import 'package:evo_mart/services/sign_up_services/signup_services.dart';
-import 'package:evo_mart/view/address/address_form.dart';
 import 'package:evo_mart/view/address/show_address_page.dart';
 import 'package:evo_mart/view/sign_in_screen/sign_in_screen.dart';
 import 'package:flutter/material.dart';
