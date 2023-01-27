@@ -1,25 +1,16 @@
 import 'dart:developer';
-import 'package:evo_mart/common/const/const.dart';
-import 'package:evo_mart/model/orders/orders_model.dart';
-import 'package:evo_mart/services/orders/orders_service.dart';
-import 'package:evo_mart/utils/error_popup/snackbar.dart';
+import 'package:evo_mart/controller/providers/cart/cart_provider.dart';
 import 'package:evo_mart/view/order_placed_screen/order_placed_screen.dart';
-import 'package:evo_mart/view/orders/model/order_argument.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 
-import 'dart:developer';
-
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class PaymentProvider extends ChangeNotifier {
   Razorpay razorpay = Razorpay();
 
-  void openCheckout(price) async {
+  void openCheckout(price,context) async {
     var options = {
       'key': 'rzp_test_boWotLKxahxvUM',
       'amount': price * 100,
@@ -40,7 +31,6 @@ class PaymentProvider extends ChangeNotifier {
       razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, (PaymentFailureResponse resp) {
         handlePaymentError(resp);
       });
-      
       notifyListeners();
     } on PaymentFailureResponse catch (e) {
       log(e.error.toString());

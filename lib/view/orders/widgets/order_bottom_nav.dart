@@ -4,6 +4,7 @@ import 'package:evo_mart/controller/providers/cart/cart_provider.dart';
 import 'package:evo_mart/controller/providers/orders/order_controller.dart';
 import 'package:evo_mart/controller/providers/payment/payment_provider.dart';
 import 'package:evo_mart/view/address/show_address_page.dart';
+import 'package:evo_mart/view/order_placed_screen/order_placed_screen.dart';
 import 'package:evo_mart/view/orders/model/order_screen_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -40,7 +41,7 @@ class OrderBottomNav extends StatelessWidget {
                     shape: const RoundedRectangleBorder(),
                   ),
                   child: order.isLoading == true
-                      ? CircularProgressIndicator()
+                      ? const CircularProgressIndicator()
                       : Text(
                           screenCheck ==
                                   OrderSummaryScreenEnum
@@ -75,7 +76,15 @@ class OrderBottomNav extends StatelessWidget {
                                         order.cartModel[0].discountPrice)
                                     .round()
                                     .toString()),
+                            context,
                           );
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) {
+                              return const OrderPlacedScreen();
+                            },
+                          ));
+                          // cart.removeCart(
+                          //     context, cart.cartList!.products[0].product.id);
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: kTextfieldColor,
